@@ -6,13 +6,23 @@
 // import ejsLayouts from "express-ejs-layouts";
 const express = require("express");
 const board = require("./src/routers/boardRouter");
+const home = require("./src/routers/globalRouter");
+const ejsLayouts = require("express-ejs-layouts");
 
 const app = express();
+const logger = morgan("dev");
 
 app.set("view engine", "ejs");
 app.set("views", "./src/views");
-app.use(express.static(`${__dirname}/src/public`));
+app.set("layout extractScripts", true);
+app.set("layout", "layout");
 
-app.use("/board", boardRouter);
+app.use(express.static(`${__dirname}/src/public`));
+app.use(logger);
+app.use(ejsLayouts);
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/", home);
+app.use("/board", board);
 
 module.exports = app;
