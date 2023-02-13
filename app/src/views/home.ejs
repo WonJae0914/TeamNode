@@ -1,0 +1,33 @@
+<body>
+    <%if(loggedIn) {%>
+    <nav>
+        <li><a href="board/question">글작성</a></li>
+    </nav>
+    <a href="logout">로그아웃</a>
+    <%if(questions.length == 0) {%>
+        <h3>There are no registered questions</h3>
+        <%} else {%>
+    <%for(var question of questions) {%>
+        <h3 class="key">Title</h3>
+        <%=question.title%>
+        <h3 class="key">Detail</h3>
+        <%=question.detail%>
+        <h3 class="key">Created Date</h3>
+        <%=question.createdDate%>
+        <h3 class="key">Views</h3>
+        <%=question.views%>
+        <br>
+        <button type="submit" onclick="/views/edit">edit</button>
+        <button type="submit">delete</button>
+        <hr>
+        <%}%>
+        <%}%>
+    <%} else { %>
+    <a href="login">로그인</a>
+    <p>아직 회원이 아니신가요?</p>
+    <p>지금 바로 <a href="signup">회원가입</a>하세요</p>
+    <%}%>
+
+    
+  </body>
+  

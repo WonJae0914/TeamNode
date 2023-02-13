@@ -1,10 +1,29 @@
-const board = require("../models/Board");
+const Question = require("../models/Board");
 
-const getQuestionList = (req, res) => {
-  //   return res.render("question_list", { pageTitle: "Question List" });
-  res.send("Get Question");
+const home = async (req, res) => {
+  const questions = await Question.find({});
+  return res.render("home", {
+    pageTitle : "Home",
+    loggedIn : true,
+    questions
+  });
+}
+
+const postQuestion = async (req, res) => {
+  const { title, detail} = req.body;
+  console.log(req.body);
+  await Question.create({
+    title,
+    detail,
+    createdDate : Date.new,
+  }); // const videos = new Video({}); /n videos.save();
+  return res.redirect("/");
 };
 
-const postQuestion = (req, res) => {};
+const getQuestionList = async (req, res) => {
+  return res.render("upload", {
+    pageTitle : "Upload Question",
+  });
+}
 
-module.exports = { getQuestionList, postQuestion };
+module.exports = { getQuestionList, postQuestion, home };

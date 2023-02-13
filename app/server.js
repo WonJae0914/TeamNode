@@ -8,6 +8,7 @@ const express = require("express");
 const board = require("./src/routers/boardRouter");
 const home = require("./src/routers/globalRouter");
 const ejsLayouts = require("express-ejs-layouts");
+const morgan = require("morgan");
 
 const app = express();
 const logger = morgan("dev");

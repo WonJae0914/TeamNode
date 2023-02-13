@@ -3,7 +3,7 @@ const mongoose = require("mongoose"); // 몽구스 import
 const questionSchema = new mongoose.Schema({
   // Schema 객체 생성
   title: { type: String, required: true, maxLength: 80 },
-  detail: [{ type: String, required: true, minlength: 20 }],
+  detail: [{ type: String, required: true, minlength: 2 }],
   createdDate: { 
     type: Date,
     required: true,
@@ -11,6 +11,7 @@ const questionSchema = new mongoose.Schema({
  },
   modified: {type: Boolean, default: false},
   views: { type: Number, default: 0, required: true },
+  loggedIn: { type: Boolean, default: true },
 });
 
 const Question = mongoose.model("Question", questionSchema);
