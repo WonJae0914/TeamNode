@@ -2,8 +2,8 @@ const Question = require("../models/Board");
 
 const home = async (req, res) => {
   const questions = await Question.find({});
-  return res.render("home", {
-    pageTitle : "Home",
+  return res.render("board", {
+    pageTitle : "board",
     loggedIn : true,
     questions
   });
