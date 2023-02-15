@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #fff;
+  user-select: none;
+}
+
+footer {
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 1.5rem 10%;
+  }
+  footer .wrap {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+  }
+  footer .wrap .social-icons i {
+    font-size: 2.2rem;
+    margin: 0 0.5em;
+  }
+  footer .wrap .options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1em;
+    
+  }
+  footer .wrap .options .option {
+    color: #6f6f6f;
+    font-size: 15px;
+  }
