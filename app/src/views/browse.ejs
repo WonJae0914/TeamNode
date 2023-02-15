@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/browse.js" defer></script>
+    <link rel="stylesheet" href="/css/browse.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('nav.ejs') %>
+    <!-- 메인 시작 -->
+    <section class="main">
+        <div class="main-content">
+            <h3>JigSaw</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <div class="buttons">
+                <button class="play"><i class="fa-solid fa-play"></i><span>재생</span></button>
+                <button class="detail"><i class="fa-solid fa-circle-info"></i>상세 정보</button>
+            </div>
+        </div>
+    </section>
+    <!-- 메인 끝 -->
+
+    <!-- 컨텐츠 시작 -->
+    <section class="content">
+        <h1>지금 뜨는 콘텐츠</h1>
+        <div class="content-box">
+            <div class="item-box">
+                <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/qEkatvFb6hrebLBAanb25ea26yh.jpg" alt="">
+            </div>
+            <div class="item-box">
+                <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/rREsWQodwtdGFjo9BYAP1smMrIG.jpg" alt="">
+            </div>
+            <div class="item-box">
+                <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/giP5yeJBrsqglkM05pbiTyRsoBa.jpg" alt="">
+            </div>
+            <div class="item-box">
+                <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/qEkatvFb6hrebLBAanb25ea26yh.jpg" alt="">
+            </div>
+            <div class="item-box">
+                <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/qEkatvFb6hrebLBAanb25ea26yh.jpg" alt="">
+            </div>
+            <div class="item-box">
+                <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/qEkatvFb6hrebLBAanb25ea26yh.jpg" alt="">
+            </div>
+        <div class="prev"><i class="fa-solid fa-angle-right prev-arrow"></i></div>
+        <div class="next"><i class="fa-solid fa-angle-right"></i></div>
+        </div>
+    </section>
+    
+    <!-- 컨텐츠 끝 -->
+    <%- include('footer.ejs') %>
+</body >
+</html>
