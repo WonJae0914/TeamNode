@@ -10,9 +10,10 @@
 <body>
     <%- include('nav.ejs') %>
     <%if(loggedIn) {%>
-    <header>
+    <header style="margin-left: 100px;">
         <li><a href="board/question">글작성</a></li>
     </header>
+    <main style="margin-left: 100px;">
     <a href="logout">로그아웃</a>
     <%if(questions.length == 0) {%>
         <h3>There are no registered questions</h3>
@@ -37,6 +38,7 @@
     <p>아직 회원이 아니신가요?</p>
     <p>지금 바로 <a href="signup">회원가입</a>하세요</p>
     <%}%>
+    </main>
     <%- include('footer.ejs') %>
   </body>
 </html>
