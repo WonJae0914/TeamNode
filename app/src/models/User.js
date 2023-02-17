@@ -1,40 +1,42 @@
 const mongoose = require("mongoose"); // 몽구스 import
-const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  // Schema 객체 생성
   id: {
     type: String,
     required: true,
-    minlength: 8,
-    trim : true,
-    match : /^[A-Za-z0-9]{7,15}$/g
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true
+    unique: true,
   },
   pw: {
     type: String,
     required: true,
-    minlength: 8,
-    match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/,
-    validate: {
-      validator: function(pw) {
-        return pw === this.pwChk;
-      },
-      message: 'Password confirmation does not match'
-    },
-    set: function(pw) {
-      return bcrypt.hashSync(pw, 10);
-    }
   },
-  pwChk: {
+  email: {
     type: String,
+    required: true,
+    unique: true,
+  },
+  age: {
+    type: Number,
+    min: 1,
+  },
+  gender: {
+    type: String,
+    enum: ['men', 'women'],
+    required: true,
+  },
+  country: {
+    type: String,
+    enum: ['Korea', 'america', 'french', 'UK'],
+    required: true,
+  },
+  isAgreed: {
+    type: Boolean,
+    required: true
+  },
+  isOptedIn: {
+    type: Boolean,
     required: true
   }
-  
 });
 
 const User = mongoose.model("User", userSchema); // .model --> document middleware
