@@ -8,4 +8,4 @@ let connect = MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rc
         db = client.db('todoapp');
         console.log("디비접속완료");
     });
-module.exports = { connect, db};
+module.exports = {connect, db};
