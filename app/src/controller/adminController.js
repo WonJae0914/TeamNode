@@ -1,5 +1,14 @@
-const mongoClient = require('../config/mongoClientDB');
-let db = mongoClient.db;
+const MongoClient = require('mongodb-legacy').MongoClient;
+
+let db;
+MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net/?retryWrites=true&w=majority"
+    , { useNewUrlParser: true },
+    function (err, client) {
+        if (err) { return console.log('DB연결 실패'); }
+        db = client.db('test');
+        console.log("몽고디비 연결 성공");
+    });
+
 
 
 //관리자 홈
@@ -24,7 +33,7 @@ const adminWriteP = async (req, res) => {
                 설명: req.body.description,
                 작성날짜: new Date().toLocaleString(),
                 경로: "/movies/" + req.files.profile[0].filename,
-                사진경로: "/images/" + req.files.profileImg[0].filename,
+                사진경로: "/img/" + req.files.profileImg[0].filename,
                 삭제: "N",
                 삭제날짜: "N"
             };
@@ -67,9 +76,8 @@ const adminDelete = async (req, res) => {
     });
     const message = await function () {
         console.log("삭제완료")
-        res.status(200).send({ message: '삭제성공.' })
-        res.redirect("/admin/list");
     }
+    return message();
 }
 
 
@@ -81,7 +89,7 @@ const adminPutG = async (req,res) =>{
 //관리자 게시판 수정 포스트
 const adminPutP = async (req,res) =>{
     req.body._id = parseInt(req.body._id);
-    const result = db.collection('post').updateOne({ _id: parseInt(req.body.id) },
+    const result = await db.collection('post').updateOne({ _id: parseInt(req.body.id) },
     {
         $set:
         {
@@ -90,11 +98,11 @@ const adminPutP = async (req,res) =>{
             수정날짜: new Date().toLocaleString(),
         }
     });
-    const message = await function(){
+    const message = function(){
         console.log("수정완료");
         res.redirect("/admin/list")
     }
-
+    return message();
 }
 
 module.exports = {adminHome,adminWriteG,adminWriteP,

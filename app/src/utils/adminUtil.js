@@ -29,14 +29,14 @@ var storageImg = multer.diskStorage({
     destination: (req, file, cb) => { // setting destination of uploading files        
 
         if (file.fieldname == "profile") {
-            cb(null, './public/movies');
+            cb(null, './src/public/movies');
         } else { // else uploading image
-            cb(null, './public/images');
+            cb(null, './src/public/img');
         }
     },
     filename: function (req, file, cb) {
 
-        cb(error, file.originalname)
+        cb(null, file.originalname)
     },
 
     limits: {
