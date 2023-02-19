@@ -14,7 +14,7 @@ const uploadFilter = function (req, file, cb) {
     } else if (file.fieldname == "profileImg") {
         var ext = path.extname(file.originalname);
         if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
-            return callback(new Error('Only images are allowed'), false);
+            return cb(new Error('Only images are allowed'), false);
         } else {
             return cb(null, true);
         }
@@ -25,7 +25,7 @@ const uploadFilter = function (req, file, cb) {
 };
 
 
-var storageImg = multer.diskStorage({
+var storage = multer.diskStorage({
     destination: (req, file, cb) => { // setting destination of uploading files        
 
         if (file.fieldname == "profile") {
@@ -44,8 +44,8 @@ var storageImg = multer.diskStorage({
     }
 });
 
-var uploadImg = multer({ storage: storageImg, fileFilter: uploadFilter });
-const upload = uploadImg.fields([
+var uploading = multer({ storage: storage, fileFilter: uploadFilter });
+const upload = uploading.fields([
     { name: 'profile', maxCount: 1 },
     { name: 'profileImg', maxCount: 1 }
 ])
