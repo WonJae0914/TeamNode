@@ -1,7 +1,7 @@
 const User = require("../models/User");
-const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 
 const getMypage = (req, res) => {
   if (!req.user) {
@@ -41,7 +41,7 @@ const signup = async (req, res, next) => {
 };
 
 const PrivacyPolicy = (req, res) => {
-  res.render('privacypolicy.ejs');
+  res.render('privacypolicy');
 };
 
 const renderLogin = (req, res) => {

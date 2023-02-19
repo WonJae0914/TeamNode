@@ -6,6 +6,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="/js/browse.js" defer></script> -->
     <!-- <link rel="stylesheet" href="/css/browse.css"> -->
+    <style>
+      /* body 스타일 */
+body {
+  background-color: #343a40;
+}
+
+/* container 스타일 */
+.container {
+  max-width: 500px;
+  margin: auto;
+ 
+}
+
+/* form 스타일 */
+form {
+  padding: 20px;
+  background-color: #343a40;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* legend 스타일 */
+legend {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  
+}
+
+/* label 스타일 */
+label {
+  font-size: 16px;
+  background-color: #343a40;
+}
+
+/* input 스타일 */
+input {
+  font-size: 16px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: #343a40;
+}
+
+input:focus {
+  background-color: #ffffff;
+  color:#343a40;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* select 스타일 */
+select {
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: #343a40;
+}
+
+select:focus {
+  background-color: #ffffff;
+  color:#343a40;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* checkbox 스타일 */
+.form-check-input {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  color:#343a40;
+}
+/*gender 스타일*/
+#inputState1 {
+  background-color: #343a40;
+  color: #fff;
+}
+
+#inputState1 option:checked {
+  color: #343a40;
+}
+/* country 스타일*/
+#countrySelect {
+  background-color: #343a40;
+  color: #fff;
+}
+
+#countrySelect option:checked {
+  color: #343a40;
+}
+
+/* button 스타일 */
+.btn {
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.btn-outline-dark {
+  color: #343a40;
+  border-color: #343a40;
+}
+
+.btn-outline-dark:hover {
+  background-color: #343a40;
+  color: #343a40
+}
+
+.btn-outline-success {
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
+  color:#343a40;
+}
+    </style>
     <title>Document</title>
 </head>
 <body>
@@ -15,20 +132,20 @@
           <fieldset>
             <legend>회원가입</legend>
             <div class="form-floating mb-3">
-              <input type="text" id="id" class="form-control" name="id" placeholder="id" style="color: black;">
+              <input type="text" id="id" class="form-control" name="id" placeholder="id">
               <label for="floatingInput" id="idlabel">ID</label>
               <!-- <button type="button" id="id_btn">id체크버튼</button> -->
             </div>
             <div class="form-floating mb-3">
-                <input type="password" id="pw" class="form-control" name="pw" placeholder="비밀번호" style="color: black;">
+                <input type="password" id="pw" class="form-control" name="pw" placeholder="비밀번호">
                 <label for="floatingInput">비밀번호</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" id="email" class="form-control" name="email" placeholder="이메일" style="color: black;">
+              <input type="text" id="email" class="form-control" name="email" placeholder="이메일" >
               <label for="floatingInput">이메일</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="password" id="pwChk" class="form-control" name="pwChk" placeholder="비밀번호 확인" style="color: black;">
+              <input type="password" id="pwChk" class="form-control" name="pwChk" placeholder="비밀번호 확인" >
               <label for="floatingInput">비밀번호 확인</label>
             </div>
             <div class="form-floating mb-3">
