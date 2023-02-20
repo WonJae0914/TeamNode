@@ -37,25 +37,30 @@ const renderLogin = (req, res) => {
   res.render('user_login');
 };
 
-const login = passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login'
-});
 
-function loginChk(req, res, next) {
-  if(req.user){
-    next();
-  }else{
-    res.send(`로그인안하셨는데요? <a href= \"/login\">로그인</a>`);
-  }
-}
+const login = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.render('user_login', { message: info.message });
+    }
+    req.logIn(user, err => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/userdetail');
+    });
+  })(req, res, next);
+};
 
 
 const userdetail =  (req, res) => {
-  if (!req.user) {
+  if (!req.User) {
     return res.redirect('/login');
   }
-  res.render('user_detail', { user: req.user });
+  res.render('user_detail', { User: req.User });
 }
 
 module.exports = { renderSignup, privacypolicy, signup , renderLogin, login , userdetail};

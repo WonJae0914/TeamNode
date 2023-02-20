@@ -2,15 +2,9 @@ const express = require('express');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session'); 
+const User = require("../models/User");
+const bcrypt = require('bcrypt');
 
-const {
-    renderSignup,
-    signup,
-    renderLogin,
-    login,
-    privacypolicy,
-    userdetail
-} = require('../controller/userController');
 const userRouter = express.Router();
 
 userRouter.use(session({   // session 부여하는건 reuter에서 사용하는거니까 app.use 가 아닌 router.use 로 부여함
@@ -52,7 +46,14 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-
+const {
+  renderSignup,
+  signup,
+  renderLogin,
+  login,
+  privacypolicy,
+  userdetail
+} = require('../controller/userController');
 
 userRouter.get('/signup',renderSignup);
 userRouter.get('/privacypolicy', privacypolicy); // 개인정보처리방침
@@ -62,5 +63,5 @@ userRouter.post('/login',login);
 userRouter.get('/userpage', userdetail); // user상세정보
 
 
-
+// module.exports = passport;
 module.exports = userRouter;

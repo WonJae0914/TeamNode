@@ -11,18 +11,21 @@ const userSchema = new mongoose.Schema({
     minlength: 8,
     trim : true,
     match : /^[A-Za-z0-9]{7,15}$/g,
-    unique : true
+    unique : true,
+    set:(value) =>value.toLowerCase()
   },
   email: {
     type: String,
     required: true,
-    match : /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+    match : /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    set:(value) =>value.toLowerCase()
   },
   pw: {
     type: String,
     minlength: 8,
     required: true,
-    match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/
+    match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/,
+    set:(value) =>value.toLowerCase()
   },
   age: { type: Number, 
     required: true, 
