@@ -67,7 +67,7 @@ userSchema.pre('save', async function (next) { // pre는 스키마 미들웨어 
     if (this.isModified('pw') || this.isNew) {
       const hashedPassword = await bcrypt.hash(this.pw, 10);
       this.pw = hashedPassword;
-    }
+    } 
     return next();
   } catch (err) {  
     return next(err);

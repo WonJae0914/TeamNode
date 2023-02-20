@@ -5,7 +5,7 @@ const passport = require('passport');
 const {
   renderSignup,
   signup,
-  PrivacyPolicy,     
+  PrivacyPolicy,       
   renderLogin,
   login,
   getMypage
