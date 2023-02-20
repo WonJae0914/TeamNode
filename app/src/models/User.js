@@ -1,22 +1,42 @@
 "use strict"
 
 const mongoose = require("mongoose"); // 몽구스 import
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
   // Schema 객체 생성
-  title: { type: String, required: true, maxLength: 80 },
-  category: [{ type: String, required: true, trim: true }], // category
-  actor: [{ type: String, required: true, trim: true }],
-  language: { type: String, required: true, trim: true },
-  rating: { type: Number, default: 0, required: true },
-  length: { type: Number, required: true },
-  uploadDate: { type: Date },
-  makingDate: { type: Date, required: true },
-  modifyDate: { type: Date },
-  meta: {
-    views: { type: Number, default: 0, required: true },
-    score: { type: Number, default: 0, required: true },
+  id: {
+    type: String,
+    required: true,
+    minlength: 8,
+    trim : true,
+    match : /^[A-Za-z0-9]{7,15}$/g
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  pw: {
+    type: String,
+    required: true,
+    minlength: 8,
+    match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/,
+    validate: {
+      validator: function(pw) {
+        return pw === this.pwChk;
+      },
+      message: 'Password confirmation does not match'
+    },
+    set: function(pw) {
+      return bcrypt.hashSync(pw, 10);
+    }
+  },
+  pwChk: {
+    type: String,
+    required: true
+  }
+  
 });
 
 const User = mongoose.model("User", userSchema); // .model --> document middleware

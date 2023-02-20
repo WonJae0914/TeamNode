@@ -16,11 +16,15 @@ const home = async (req, res) => {
 const postQuestion = async (req, res) => {
   const { title, detail} = req.body;
   console.log(req.body);
+  try{
   await Question.create({
     title,
     detail,
     createdDate : Date.new,
   }); // const videos = new Video({}); /n videos.save();
+}catch(err){
+  return res.send('<script> alert("틀림")</script>');
+}
   return res.redirect("/");
 };
 

@@ -3,13 +3,6 @@ const express = require("express");
 const board = require("./src/routers/boardRouter");
 const browse = require("./src/routers/globalRouter");
 const admin = require("./src/routers/adminRouter");
-const app = express();
-
-// 라우터 불러오기
-const board = require("./src/routers/boardRouter");
-const browse = require("./src/routers/browseRouter");
-
-//모르건 모듈 불러오기
 const morgan = require("morgan");
 const logger = morgan("dev");
 
@@ -34,6 +27,5 @@ app.use(express.urlencoded({ extended: true }));
 //라우팅 미들웨어 (제일 하단 고정)
 app.use("/", browse);
 app.use("/board", board);
-app.use("/admin", admin);
-
+app.use("/admin", admin)
 module.exports = app;
