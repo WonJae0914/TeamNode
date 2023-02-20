@@ -54,7 +54,7 @@ const login = passport.authenticate('local', {
   failureRedirect: '/login'
 });
 
-passport.use(new LocalStrategy({ usernameField: 'id' }, async (id, pw, done) => {
+passport.use(new LocalStrategy({ usernameField: 'id' ,passwordField: 'pw',session: true, }, async (id, pw, done) => {
   try {
     const user = await User.findOne({ id });
     if (!user) {
