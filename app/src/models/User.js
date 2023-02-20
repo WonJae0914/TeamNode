@@ -71,7 +71,7 @@ userSchema.pre('save', async function (next) { // pre는 스키마 미들웨어 
     return next();
   } catch (err) {  
     return next(err);
-  }
+  }       
 });
 
 userSchema.methods.comparePassword = async function (pw) {

@@ -69,7 +69,7 @@ passport.use(new LocalStrategy({ usernameField: 'id' ,passwordField: 'pw',sessio
     return done(err);
   }
 }));
-
+    
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
