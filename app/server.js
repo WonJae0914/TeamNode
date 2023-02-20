@@ -2,7 +2,7 @@
 const express = require("express");
 const board = require("./src/routers/boardRouter");
 const browse = require("./src/routers/globalRouter");
-const admin = require("./src/routers/adminRouter");
+
 const morgan = require("morgan");
 const logger = morgan("dev");
 
@@ -28,4 +28,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", browse);
 app.use("/board", board);
 app.use("/admin", admin)
+
 module.exports = app;
+
