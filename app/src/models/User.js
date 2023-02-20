@@ -69,7 +69,7 @@ userSchema.pre('save', async function (next) { // pre는 스키마 미들웨어 
       this.pw = hashedPassword;
     }
     return next();
-  } catch (err) {
+  } catch (err) {  
     return next(err);
   }
 });

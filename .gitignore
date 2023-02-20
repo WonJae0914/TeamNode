@@ -102,3 +102,15 @@ dist
 
 # TernJS port file
 .tern-port
+
+#package-lock
+package-lock.json
+
+#package
+package.json
+
+# #server
+# server.js
+
+# #boardController
+# boardController.js
