@@ -3,13 +3,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
-const getMypage = (req, res) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-  res.render('mypage', { user: req.user });
-}
-
 const renderSignup = (req, res) => {
   res.render('signup');
 };
@@ -39,6 +32,14 @@ const signup = async (req, res, next) => {
     res.send('Error');
   }
 };
+
+const getMypage = (req, res) => {
+  if (!req.user) {
+    return res.redirect('/login');
+  }
+  res.render('mypage', { user: req.user });
+}
+
 
 const PrivacyPolicy = (req, res) => {
   res.render('privacypolicy');
