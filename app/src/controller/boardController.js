@@ -2,6 +2,8 @@
 
 const Question = require("../models/Board");
 
+
+
 const home = async (req, res) => {
   const questions = await Question.find({});
   return res.render("board", {
