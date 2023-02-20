@@ -1,3 +1,5 @@
+"use strict"
+
 const Question = require("../models/Board");
 
 
