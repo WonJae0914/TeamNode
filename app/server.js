@@ -6,7 +6,7 @@ const admin = require("./src/routers/adminRouter");
 const morgan = require("morgan");
 const app = express();
 const logger = morgan("dev");
-const methodOverride = require('method-override');
+const methodOverride = require('method-override');  // method-override 
 
 app.use(methodOverride('method-override')); // method-override
 app.use(methodOverride('_method')); // method-override

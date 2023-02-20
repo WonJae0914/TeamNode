@@ -9,89 +9,39 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
         console.log("몽고디비 연결 성공");
     });
 
-
-
 //관리자 홈
 const adminHome = (req, res) => {   //
     res.render('admin_home.ejs');
 };
+
 // 관리자 게시판 글쓰기 겟
 const adminWriteG = (req, res) => {
     res.render('admin_write.ejs');
 };
-//관리자 게시판 글쓰기 포스트
-// const adminWriteP = async (req, res) => {
-//     try {
-//         const add = async function (req, res) {
-//             const result = await db.collection('counter').findOne({ name: '게시물 개수' });
-//             console.log(result.totalpost);
-//             const total = result.totalpost;
-//             const put = {
-//                 _id: total + 1,
-//                 // 작성자: req.user._id,
-//                 제목: req.body.title,
-//                 설명: req.body.description,
-//                 작성날짜: new Date().toLocaleString(),
-//                 경로: "/movies/" + req.files.profile[0].filename,
-//                 사진경로: "/img/" + req.files.profileImg[0].filename,
-//                 삭제: "N",
-//                 삭제날짜: "N"
-//             };
-//             if(req.body.title==null || req.body.description==null){
-                
-//             }
-//             const result2 = await db.collection('post').insertOne(put);
-//             console.log('저장완료');
-//             const result3 = await db.collection('counter').updateOne(
-//                 { name: '게시물 개수' },
-//                 { $inc: { totalpost: 1 } }
-//             );
-//         };
-//         await add(req, res);
-//         res.redirect('/admin/list');
-        
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send('Internal Server Error');
-//     }
-// };
-
-const adminWriteP =  async function (req, res) {
-                const result = await db.collection('counter').findOne({ name: '게시물 개수' });
-                console.log(result.totalpost);
-                const total = result.totalpost;
-                const put = {
-                    _id: total + 1,
-                    // 작성자: req.user._id,
-                    제목: req.body.title,
-                    설명: req.body.description,
-                    작성날짜: new Date().toLocaleString(),
-                    경로: "/movies/" + req.files.profile[0].filename,
-                    사진경로: "/img/" + req.files.profileImg[0].filename,
-                    삭제: "N",
-                    삭제날짜: "N"
-                };
-             
-                    
-                    // if(req.body.title==null || req.body.description==null){
-                    //     res.send('<script>alert("제목쓰셈")</script>');
-                    // }
-               
-                const result2 = await db.collection('post').insertOne(put);
-                console.log('저장완료');
-                const result3 = await db.collection('counter').updateOne(
-                    { name: '게시물 개수' },
-                    { $inc: { totalpost: 1 } }
-                );
-                res.redirect('/admin/list');
-            };
-            
-       
-    
-
-
-
-
+// 관리자 게시판 글쓰기 포스트
+const adminWriteP = async function (req, res) {
+    const result = await db.collection('counter').findOne({ name: '게시물 개수' });
+    console.log(result.totalpost);
+    const total = result.totalpost;
+    const put = {
+        _id: total + 1,
+        // 작성자: req.user._id,
+        제목: req.body.title,
+        설명: req.body.description,
+        작성날짜: new Date().toLocaleString(),
+        경로: "/movies/" + req.files.profile[0].filename,
+        사진경로: "/img/" + req.files.profileImg[0].filename,
+        삭제: "N",
+        삭제날짜: "N"
+    };
+    const result2 = await db.collection('post').insertOne(put);
+    console.log('저장완료');
+    const result3 = await db.collection('counter').updateOne(
+        { name: '게시물 개수' },
+        { $inc: { totalpost: 1 } }
+    );
+    res.redirect('/admin/list');
+};
 
 // 관리자 게시판 리스트
 const adminList = async (req, res) => {
@@ -120,7 +70,6 @@ const adminDelete = async (req, res) => {
     }
     return message();
 }
-
 
 //관리자 게시판 수정 겟
 const adminPutG = async (req, res) => {
