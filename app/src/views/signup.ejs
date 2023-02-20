@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="/js/browse.js" defer></script> -->
+    <!-- <link rel="stylesheet" href="/css/browse.css"> -->
+    <title>Document</title>
+</head>
+<body>
+  <%- include('nav.ejs') %>
+    <div class="container mt-4">
+        <form action="/signup" method="POST">
+          <fieldset>
+            <legend>회원가입</legend>
+            <div class="form-floating mb-3">
+              <input type="text" id="id" class="form-control" name="id" placeholder="id" style="color: black;">
+              <label for="floatingInput" id="idlabel">ID</label>
+              <!-- <button type="button" id="id_btn">id체크버튼</button> -->
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" id="pw" class="form-control" name="pw" placeholder="비밀번호" style="color: black;">
+                <label for="floatingInput">비밀번호</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" id="email" class="form-control" name="email" placeholder="이메일" style="color: black;">
+              <label for="floatingInput">이메일</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" id="pwChk" class="form-control" name="pwChk" placeholder="비밀번호 확인" style="color: black;">
+              <label for="floatingInput">비밀번호 확인</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="number" min="1" id="age" class="form-control" name="age" placeholder="나이">
+              <label for="floatingInput">나이</label>
+            </div>
+            <div class="col-md-12">
+              <label for="inputState" class="form-label">성별</label>
+              <select id="inputState1" class="form-select" id="genderSelect" name="gender">
+                <option selected value="men">남자</option>
+                <option value="women">여자</option>
+              </select>
+            </div>
+            <div class="col-md-12">
+              <label for="inputState" class="form-label">국가</label>
+              <select id="inputState2" class="form-select" id="countrySelect" name="country">
+                <option selected value="Korea">대한민국</option>
+                <option value="america">미국</option>
+                <option value="french">프랑스</option>
+                <option value="UK">영국</option>
+              </select>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck1">
+                  <label class="form-check-label" for="gridCheck1">
+                   예, 저는 <span><a href="/#none" target="_blank" onclick="privacy_p()">개인정보처리방침</a></span>에 따른 개인정보 수집 및 활용에 동의합니다.  
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck2">
+                  <label class="form-check-label" for="gridCheck2">
+                    예, gunchimfilx 특별 할인 알림 이메일을 보내주세요(선택사항)
+                  </label>
+                </div>
+              </div>
+            </div>
+            <button id="signup" type="submit" class="btn btn-outline-dark">회원가입</button>
+            <a href="/member/login" class="btn btn-outline-success">이미 아이디가 있나요?</a>
+          </fieldset>
+      </form>
+    </div>
+    <%- include('footer.ejs') %>
+</body>
+
+</html>
