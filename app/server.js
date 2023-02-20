@@ -2,6 +2,10 @@
 const express = require("express");
 const board = require("./src/routers/boardRouter");
 const browse = require("./src/routers/globalRouter");
+const admin = require("./src/routers/adminRouter");
+const signup = require("./src/routers/userRouter");
+const app = express();
+const methodOverride = require("method-override");
 
 const morgan = require("morgan");
 const logger = morgan("dev");
@@ -27,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 //라우팅 미들웨어 (제일 하단 고정)
 app.use("/", browse);
 app.use("/board", board);
-app.use("/admin", admin)
-
+app.use("/admin", admin);
+app.use("/", signup);
 module.exports = app;
 
