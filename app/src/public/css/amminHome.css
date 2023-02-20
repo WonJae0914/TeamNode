@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Black And White Picture', sans-serif;
+    color: aliceblue;
+    font-size: 1.5rem;
+  }
+  
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 70vw;
+    height: 50vh;
+    border: solid 1px black;
+
+}
+.box{
+    height: 300px;
+    width: 300px;
+}
+img{
+    height: 150px;
+    width: 150px;
+}
