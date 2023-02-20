@@ -28,4 +28,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", browse);
 app.use("/board", board);
 
-module.exports = app;
+module.exports = app; 

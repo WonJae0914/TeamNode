@@ -10,7 +10,7 @@ const contentSchema = new mongoose.Schema({
   language: { type: String, required: true, trim: true },
   rating: { type: Number, default: 0, required: true },
   length: { type: Number, required: true },
-  uploadDate: { type: Date },
+  uploadDate: { type: Date }, 
   makingDate: { type: Date, required: true },
   modifyDate: { type: Date },
   meta: {
@@ -18,7 +18,7 @@ const contentSchema = new mongoose.Schema({
     score: { type: Number, default: 0, required: true },
   },
   fileUrl : { type : String },
-  image : { type : String} ,
+  image : { type : String} , 
 });
 
 const Content = mongoose.model("Content", contentSchema); // .model --> document middleware

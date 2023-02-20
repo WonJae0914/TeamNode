@@ -6,12 +6,12 @@
 //   const findContent = Content.find({});
 //   return res.render("watch", {
 //     title : "Video List",
-//     findContent
+//     findContent 
 //   });
 // };
 
-const watch = (req, res) =>{
+const watch = (req, res) =>{ 
   res.render("watch")
 }
 
-module.exports = watch;
+module.exports = watch; 

@@ -6,8 +6,8 @@ const {
   postQuestion,
   home,
 } = require("../controller/boardController");
-const boardRouter = express.Router();
-
+const boardRouter = express.Router(); 
+ 
 boardRouter.get("/", home);
 boardRouter.route("/question").get(getQuestionList).post(postQuestion);
 
