@@ -11,5 +11,5 @@ adminRouter.get('/detail/:id', admin.adminDetail)
 adminRouter.put('/detail/delete', admin.adminDelete)
 adminRouter.get('/edit/:id', admin.adminPutG)
 adminRouter.put('/edit', admin.adminPutP)
-
+adminRouter.get('/search', admin.adminSearchList)
 module.exports = adminRouter;

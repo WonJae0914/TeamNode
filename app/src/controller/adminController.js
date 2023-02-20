@@ -97,8 +97,40 @@ const adminPutP = async (req, res) => {
     return message();
 }
 
+// 관리자 게시판 검색
+const adminSearchList = (req, res) => {
+    // console.log(req.query.value)
+
+    var condition = [
+        {
+            $search: {
+                index: 'post', //인덱싱
+                text: {
+                    query: req.query.value,
+                    path: '제목'  // 제목날짜 둘다 찾고 싶으면 ['제목', '날짜']
+                }
+            }
+        },
+        // { $sort: { _id: 1 } }, //정렬순서 정하기 1,-1 오름or 내림차순
+        // { $limit: 10}, // 10개만 가져오기
+        { $project: { 제목: 1, _id: 0, score: { $meta: "searchScore" } } } //검색결과를 뭘보여줄지 정해줌  서치스코어. 몽고디비.
+        //자주 검색한거 찾아옴. 1가져옴 0안가져옴.
+
+
+    ]
+                        //find 대신 aggregate를 씀. 대량 검색시 유리.
+    db.collection('post').aggregate(condition).toArray((err, result) => {
+        console.log(result);
+        res.render('search.ejs', { posts: result })
+    })
+
+};
+
+
+
+
 module.exports = {
     adminHome, adminWriteG, adminWriteP,
     adminList, adminDetail, adminDelete,
-    adminPutG, adminPutP
+    adminPutG, adminPutP, adminSearchList
 }
