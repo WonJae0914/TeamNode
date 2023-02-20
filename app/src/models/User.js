@@ -22,16 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 8,
     required: true,
-    // match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/,
-    // validate: {
-    //   validator: function(pw) {
-    //     return pw === this.pwChk;
-    //   },
-    //   message: 'Password confirmation does not match'
-    // },
-    // set: function(pw) {
-    //   return bcrypt.hashSync(pw, 10);
-    // }
+    match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/
   },
   age: { type: Number, 
     required: true, 
@@ -46,16 +37,16 @@ const userSchema = new mongoose.Schema({
     enum: ['Korea', 'america', 'french', 'UK'], 
     required: true ,
     default: 'Korea'},
-  agreedToPrivacyPolicy: { 
+  isAgreed: { 
     type: Boolean, 
     required: true ,
     default: true},
-  subscribedToPromotions: { 
+  isOptedIn : { 
     type: Boolean, 
     required: true,
     default:false 
   }  
-});
+},{ timestamps: true });
 
 const User = mongoose.model("User", userSchema); // .model --> document middleware
 // 첫번째 파라미터 "User" = collection명, 두번째 파라미터 contentSchema = 스키마

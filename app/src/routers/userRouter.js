@@ -7,7 +7,9 @@ const {
     renderSignup,
     signup,
     renderLogin,
-    login
+    login,
+    privacypolicy,
+    userdetail
 } = require('../controller/userController');
 const userRouter = express.Router();
 
@@ -24,11 +26,11 @@ passport.use(
     try {
       const user = await User.findOne({ id });
       if (!user) {
-        return done(null, false, { message: 'Incorrect email.' });
+        return done(null, false, { message: '등록된 아이디가 없습니다.' });
       }
       const isMatch = await bcrypt.compare(pw, user.pw);
       if (!isMatch) {
-        return done(null, false, { message: 'Incorrect password.' });
+        return done(null, false, { message: '비밀번호를 잘못입력하였습니다.' });
       }
       return done(null, user);
     } catch (err) {
@@ -53,8 +55,12 @@ passport.deserializeUser(async (id, done) => {
 
 
 userRouter.get('/signup',renderSignup);
+userRouter.get('/privacypolicy', privacypolicy); // 개인정보처리방침
 userRouter.post('/signup',signup);
 userRouter.get('/login',renderLogin);
 userRouter.post('/login',login);
+userRouter.get('/userpage', userdetail); // user상세정보
+
+
 
 module.exports = userRouter;
