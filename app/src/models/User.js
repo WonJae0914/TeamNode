@@ -1,3 +1,5 @@
+"use strict"
+
 const mongoose = require("mongoose"); // 몽구스 import
 
 const userSchema = new mongoose.Schema({

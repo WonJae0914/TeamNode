@@ -1,3 +1,5 @@
+"use strict"
+
 const mongoose = require("mongoose"); // 몽구스 import
 
 const contentSchema = new mongoose.Schema({
@@ -15,6 +17,8 @@ const contentSchema = new mongoose.Schema({
     views: { type: Number, default: 0, required: true },
     score: { type: Number, default: 0, required: true },
   },
+  fileUrl : { type : String },
+  image : { type : String} ,
 });
 
 const Content = mongoose.model("Content", contentSchema); // .model --> document middleware
