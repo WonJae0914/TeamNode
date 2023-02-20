@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>video player</title>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <ul>
+      <% videos.forEach(function(video) { %>
+        <li>
+          <a href="/video/<%= video._id %>">
+            <img src="<%= carousel.image %>"> 
+            <h2><%= video.title %></h2>
+            <p><%= video.description %></p>
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+</html> 

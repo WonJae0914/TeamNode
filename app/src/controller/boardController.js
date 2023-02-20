@@ -1,4 +1,8 @@
+"use strict"
+
 const Question = require("../models/Board");
+
+
 
 const home = async (req, res) => {
   const questions = await Question.find({});
@@ -25,7 +29,7 @@ const postQuestion = async (req, res) => {
 };
 
 const getQuestionList = async (req, res) => {
-  return res.render("upload", {
+  return res.render("board_upload", {
     pageTitle : "Upload Question",
   });
 }

@@ -1,77 +1,47 @@
+"use strict"
+
 const mongoose = require("mongoose"); // 몽구스 import
 const bcrypt = require('bcrypt'); // 암호화 하려고 사용
 
 const userSchema = new mongoose.Schema({
+  // Schema 객체 생성
   id: {
     type: String,
     required: true,
-    unique: true,
-    validate: {
-      validator: function(v) {
-        return /^.{4,12}$/.test(v);
-      },
-      message: props => `${props.value} 아이디는 4자이상 12자 미만으로 기재부탁드립니다. `,
-    },
-  },
-  pw: {
-    type: String,
-    required: true,
-    validate: {
-      validator: function(v) {
-        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/.test(v);
-      },
-      message: (props) => 
-      `${props.value} 안전하지 않는 비밀번호입니다. 공백을 제외하고 특수문자를 포함한 8자 이상 기재부탁드립니다.`
-    },
+    minlength: 8,
+    trim : true,
+    match : /^[A-Za-z0-9]{7,15}$/g,
+    unique : true
   },
   email: {
     type: String,
     required: true,
+    match : /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
   },
-  age: {
-    type: Number,
-    required: true,
-    validate: {
-      validator: function (v) {
-        return v >= 18 && v <=100;
-      },
-      message: '가입 가능한 나이는 18세 이상 100세 이하입니다.'
-    }
-  },
-  gender: {
+  pw: {
     type: String,
-    enum: ['men', 'women'],
+    minlength: 8,
     required: true,
+    // match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/,
+    // validate: {
+    //   validator: function(pw) {
+    //     return pw === this.pwChk;
+    //   },
+    //   message: 'Password confirmation does not match'
+    // },
+    // set: function(pw) {
+    //   return bcrypt.hashSync(pw, 10);
+    // }
   },
-  country: {
-    type: String,
-    enum: ['Korea', 'america', 'french', 'UK'],
+  age: { type: Number, 
+    required: true, 
+    min: 18 
+  },
+  gender: { type: String, 
+    enum: ['men', 'women'], 
     required: true,
-  },
-  isAgreed: { // 개인정보처리방침 필수선택사항
-    type: Boolean,
-    required: true,
-  },
-  isOptedIn: { // 이메일로 추가 수신여부*(선택사항)
-    type: Boolean,
-    required: false,
-  },
-}, { timestamps: true });
-
-userSchema.pre('save', async function (next) { // pre는 스키마 미들웨어 함수 중 하나. 
-  //save 메소드를 실행하기 전에 비밀번호 해싱작업을 실행 
-  // this.isModified('pw')는 현재 스키마 객체의 비밀번호가 변경되었는지를 확인하고
-  // this.isNew 는 새로운 객체가 생성되었는지 확인
-  // 즉 비밀번호 객체가 변경되었거나 새로 생성되면 해싱해주는 작업 함수임
-  try {
-    if (this.isModified('pw') || this.isNew) {
-      const hashedPassword = await bcrypt.hash(this.pw, 10);
-      this.pw = hashedPassword;
-    }
-    return next();
-  } catch (err) {
-    return next(err);
-  }
+    default: 'men' 
+},
 });
 
 userSchema.methods.comparePassword = async function (pw) {

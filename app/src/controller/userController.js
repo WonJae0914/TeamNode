@@ -1,48 +1,43 @@
 const User = require("../models/User");
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-
-const getMypage = (req, res) => {
-  if (!req.user) {
-    return res.redirect('/login');
-  }
-  res.render('mypage', { user: req.user });
-}
+const passport = require('passport');
+// const session = require('express-session');
 
 const renderSignup = (req, res) => {
   res.render('signup');
 };
 
-const signup = async (req, res, next) => {
-  const { id, pw, email, pwChk, age, gender, country, isAgreed, isOptedIn } = req.body;
-  try {
-    if (pw !== pwChk) {
-      return res.send("<script>alert('비밀번호가 틀렸습니다.'); window.location.replace('/login');</script>");
-    } else {
-      const hashedPassword = await bcrypt.hash(pw, 10);
-      await User.create({
-        id,
-        pw: hashedPassword,
-        email,
-        age,
-        gender,
-        country,
-        isAgreed,
-        isOptedIn
-      }, () => {
-        res.send("<script>alert('환영합니다'); window.location.replace('/login');</script>");
-      });
-    }
-  } catch (err) {
-    console.log(err);
-    res.send('Error');
-  }
-};
-
-const PrivacyPolicy = (req, res) => {
+const PrivacyPolicy = async (req, res) => {
   res.render('privacypolicy');
 };
+
+const signup = async (req, res) => {
+    const { id, email, pw, age, gender, country, isAgreed, isOptedIn } = req.body;
+  try {
+    const hash = await bcrypt.hash(pw, 10);
+    if (pw !== pwChk) {
+      return res.send("<script>alert('비밀번호가 틀렸습니다.'); window.location.replace('/signup');</script>");
+    } else {
+    await User.create({
+      id,
+      email,
+      pw : hash,
+      age,
+      gender,
+      country, 
+      isAgreed, 
+      isOptedIn
+    },() => {
+      res.send("<script>alert('${id}환영합니다'); window.location.replace('/login');</script>");
+    });
+  }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error creating user');
+  }
+}
+
+
 
 const renderLogin = (req, res) => {
   res.render('login');
@@ -53,33 +48,14 @@ const login = passport.authenticate('local', {
   failureRedirect: '/login'
 });
 
-passport.use(new LocalStrategy({ usernameField: 'id' }, async (id, pw, done) => {
-  try {
-    const user = await User.findOne({ id });
-    if (!user) {
-      return done(null, false, { message: '아이디가 없습니다.' });
-    }
-    const isMatch = await bcrypt.compare(pw, user.pw);
-    if (!isMatch) {
-      return done(null, false, { message: '잘못된 비밀번호 입니다.' });
-    }
-    return done(null, user);
-  } catch (err) {
-    return done(err);
+
+
+const getMypage = (req, res) => {
+  if (!req.user) {
+    return res.redirect('/login');
   }
-}));
+  res.render('mypage', { user: req.user });
+}
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+module.exports = { renderSignup, PrivacyPolicy,signup, renderLogin, login, getMypage };
 
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
-
-module.exports = { renderSignup, signup, renderLogin, login, PrivacyPolicy, getMypage };
