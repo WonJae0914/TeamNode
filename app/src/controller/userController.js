@@ -42,4 +42,24 @@ const login = passport.authenticate('local', {
   failureRedirect: '/login'
 });
 
-module.exports = { renderSignup, signup, renderLogin, login , privacypolicy};
+
+function loginChk(req, res, next) {
+  const id = req.body;
+  if(req.user.id === id) {
+    next();
+  }else{
+    res.send(`로그인안하셨는데요? <a href= \"/login\">로그인</a>`);
+  }
+}
+
+
+const userdetail = async (req, res) => {
+  const users = await User.find({});
+  return res.render('user_detail', {
+    user});
+  // await User.update
+ 
+}
+
+module.exports = { renderSignup, privacypolicy, signup , renderLogin, login , userdetail};
+
