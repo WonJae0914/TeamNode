@@ -1,6 +1,6 @@
 
-const express = require("express");
-const { output } = require("../controller/browseController");
+const express = require("express")
+const browse = require("../controller/browseController");
 const userRouter = require("./userRouter");
 const {
   getQuestionList,
@@ -10,7 +10,7 @@ const {
 const globalRouter = express.Router();
 
 globalRouter.get("/board", home);
-globalRouter.get("/browse" , output.browse);
+globalRouter.get("/browse" , browse);
 globalRouter.get("/user", userRouter);
 // boardRouter.route("/").get(getQuestionList).post(postQuestion);
 

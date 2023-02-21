@@ -1,3 +1,5 @@
+"use strict"
+
 const Question = require("../models/Board");
 
 
@@ -27,7 +29,7 @@ const postQuestion = async (req, res) => {
 };
 
 const getQuestionList = async (req, res) => {
-  return res.render("upload", {
+  return res.render("board_upload", {
     pageTitle : "Upload Question",
   });
 }
