@@ -11,7 +11,7 @@
     <%- include('nav.ejs') %>
     <%if(loggedIn) {%>
     <header>
-        <li><a href="board/question">글작성</a></li>
+        <li><a href="upload">글작성</a></li>
     </header>
     <main style="margin-left: 100px;">
     <a href="logout">로그아웃</a>
@@ -27,8 +27,8 @@
     <h3 class="key">Views</h3>
     <%=question.views%>
     <br />
-    <button type="submit" onclick="/board/edit">edit</button>
-    <button type="submit">delete</button>
+    <button type="submit"><a href="<%=question._id%>/update">edit</a></button>
+    <button type="submit"><a href="<%=question._id%>/delete">delete</a></button>
     <hr />
     <%}%> <%}%> <%} else { %>
     <a href="login">로그인</a>
