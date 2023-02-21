@@ -21,7 +21,7 @@ const signup = async (req, res) => {
       isAgreed, 
       isOptedIn 
     });
-    res.send(`<script>alert("${id}님 환영합니다."); window.location.href="/signup";</script>`);
+    res.send(`<script>alert("${id}님 환영합니다."); window.location.href="/login";</script>`);
   } catch (err) {
     console.log(err);
     res.status(500).send('Error creating user');
@@ -32,11 +32,9 @@ const privacypolicy = async (req, res) => {
     res.render('user_privacypolicy');
 };
 
-
 const renderLogin = (req, res) => {
   res.render('user_login');
 };
-
 
 const login = (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
@@ -46,21 +44,56 @@ const login = (req, res, next) => {
     if (!user) {
       return res.render('user_login', { message: info.message });
     }
-    req.logIn(user, err => {
+    req.login(user, err => {
       if (err) {
         return next(err);
       }
-      return res.redirect('/userdetail');
+      return res.redirect('/userpage');
     });
   })(req, res, next);
 };
 
-
 const userdetail =  (req, res) => {
-  if (!req.User) {
+  if (!req.user) {
     return res.redirect('/login');
   }
-  res.render('user_detail', { User: req.User });
+  res.render('user_detail', { user: req.user });
 }
 
-module.exports = { renderSignup, privacypolicy, signup , renderLogin, login , userdetail};
+
+const updateuser = async(req, res) => {
+  const userinfo = req.user;
+  try {
+    await User.findOneAndUpdate(
+      {id: userinfo.id},
+      {$set : req.body },
+      {returnOriginal : false}
+    );
+    res.send(`<script>alert("${userinfo.id}님 수정되었습니다."); window.location.href="/login";</script>`);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error creating user');
+  }
+};
+const removeuser = async(req, res) => {
+  const userinfo = req.user;
+  console.log(userinfo);
+  try {
+    await User.findOneAndDelete(
+      {id: userinfo.id},
+      {$set : req.body},
+      {returnOriginal : false}
+    );
+    res.send(`<script>alert("이용해주셔서 감사합니다."); window.location.href="/browse";</script>`);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error creating user');
+  }
+};
+
+
+const logout = (req, res) => {
+  req.session.destroy();
+  return res.send('재로그인 하겠습니까? <a href=\"/login\">로그인</a>')
+};
+module.exports = { renderSignup, privacypolicy, signup , renderLogin, login , logout, userdetail, updateuser, removeuser};
