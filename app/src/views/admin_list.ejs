@@ -32,17 +32,17 @@
             <a class="nav-link" href="/admin/write">현황분석</a>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input id="val"class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button id="search"class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <div class="d-flex">
+          <input id="val" class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
+          <button id="search" class="btn btn-outline-success" type="button">Search</button>
+        </div>
       </div>
     </div>
   </nav>
   <header>
     <h1 class="header__title">영상 목록</h1>
   </header>
- 
+
   <table class="table">
     <thead>
       <tr>
@@ -52,34 +52,93 @@
         <th scope="col">작성자</th>
       </tr>
     </thead>
-    <tbody>
-      <% for(var i=0; i < posts.length; i++){ %>
-        <tr>
-          <th scope="row">
-            <%= posts[i]._id %>
-          </th>
-          <td><a href="detail/<%= posts[i]._id %>">
-              <%= posts[i].제목 %>
-            </a></td>
-          <td>
-            <%= posts[i].작성날짜 %>
-          </td>
-          <td>군침이싹</td>
-        </tr>
-        <% } %>
+    <tbody id="postList">
+      
     </tbody>
-    <br>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+      
+      </ul>
+    </nav>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"></script>
-      
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script>
 
+      window.addEventListener("DOMContentLoaded", function () {
+        var currentPage = 1;
+
+        function getPosts(page) {
+          $.ajax({
+            url: '/admin/list/' + page,
+            method: 'get',
+            dataType: "json",
+            success: function (data) {
+              renderPosts(data.posts);
+              renderPagination(data.pageSize, data.total, page);}, 
+            error: function (xhr, status, error) {
+              console.error(error);
+            }
+          });
+        }
+
+        function renderPosts (posts) {
+          var postList = $('#post-list');
+          postList.empty();
+          posts.forEach(function(elem,i) {
+            postFrame = $('#frame');
+            postList.append(postFrame);
+            postFrame.append('<th>'+elem._id+'</th>');
+            postFrame.append('<th>'+elem.제목+'</th>');
+            postFrame.append('<th>'+elem.작성날짜+'</th>');
+            postFrame.append('<th>'+'군침이'+'</th>');
+          });
+        }
+        
+        function renderPagination(pageSize, total, currentPage){
+          var pagenation = $('.pagenation');
+          pagenation.empty();
+          if(total>1){
+              for(var i=1; i<total; i++){
+                if(i===currentPage){
+                  pagenation.append('<li class="page-item">'+i+'</li>');
+                }else{
+                  pagenation.append('<li class="page-item"><a class="page-link" href="#">'+i+'</a></li>')
+                }
+              }
+            $('.page-link').click(function(e){
+              e.preventDefault();
+              var page = $(this).data('page');
+              getPosts(page);
+              currentPage = page;
+            });
+              
+          }
+        }
+
+
+
+
+        getPosts(currentPage);
+
+
+      });
+
+
+
+
+
+
+
+
+
       $('#search').click(function () {
-        let putt = $('#val').val();
-        console.log(putt);
-        window.location.replace('/search?value=' + put); //누르면 주소바꾸기 get요청함
-      })
+        let put = $('#val').val();
+        console.log(put);
+        window.location.replace('/admin/search?value=' + put);
+      });
 
     </script>
 </body>
