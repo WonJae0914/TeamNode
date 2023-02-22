@@ -33,7 +33,7 @@ const postUpload = async (req, res) => {
 const list = async (req, res) => {
   const questions = await Question.find({ delete: false });
   console.log(questions);
-  return res.render("board", {
+  return res.render("board_list", {
     pageTitle: "Question List",
     questions: questions,
     loggedIn: true,
