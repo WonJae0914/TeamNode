@@ -72,9 +72,9 @@ const postUpdate = async (req, res) => {
     if (!questions) {
       return res.status(404).send("Board not found");
     }
-    return res.redirect("/questions/list");
+    return res.redirect("/board/list");
   } catch {
-    return res.render("update", {
+    return res.render("board_update", {
       pageTitle: "Update Question",
     });
   }
@@ -89,7 +89,7 @@ const deleteQuestions = async (req, res) => {
     );
     return res.redirect("/board/list");
   } catch {
-    return res.render("list", {
+    return res.render("board_list", {
       pageTitle: "Question List",
     });
   }
