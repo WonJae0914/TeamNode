@@ -66,8 +66,8 @@ userRouter.get('/login',renderLogin);
 userRouter.post('/login',login);
 userRouter.get('/',logout)
 userRouter.get('/userpage', userdetail); // user상세정보
-userRouter.post('/userpage', updateuser);
-userRouter.post('/userpage', removeuser);
+userRouter.post('/userpage', updateuser); // user정보변경
+userRouter.delete('/userpage', removeuser); // user삭제
 
 
 // module.exports = passport;

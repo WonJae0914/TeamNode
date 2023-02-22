@@ -3,7 +3,7 @@ const express = require("express");
 const board = require("./src/routers/boardRouter");
 const browse = require("./src/routers/globalRouter");
 const admin = require("./src/routers/adminRouter");
-const signup = require("./src/routers/userRouter");
+const user = require("./src/routers/userRouter");
 const app = express();
 const methodOverride = require("method-override");
 
@@ -32,6 +32,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", browse);
 app.use("/board", board);
 app.use("/admin", admin);
-app.use("/", signup);
+app.use("/", user);
 module.exports = app;
 

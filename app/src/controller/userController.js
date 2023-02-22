@@ -75,22 +75,21 @@ const updateuser = async(req, res) => {
     res.status(500).send('Error creating user');
   }
 };
-const removeuser = async(req, res) => {
-  const userinfo = req.user;
-  console.log(userinfo);
+const removeuser = async (req, res) => {
+  const userInfo = req.user;
+
   try {
     await User.findOneAndDelete(
-      {id: userinfo.id},
-      {$set : req.body},
-      {returnOriginal : false}
+      { id: userInfo.id },
+      { $set: req.body },
+      { returnOriginal: false }
     );
-    res.send(`<script>alert("이용해주셔서 감사합니다."); window.location.href="/browse";</script>`);
+    res.status(200).send(`<script>alert("이용해주셔서 감사합니다."); window.location.href="/login";</script>`);
   } catch (err) {
     console.log(err);
-    res.status(500).send('Error creating user');
+    res.status(500).send(`<script>alert("삭제시 에러 발생");</script>`);
   }
 };
-
 
 const logout = (req, res) => {
   req.session.destroy();
