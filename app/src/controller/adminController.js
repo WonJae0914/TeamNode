@@ -47,34 +47,34 @@ const adminWriteP = async function (req, res) {
 
 //관리자 게시판 리스트
 const adminList = async (req, res) => {
-    const result = await db.collection('post').find().toArray();
-    // { 삭제: 'N' }
-    // res.render('admin_list.ejs', { posts: result });
-    res.render('admin_list.ejs');
-}
-const adminListPg = (req, res) => {
-    const PAGE_SIZE = 5;
+    const result = db.collection('post').find({ 삭제: 'N' }).toArray();
+    res.render('admin_list.ejs', { posts: result });
+};
+
+// 관리자 게시판 페이징
+const adminListG = async function (req, res) {
+    const PAGE_SIZE = 10;
     const pageNumber = parseInt(req.params.page) || 1;
     const collection = db.collection('post');
-    collection.countDocuments({}, function (err, total) {
-        if (err) throw err;
+    try {
+        const total = await collection.countDocuments({});
         const totalPages = Math.ceil(total / PAGE_SIZE);
-
-        collection.find({})
+        const result = await collection.find({})
+            .sort({ "_id": -1 })
             .skip((pageNumber - 1) * PAGE_SIZE)
             .limit(PAGE_SIZE)
-            .toArray(function (err, result) {
-                if (err) throw err;
-                 
-                res.json({
-                    posts: result,
-                    pageSize: PAGE_SIZE,
-                    total: totalPages
-                });
-            });
-    });
+            .toArray();
+        const data = {
+            posts: result,
+            pageSize: PAGE_SIZE,
+            total: totalPages
+        }
+        res.json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 }
-
 
 
 
@@ -131,13 +131,13 @@ const adminSearchList = (req, res) => {
     var condition = [
         {
             $search: {
-                index: 'korean', 
+                index: 'korean',
                 text: {
-                    query:  req.query.value ,
+                    query: req.query.value,
                     path: '제목'  // 제목날짜 둘다 찾고 싶으면 ['제목', '날짜']
                 }
-                }
             }
+        }
     ]
     console.log(req.query.value);
     db.collection('post').aggregate(condition).toArray((err, result) => {
@@ -153,5 +153,5 @@ const adminSearchList = (req, res) => {
 module.exports = {
     adminHome, adminWriteG, adminWriteP,
     adminList, adminDetail, adminDelete,
-    adminPutG, adminPutP, adminSearchList, adminListPg
+    adminPutG, adminPutP, adminSearchList, adminListG
 }
