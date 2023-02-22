@@ -1,6 +1,7 @@
 
 const express = require("express")
 const browse = require("../controller/browseController");
+const passport = require("../config/passport");
 const userRouter = require("./userRouter");
 const {
   getQuestionList,
