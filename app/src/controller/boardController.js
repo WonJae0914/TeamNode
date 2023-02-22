@@ -89,7 +89,7 @@ const deleteQuestions = async (req, res) => {
     );
     return res.redirect("/board/list");
   } catch {
-    return res.render("board_list", {
+    return res.render("board", {
       pageTitle: "Question List",
     });
   }
