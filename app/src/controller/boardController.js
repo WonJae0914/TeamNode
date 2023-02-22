@@ -11,18 +11,23 @@ const home = async (req, res) => {
   });
 };
 
+const uploadQuestions = (req, res) => {
+  return res.render("board_upload", {
+    pageTitle: "Upload Board",
+  });
+};
+
 const postUpload = async (req, res) => {
   // const { originalname, path } =req.file;
-  const { title, description, hashtags } = req.body;
+  const { title, detail } = req.body;
   console.log(req.body);
   console.log(req.file);
   await Question.create({
     // path,
     title,
-    description,
-    hashtags: hashtags.split(",").map((word) => `#${word}`),
+    detail,
   });
-  return res.redirect("/questions/list");
+  return res.redirect("/board/list");
 };
 
 const list = async (req, res) => {
@@ -38,7 +43,7 @@ const list = async (req, res) => {
 const updateQuestion = async (req, res) => {
   const boardId = req.params.id;
   console.log(boardId);
-  return res.redirect(`/questions/${boardId}/update`);
+  return res.redirect(`/board/${boardId}/update`);
 };
 
 const updateQuestions = async (req, res) => {
@@ -48,8 +53,7 @@ const updateQuestions = async (req, res) => {
   return res.render("board_update", {
     pageTitle: "Update Question",
     title: questions[0].title,
-    description: questions[0].description,
-    hashtags: questions[0].hashtags,
+    detail: questions[0].detail,
   });
 };
 
