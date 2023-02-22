@@ -2,16 +2,12 @@
 
 const Question = require("../models/Board");
 
-const home = (req, res) => {
+const home = async (req, res) => {
+  const questions = await Question.find({});
   return res.render("board", {
-    pageTitle: "Board",
-    loggedIn: false,
-  });
-};
-
-const uploadQuestions = (req, res) => {
-  return res.render("board_upload", {
-    pageTitle: "Upload Question",
+    pageTitle: "board",
+    loggedIn: true,
+    questions,
   });
 };
 
