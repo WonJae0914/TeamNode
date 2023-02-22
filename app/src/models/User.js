@@ -39,13 +39,19 @@ const userSchema = new mongoose.Schema({
     required: true ,
     default: 'Korea'},
   isAgreed: { 
-    type: Boolean, 
-    required: true ,
-    default: true},
+    type: String, 
+    required: true },
   isOptedIn : { 
-    type: Boolean, 
+    type: String, 
+    required: false, 
+    default: function () {
+      return this.isOptedIn === 'on' ? 'on' : 'off';
+    },
+  },
+  delete : {
+    type : Boolean,
     required: true,
-    default:false 
+    default: false
   }  
 },{ timestamps: true });
 
