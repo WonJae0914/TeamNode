@@ -1,5 +1,6 @@
 "use strict";
 
+const { db } = require("../models/Board");
 const Question = require("../models/Board");
 
 const home = async (req, res) => {
@@ -32,18 +33,11 @@ const postUpload = async (req, res) => {
 
 const list = async (req, res) => {
   const questions = await Question.find({ delete: false });
-  console.log(questions);
   return res.render("board", {
     pageTitle: "Question List",
     questions: questions,
     loggedIn: true,
   });
-};
-
-const updateQuestion = async (req, res) => {
-  const boardId = req.params.id;
-  console.log(boardId);
-  return res.redirect(`/board/${boardId}/update`);
 };
 
 const updateQuestions = async (req, res) => {
@@ -95,16 +89,25 @@ const deleteQuestions = async (req, res) => {
   }
 };
 
-const postDelete = async (req, res) => {};
+const searchQuestion = async (req, res) => {
+  db.collection("questions")
+    .find({
+      title: req.query.value,
+    })
+    .toArray(function (err, result) {
+      res.render("search.ejs", {
+        post: result,
+      });
+    });
+};
 
 module.exports = {
   home,
   list,
   uploadQuestions,
-  updateQuestion,
   updateQuestions,
   postUpdate,
-  postDelete,
   deleteQuestions,
   postUpload,
+  searchQuestion,
 };

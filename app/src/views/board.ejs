@@ -15,6 +15,15 @@
     </header>
     <main style="margin-left: 100px;">
     <a href="logout">로그아웃</a>
+    
+      <div class="icon search">
+          <div class="search-bar">
+              <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="search-input" type="text" name="search_1" placeholder="검색"/>
+                <button id="search" type="submit">검색</button>
+          </div>
+      </div>
+  
     <%if(questions.length == 0) {%>
     <h3>There are no registered questions</h3>
     <%} else {%> <%for(var question of questions) {%>
@@ -27,7 +36,7 @@
     <h3 class="key">Views</h3>
     <%=question.views%>
     <br />
-    <button type="submit"><a href="<%=question._id%>/update">edit</a></button>
+    <button type="submit"><a href="<%=question._id%>/Update">edit</a></button>
     <button type="submit"><a href="<%=question._id%>/delete">delete</a></button>
     <hr />
     <%}%> <%}%> <%} else { %>
@@ -36,5 +45,12 @@
     <p>지금 바로 <a href="signup">회원가입</a>하세요</p>
     <%}%>
     <%- include('footer.ejs') %>
+    <script>
+      $("#search").click(function () {
+        let searchVal = $("#search-input").val();
+        window.location.replace(`/board/list?value=${searchVal}`);
+      });
+
+    </script>
   </body>
 </html>
