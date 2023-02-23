@@ -29,10 +29,14 @@ const adminWriteP = async function (req, res) {
         _id: total + 1,
         // 작성자: req.user._id,
         제목: req.body.title,
+        감독: req.body.director,
+        주연: req.body.actor,
+        출시년도: req.body.year,
+        장르: req.body.category,
         설명: req.body.description,
-        작성날짜: new Date().toLocaleString(),
         경로: "/movies/" + req.files.profile[0].filename,
         사진경로: "/img/" + req.files.profileImg[0].filename,
+        작성날짜: new Date().toLocaleString(),
         삭제: "N",
         삭제날짜: "N"
     };
@@ -99,6 +103,7 @@ const adminDelete = async (req, res) => {
     const message = await function () {
         console.log("삭제완료")
     }
+    res.redirect("/admin/list")
     return message();
 }
 
