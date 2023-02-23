@@ -1,11 +1,9 @@
-@import "./nav.css";
-@import "./footer.css";
-@import "./browse.css";
-
 main {
   width: 100%;
-  /* border: solid 1px white; */
+  border: solid 1px white;
   align-items: center;
+  justify-content: center;
+  align-content: center;
   padding: 1.5rem 5%;
   background-color: #141414;
 }
@@ -98,4 +96,38 @@ h4 {
 
 .profile li:hover > ul {
   display: block;
+}
+
+#upload {
+  width: 90%;
+  margin: auto;
+}
+
+#upload .upload--form {
+  border: solid 1px white;
+  justify-content: space-around;
+  width: 80%;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+#upload .upload--form input {
+  width: 90%;
+  margin: auto;
+  height: 20px;
+}
+
+#upload .upload--form textarea {
+  width: 90%;
+  height: 70%;
+  margin: auto;
+}
+
+#upload .upload--form button {
+  width: 20%;
+  height: 20px;
+  margin: auto;
+  padding: 0;
+  background-color: #ad0000;
 }

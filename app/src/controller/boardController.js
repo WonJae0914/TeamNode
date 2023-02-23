@@ -13,7 +13,7 @@ const home = async (req, res) => {
 
 const uploadQuestions = (req, res) => {
   return res.render("board_upload", {
-    pageTitle: "Upload Board",
+    pageTitle: "Question Board",
   });
 };
 
