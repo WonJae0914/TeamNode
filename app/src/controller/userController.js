@@ -1,8 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
-const passport = require('passport');
+// const passport = require('passport');
 // const session = require('express-session');
-
+const passport = require('../config/passport.js');
 
 const renderSignup = (req, res) => {
   res.render('user_signup');
@@ -43,7 +43,7 @@ const renderLogin = (req, res) => {
 };
 
 const login = (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate('local',(err, user, info) => {
     console.log(info);
     if (err) {
       return next(err);
@@ -59,6 +59,14 @@ const login = (req, res, next) => {
     });
   })(req, res, next);
 };
+
+function loginChk(req, res, next){
+  if(req.user){
+    next();
+  }else{
+    res.send('<script>alert("현재 로그인 상태가 아닙니다. ")</script>');
+  }
+}
 
 const userdetail =  (req, res) => {
   if (!req.user) {
