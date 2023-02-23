@@ -90,15 +90,20 @@ const deleteQuestions = async (req, res) => {
 };
 
 const searchQuestion = async (req, res) => {
-  db.collection("questions")
-    .find({
-      title: req.query.value,
-    })
-    .toArray(function (err, result) {
-      res.render("search.ejs", {
-        post: result,
-      });
+  const { kw } = req.query;
+  let questions = [];
+  if (kw) {
+    questions = await Question.find({
+      title: {
+        $regex: new RegExp(`${kw}$`, "i"),
+      },
     });
+  }
+  return res.render("board_search", {
+    pageTitle: "Search",
+    questions,
+    loggedIn: true,
+  });
 };
 
 module.exports = {

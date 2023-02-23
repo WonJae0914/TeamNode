@@ -16,6 +16,6 @@ boardRouter.route("/upload").get(uploadQuestions).post(postUpload); // board/upl
 boardRouter.route("/list").get(list); // board/list
 boardRouter.route("/:id/update").get(updateQuestions).post(postUpdate); // board/:id/update
 boardRouter.route("/:id/delete").get(deleteQuestions); // board/:id/delete
-boardRouter.route("/list").get(searchQuestion); // board/:id/search
+boardRouter.route("/search").get(searchQuestion); // board/:id/search
 
 module.exports = boardRouter;
