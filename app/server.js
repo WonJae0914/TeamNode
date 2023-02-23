@@ -2,7 +2,7 @@
 const express = require("express");
 const session = require('express-session'); // session module
 const passport = require("./src/config/passport"); // passport module
-const board = require("./src/routers/boardRouter");
+const boardRouter = require("./src/routers/boardRouter");
 const browse = require("./src/routers/browseRouter");
 const admin = require("./src/routers/adminRouter");
 const user = require("./src/routers/userRouter");
@@ -36,13 +36,14 @@ app.use(session({
     saveUninitialized: false, // false :  empty session obj가 쌓이는 걸 방지
     // store: new Session({mongooseConnection: mongoose.connection }) // 이걸 쓰려면 근데 npm i conect-mongo 해줘야함
     // store에 mongoose.connection을 쓴 것은, 기존에 연결된 DB를 그대로 사용하겠다는 말입니다.
-
+}));
   app.use(passport.initialize());
   app.use(passport.session()); 
   // passport는 session을 사용하기 때문에 exporess-session 미들웨어 코드 다음에 작성해야한다.
   //app.use(session()) 코드 아래에 위치해야 한다는 말이다. 또, Cookie 나 Cookie-parser 미들웨어 다음에 작성해야 한다. 
 
 //라우팅 미들웨어 (제일 하단 고정)
+app.use("/",browse);
 app.use("/board", boardRouter);
 app.use("/admin", admin);
 app.use("/", user);
