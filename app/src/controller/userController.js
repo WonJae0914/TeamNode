@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
-const LocalStrategy = require('passport-local').Strategy;
-const passport = require("../config/passport");
+const passport = require('passport');
+// const session = require('express-session');
+
 
 const renderSignup = (req, res) => {
   res.render('user_signup');
