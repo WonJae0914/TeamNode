@@ -12,7 +12,7 @@ const methodOverride = require("method-override");
 const morgan = require("morgan");
 const logger = morgan("dev");
 
-// 뷰 엔진 및 셋팅
+// 뷰 엔진 및 셋팅 
 app.set("view engine", "ejs");
 app.set("views", "./src/views");
 

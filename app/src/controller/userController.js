@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const passport = require('../config/passport'); // passport 모듈 불러오기
 
 const renderSignup = (req, res) => {
-  res.render('user_signup');
+  res.render('user_signup'); 
 };
 
 const signup = async (req, res) => {

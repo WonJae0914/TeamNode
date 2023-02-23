@@ -11,7 +11,7 @@ const {
   isLoggedIn,
   login,
   privacypolicy,
-  logout,
+  logout, 
   userdetail,
   updateuser,
   removeuser
