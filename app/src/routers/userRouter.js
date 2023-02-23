@@ -1,50 +1,30 @@
 const express = require('express');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const {
-    renderSignup,
-    signup,
-    renderLogin,
-    login
-} = require('../controller/userController');
-
-
-passport.use(
-  new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
-    try {
-      const user = await User.findOne({ email });
-      if (!user) {
-        return done(null, false, { message: 'Incorrect email.' });
-      }
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    } catch (err) {
-      return done(err);
-    }
-  })
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
 
 const userRouter = express.Router();
 
+
+
+const {
+  renderSignup,
+  signup,
+  renderLogin,
+  isLoggedIn,
+  login,
+  privacypolicy,
+  logout, 
+  userdetail,
+  updateuser,
+  removeuser
+} = require('../controller/userController');
+
 userRouter.get('/signup',renderSignup);
+userRouter.get('/privacypolicy', privacypolicy); // 개인정보처리방침
 userRouter.post('/signup',signup);
 userRouter.get('/login',renderLogin);
 userRouter.post('/login',login);
+userRouter.get('/userpage', isLoggedIn ,userdetail); // user상세정보
+userRouter.post('/userpage', isLoggedIn,updateuser); // user정보변경
+userRouter.get('/userpage/delete', isLoggedIn,removeuser); // user삭제
+userRouter.get('/',logout)
 
 module.exports = userRouter;
