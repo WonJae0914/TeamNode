@@ -1,8 +1,7 @@
+//userController.js
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
-// const passport = require('passport');
-// const session = require('express-session');
-const passport = require('../config/passport.js');
+const passport = require('../config/passport'); // passport 모듈 불러오기
 
 const renderSignup = (req, res) => {
   res.render('user_signup');
@@ -42,9 +41,15 @@ const renderLogin = (req, res) => {
   res.render('user_login');
 };
 
+function isLoggedIn(req, res, next) { // 로그인했는지 안했는지 확인하는 함수
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
 const login = (req, res, next) => {
-  passport.authenticate('local',(err, user, info) => {
-    console.log(info);
+  passport.authenticate('local',(err, user, info) => { // 로컬에 정보 따오는거 
     if (err) {
       return next(err);
     }
@@ -60,13 +65,13 @@ const login = (req, res, next) => {
   })(req, res, next);
 };
 
-function loginChk(req, res, next){
-  if(req.user){
-    next();
-  }else{
-    res.send('<script>alert("현재 로그인 상태가 아닙니다. ")</script>');
-  }
-}
+// function loginChk(req, res, next){
+//   if(req.user){
+//     next();
+//   }else{
+//     res.send('<script>alert("현재 로그인 상태가 아닙니다. ")</script>');
+//   }
+// }
 
 const userdetail =  (req, res) => {
   if (!req.user) {
@@ -111,4 +116,4 @@ const logout = (req, res) => {
   req.session.destroy();
   return res.send('재로그인 하겠습니까? <a href=\"/login\">로그인</a>')
 };
-module.exports = { renderSignup, privacypolicy, signup , renderLogin, login , logout, userdetail, updateuser, removeuser};
+module.exports = { renderSignup, privacypolicy, signup , renderLogin, isLoggedIn, login , logout, userdetail, updateuser, removeuser};
