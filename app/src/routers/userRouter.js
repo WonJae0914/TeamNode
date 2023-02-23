@@ -22,6 +22,7 @@ userRouter.get('/privacypolicy', privacypolicy); // 개인정보처리방침
 userRouter.post('/signup',signup);
 userRouter.get('/login',renderLogin);
 userRouter.post('/login',login);
+userRouter.get("/user", userRouter);
 userRouter.get('/userpage', isLoggedIn ,userdetail); // user상세정보
 userRouter.post('/userpage', isLoggedIn,updateuser); // user정보변경
 userRouter.get('/userpage/delete', isLoggedIn,removeuser); // user삭제
