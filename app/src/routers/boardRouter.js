@@ -10,6 +10,7 @@ const {
   deleteQuestions,
   searchQuestion,
 } = require("../controller/boardController");
+
 const boardRouter = express.Router();
 
 boardRouter.route("/upload").get(uploadQuestions).post(postUpload); // board/upload
