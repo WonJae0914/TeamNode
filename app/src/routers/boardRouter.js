@@ -1,14 +1,22 @@
-"use strict"
+"use strict";
 
 const express = require("express");
 const {
-  getQuestionList,
-  postQuestion,
-  home,
+  postUpload,
+  uploadQuestions,
+  list,
+  updateQuestions,
+  postUpdate,
+  deleteQuestions,
+  searchQuestion,
 } = require("../controller/boardController");
-const boardRouter = express.Router(); 
- 
-boardRouter.get("/", home);
-boardRouter.route("/question").get(getQuestionList).post(postQuestion);
+
+const boardRouter = express.Router();
+
+boardRouter.route("/upload").get(uploadQuestions).post(postUpload); // board/upload
+boardRouter.route("/list").get(list); // board/list
+boardRouter.route("/:id/update").get(updateQuestions).post(postUpdate); // board/:id/update
+boardRouter.route("/:id/delete").get(deleteQuestions); // board/:id/delete
+boardRouter.route("/search").get(searchQuestion); // board/:id/search
 
 module.exports = boardRouter;

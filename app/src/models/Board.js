@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const mongoose = require("mongoose"); // 몽구스 import
 
@@ -15,6 +15,7 @@ const questionSchema = new mongoose.Schema({
   modified: { type: Boolean, default: false },
   views: { type: Number, default: 0, required: true },
   loggedIn: { type: Boolean, default: true },
+  delete: { type: Boolean, default: false },
 });
 
 const Question = mongoose.model("Question", questionSchema);
