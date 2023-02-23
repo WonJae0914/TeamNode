@@ -29,10 +29,14 @@ const adminWriteP = async function (req, res) {
         _id: total + 1,
         // 작성자: req.user._id,
         제목: req.body.title,
+        감독: req.body.director,
+        주연: req.body.actor,
+        출시년도: req.body.year,
+        장르: req.body.category,
         설명: req.body.description,
-        작성날짜: new Date().toLocaleString(),
         경로: "/movies/" + req.files.profile[0].filename,
         사진경로: "/img/" + req.files.profileImg[0].filename,
+        작성날짜: new Date().toLocaleString(),
         삭제: "N",
         삭제날짜: "N"
     };
@@ -45,11 +49,40 @@ const adminWriteP = async function (req, res) {
     res.redirect('/admin/list');
 };
 
-// 관리자 게시판 리스트
+//관리자 게시판 리스트
 const adminList = async (req, res) => {
-    const result = await db.collection('post').find({ 삭제: 'N' }).toArray();
+    const result = db.collection('post').find({ 삭제: 'N' }).toArray();
     res.render('admin_list.ejs', { posts: result });
+};
+
+// 관리자 게시판 페이징
+const adminListG = async function (req, res) {
+    const PAGE_SIZE = 10;
+    const pageNumber = parseInt(req.params.page) || 1;
+    const collection = db.collection('post');
+    try {
+        const total = await collection.countDocuments({});
+        const totalPages = Math.ceil(total / PAGE_SIZE);
+        const result = await collection.find({})
+            .sort({ "_id": -1 })
+            .skip((pageNumber - 1) * PAGE_SIZE)
+            .limit(PAGE_SIZE)
+            .toArray();
+        const data = {
+            posts: result,
+            pageSize: PAGE_SIZE,
+            total: totalPages
+        }
+        res.json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 }
+
+
+
+
 
 // 관리자 게시판 상세보기
 const adminDetail = async (req, res) => {
@@ -70,6 +103,7 @@ const adminDelete = async (req, res) => {
     const message = await function () {
         console.log("삭제완료")
     }
+    res.redirect("/admin/list")
     return message();
 }
 
@@ -97,8 +131,32 @@ const adminPutP = async (req, res) => {
     return message();
 }
 
+// 관리자 게시판 검색
+const adminSearchList = (req, res) => {
+    var condition = [
+        {
+            $search: {
+                index: 'korean',
+                text: {
+                    query: req.query.value,
+                    path: '제목'  // 제목날짜 둘다 찾고 싶으면 ['제목', '날짜']
+                }
+            }
+        }
+    ]
+    console.log(req.query.value);
+    db.collection('post').aggregate(condition).toArray((err, result) => {
+        console.log(result);
+        res.render('admin_search_list.ejs', { posts: result })
+    })
+
+};
+
+
+
+
 module.exports = {
     adminHome, adminWriteG, adminWriteP,
     adminList, adminDetail, adminDelete,
-    adminPutG, adminPutP
+    adminPutG, adminPutP, adminSearchList, adminListG
 }
