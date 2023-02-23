@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+/* Style for the form container */
+.login_container {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Style for the form fieldset */
+fieldset {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Style for the form legend */
+legend {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Style for the form label */
+label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+/* Style for the form input */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #343a40;
+  color: #ffffff;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Style for the form button */
+button[type="submit"],
+a.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid #000;
+  color: #28a745;
+  border-color: #28a745;
+  border-radius: 5px;
+  margin-right: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover,
+a.btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Style for the form error message */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <%- include('nav.ejs') %>
+    <div class="login_container mt-4">
+        <form action="/login" method="POST">
+          <fieldset>
+            <legend>로그인</legend>
+            <div class="mb-3">
+              <label for="id" class="form-label">아이디</label>
+              <input type="text" id="id" class="form-control" name="id">
+            </div>
+            <div class="mb-3">
+              <label for="pw" class="form-label">비밀번호</label>
+              <input type="password" id="pw" class="form-control" name="pw">
+            </div>
+            <button type="submit" class="btn btn-outline-dark">로그인</button>
+            <a href="/signup" class="btn btn-outline-success">아이디가 없나요?</a>
+          </fieldset>
+      </form>
+    </div> 
+    <%- include('footer.ejs') %>
+</body>
+</html>

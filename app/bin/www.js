@@ -1,5 +1,6 @@
 const app = require("../server");
 const runDb = require("../src/config/db");
+const passport = require("../src/config/passport");
 const content = require("../src/models/Content");
 const PORT = 3000;
 const handleListening = () =>
