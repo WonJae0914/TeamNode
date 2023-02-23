@@ -1,7 +1,7 @@
 //express 모듈 불러오기
 const express = require("express");
 const board = require("./src/routers/boardRouter");
-const browse = require("./src/routers/globalRouter");
+const browse = require("./src/routers/browseRouter");
 const admin = require("./src/routers/adminRouter");
 const signup = require("./src/routers/userRouter");
 const app = express();

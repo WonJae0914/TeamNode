@@ -34,7 +34,7 @@ const adminWriteP = async function (req, res) {
         경로: "/movies/" + req.files.profile[0].filename,
         사진경로: "/img/" + req.files.profileImg[0].filename,
         삭제: "N",
-        삭제날짜: "N"
+        삭제날짜: "N",
     };
     const result2 = await db.collection('post').insertOne(put);
     console.log('저장완료');

@@ -46,5 +46,6 @@ userRouter.get('/signup',renderSignup);
 userRouter.post('/signup',signup);
 userRouter.get('/login',renderLogin);
 userRouter.post('/login',login);
+userRouter.get("/user", userRouter);
 
 module.exports = userRouter;
