@@ -1,12 +1,6 @@
 <%- include('head.ejs') %>
 <body>
   <%- include('navigation.ejs') %>
-    <%if(loggedIn) {%>
-    <header>
-        <li><a href="upload">글작성</a></li>
-        <li><a href="logout">로그아웃</a></li>
-    </header>
-
     <main>
       <section>
         <%if(questions.length == 0) {%>
@@ -25,11 +19,7 @@
           </div>
           <br/>
         </div>
-        <%}%> <%}%> <%} else { %> 
-        <a href="login">로그인</a>
-        <p>아직 회원이 아니신가요?</p>
-        <p>지금 바로 <a href="signup">회원가입</a>하세요</p>
-        <%}%>
+        <%}%> <%}%>
       </section>
     </main>
     <%- include('footer.ejs') %>

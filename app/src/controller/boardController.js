@@ -7,7 +7,6 @@ const home = async (req, res) => {
   const questions = await Question.find({});
   return res.render("board", {
     pageTitle: "board",
-    loggedIn: true,
     questions,
   });
 };
