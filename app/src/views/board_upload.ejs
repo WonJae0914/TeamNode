@@ -1,21 +1,22 @@
+<%- include('head.ejs') %>
 <body>
-    <form method="post">
-      <input
-        type="text"
-        name="title"
-        id="title"
-        placeholder="input title"
-        required
-      />
-      <input
-        type="text"
-        name="detail"
-        id="detail"
-        placeholder="input detail"
-        required
-      />
-      <button type="submit">submit</button>
-    </form>
-  </body>
-  
-  
+  <%- include('navigation.ejs') %>
+  <form method="post">
+    <input
+      type="text"
+      name="title"
+      id="title"
+      placeholder="input title"
+      required
+    />
+    <input
+      type="text"
+      name="detail"
+      id="detail"
+      placeholder="input detail"
+      required
+    />
+    <button type="submit">submit</button>
+  </form>
+  <%- include('footer.ejs') %>
+</body>

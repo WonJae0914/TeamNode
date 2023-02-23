@@ -1,0 +1,101 @@
+@import "./nav.css";
+@import "./footer.css";
+@import "./browse.css";
+
+main {
+  width: 100%;
+  /* border: solid 1px white; */
+  align-items: center;
+  padding: 1.5rem 5%;
+  background-color: #141414;
+}
+
+section {
+  width: 100%;
+  /* border: solid 1px wheat; */
+}
+
+h3 {
+  font-size: 1.8rem;
+  color: #141414;
+}
+
+h4 {
+  font-size: 1.2rem;
+  color: #141414;
+}
+
+.con-li {
+  width: 100%;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  display: flex;
+  background-color: lightgray;
+  padding: 10px;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.con-li__info {
+  /* border: solid 1px teal; */
+  width: 50%;
+}
+
+.con-li__info > h3 > a {
+  font-size: 2rem;
+  color: #141414;
+}
+
+.con-li__util {
+  /* border: solid 1px teal; */
+  width: 50%;
+}
+
+.con-li__util > h4 {
+  margin-left: 28%;
+  margin-bottom: 7px;
+}
+
+.con-li__util > .con-li__btn:nth-child(2) {
+  margin-left: 59%;
+}
+
+/* .con-li__util > .con-li__btn:last-child {
+  margin-left: 85%;
+} */
+
+.con-li__btn {
+  margin-left: 1%;
+  background-color: #ad0000;
+  display: inline;
+}
+
+.profile ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profile li {
+  position: relative;
+}
+
+.profile ul ul {
+  position: absolute;
+  top: 100%;
+  right: 0px;
+  display: none;
+  width: 150px;
+  border: solid 0.5px dimgray;
+  background-color: black;
+  padding: 3px;
+}
+
+.profile ul ul a {
+  font-size: 1.5rem;
+  margin: 10px;
+}
+
+.profile li:hover > ul {
+  display: block;
+}
