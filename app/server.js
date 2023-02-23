@@ -28,6 +28,7 @@ app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 
 
+
 //라우팅 미들웨어 (제일 하단 고정)
 app.use("/", browse);
 app.use("/board", board);
