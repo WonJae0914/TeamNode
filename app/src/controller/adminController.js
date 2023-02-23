@@ -91,20 +91,19 @@ const adminDetail = async (req, res) => {
 };
 
 //관리자 게시판 삭제(fake)
-const adminDelete = async (req, res) => {
-    const result = await db.collection('post').updateOne({ _id: parseInt(req.body._id) },
+const adminDelete =  (req, res) => {
+    db.collection('post').updateOne({ _id: parseInt(req.body._id) },
+     {
+        $set:
         {
-            $set:
-            {
-                삭제: 'Y',
-                삭제날짜: new Date().toLocaleString()
-            }
-        });
-    const message = await function () {
-        console.log("삭제완료")
-    }
-    res.redirect("/admin/list")
-    return message();
+            삭제: 'Y',
+            삭제날짜: new Date().toLocaleString()
+        }
+    },
+    function (err, result) {
+        console.log('삭제성공');
+        res.status(200).send('success');
+        })
 }
 
 //관리자 게시판 수정 겟

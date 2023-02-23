@@ -100,10 +100,9 @@
       $.ajax({
         method: 'PUT',
         url: '/admin/detail/delete',
-        data: { _id: number },
-        // async: false
+        data: { _id: number }
       }).done(function (result) {
-        alert('삭제요청 성공했음');
+        alert('삭제요청 성공')
         window.location.replace("/admin/list")
       }).fail(function (xhr, textStatus, errorThrown) {
         console.log(xhr, textStatus, errorThrown);  // 실패시 실행할 코드
