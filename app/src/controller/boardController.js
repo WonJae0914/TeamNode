@@ -3,17 +3,17 @@
 const { db } = require("../models/Board");
 const Question = require("../models/Board");
 
-const home = async (req, res) => {
-  const questions = await Question.find({});
-  return res.render("board", {
-    pageTitle: "board",
-    questions,
-  });
-};
+// const home = async (req, res) => {
+//   const questions = await Question.find({});
+//   return res.render("board", {
+//     pageTitle: "board",
+//     questions,
+//   });
+// };
 
 const uploadQuestions = (req, res) => {
   return res.render("board_upload", {
-    pageTitle: "Upload Board",
+    pageTitle: "Question Board",
   });
 };
 
@@ -36,6 +36,17 @@ const list = async (req, res) => {
     pageTitle: "Question List",
     questions: questions,
     loggedIn: true,
+  });
+};
+
+const detailQuestion = async (req, res) => {
+  const questions = await Question.find({ _id: req.params.id }).exec();
+  console.log("questions[0]");
+  console.log(questions[0]);
+  return res.render("board_detail", {
+    pageTitle: "Update Question",
+    title: questions[0].title,
+    detail: questions[0].detail,
   });
 };
 
@@ -106,9 +117,9 @@ const searchQuestion = async (req, res) => {
 };
 
 module.exports = {
-  home,
   list,
   uploadQuestions,
+  detailQuestion,
   updateQuestions,
   postUpdate,
   deleteQuestions,

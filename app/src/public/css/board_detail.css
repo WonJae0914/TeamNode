@@ -1,0 +1,17 @@
+.detail-box {
+  width: 80%;
+  margin: auto;
+  height: 70vh;
+}
+.detail-box h3 {
+  width: 100%;
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+.detail-box p {
+  width: 100%;
+  color: white;
+  font-size: 1.3rem;
+  line-height: 23px;
+}
