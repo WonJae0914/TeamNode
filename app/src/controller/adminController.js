@@ -61,9 +61,9 @@ const adminListG = async function (req, res) {
     const pageNumber = parseInt(req.params.page) || 1;
     const collection = db.collection('post');
     try {
-        const total = await collection.countDocuments({});
+        const total = await collection.countDocuments({ 삭제: { $eq: 'N' } });
         const totalPages = Math.ceil(total / PAGE_SIZE);
-        const result = await collection.find({})
+        const result = await collection.find({ 삭제: { $eq: 'N' } })
             .sort({ "_id": -1 })
             .skip((pageNumber - 1) * PAGE_SIZE)
             .limit(PAGE_SIZE)
