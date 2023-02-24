@@ -154,8 +154,11 @@ const adminSearchList = (req, res) => {
 
 };
 
-
-
+// 회원관리 게시판
+const adminUserList = (req, res) => {
+    const result = db.collection('user').find({}).toArray();
+    res.render('admin_user_list.ejs', { user : result });
+};
 
 module.exports = {
     adminHome, adminWriteG, adminWriteP,
