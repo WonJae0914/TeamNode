@@ -62,18 +62,10 @@ const login = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      return res.redirect('/userpage');
+      return res.redirect('/browse');
     });
   })(req, res, next);
 };
-
-// function loginChk(req, res, next){
-//   if(req.user){
-//     next();
-//   }else{
-//     res.send('<script>alert("현재 로그인 상태가 아닙니다. ")</script>');
-//   }
-// }
 
 const userdetail =  (req, res) => {
   if (!req.user) {
@@ -81,7 +73,6 @@ const userdetail =  (req, res) => {
   }
   res.render('user_detail', { user: req.user });
 }
-
 
 const updateuser = async(req, res) => {
   const userinfo = req.user;
@@ -98,24 +89,37 @@ const updateuser = async(req, res) => {
     res.status(500).send('Error creating user');
   }
 };
+
 const removeuser = async (req, res) => {
-  console.log(req.user)
   const userInfo = req.user;
+  const confirmed = req.query.confirmed;
+  if (confirmed === 'true') {
+    try {
+      await User.updateOne(
+        {id: userInfo.id},
+        {$set: {delete: true}},
+        {returnOriginal: false}
+      );
+      res.status(200).send(`<script>alert("이용해주셔서 감사합니다."); window.location.href="/login";</script>`);
+    } catch (err) {
+      console.log(err);
+      res.status(500).send(`<script>alert("삭제시 에러 발생");</script>`);
+    }
+  } else {
+    res.redirect('/userpage');
+  }
+};
+const logout = (req, res) => {
   try {
-    await User.updateOne(
-      {id : userInfo.id},
-      {$set :{delete : true} },
-      {returnOriginal : false}
-    );
-    res.status(200).send(`<script>alert("이용해주셔서 감사합니다."); window.location.href="/login";</script>`);
+    req.session.destroy();
+    return res.redirect('/login');
   } catch (err) {
-    console.log(err);
-    res.status(500).send(`<script>alert("삭제시 에러 발생");</script>`);
+    console.error(err);
+    return res.status(500).send('An error occurred while logging out');
   }
 };
 
-const logout = (req, res) => {
-  req.session.destroy();
-  return res.send('재로그인 하겠습니까? <a href=\"/login\">로그인</a>')
-};
-module.exports = { renderSignup, privacypolicy, signup , renderLogin, isLoggedIn, login , logout, userdetail, updateuser, removeuser};
+module.exports = { 
+  renderSignup, privacypolicy, signup , 
+  renderLogin, isLoggedIn, login , logout, 
+  userdetail, updateuser, removeuser};
