@@ -46,7 +46,7 @@
               <img src="<%=posts.사진경로%>" alt="">
             </div>
             <div class="content-info">
-              <div class="content-header">
+              <div class="content-header" data-movie="<%=posts.제목%>" id="movie">
                 <h2><%=posts.제목%><span class="content-year">(<%=posts.출시년도%>년)</span></h2>
                 <p class="content-genre"><span>장르: </span><%=posts.장르%></p>
               </div>
@@ -89,11 +89,9 @@
                     <i class="active fa fa-star"></i>
                   </label>
                 </div>
-                <form method="post">
                   <div class="rating-bookmark">
                     <button class="fa-regular fa-bookmark" type="submit"></button>
                   </div>
-                </form>
               </div>
               <div class="user-rating">
                 <h2>평가하기 : </h2>

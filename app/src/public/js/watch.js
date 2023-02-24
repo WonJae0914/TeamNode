@@ -102,9 +102,14 @@ fullscreenButton.addEventListener('click', () => {
 
 const bookmark = document.querySelector(".fa-bookmark");
 
-
 function bookmarkHandler(){
+    var movie = document.querySelector("#movie").dataset.movie;
+    $.ajax({
+      type : "post",
+      url : "/bookmark?="+ movie
+    })
     bookmark.classList.toggle("fa-solid");
+    
 }
 
 bookmark.addEventListener("click", bookmarkHandler);
@@ -129,3 +134,4 @@ submitBtn.addEventListener('click', () => {
   // Send rating to server here
   console.log(`User rated ${rating} stars.`);
 });
+
