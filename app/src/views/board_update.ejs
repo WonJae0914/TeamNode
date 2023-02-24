@@ -1,24 +1,31 @@
-<%- include('head.ejs')%>
+<%- include('head.ejs') %>
 <body>
   <%- include('nav.ejs') %>
-  <form method="post">
-    <span aria-live="assertive">필수 정보입니다.</span>
-    <input
-      type="text"
-      name="title"
-      id="title"
-      placeholder="input title"
-      required
-      value="<%=title%>"
-    />
-    <textarea
-      type="text"
-      name="detail"
-      id="detail"
-      placeholder="input detail"
-      required
-      value="<%=detail%>"
-    ></textarea>
-    <input type="submit" value="Update" />
-  </form>
+  <main>
+    <div id="upload">
+      <form class="upload--form" method="post">
+        <label for="title">제목</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="input title"
+          required
+          value="<%=title%>"
+        />
+        <label for="detail">내용</label>
+        <textarea
+          type="text"
+          name="detail"
+          id="detail"
+          placeholder="input detail"
+          required
+        >
+          <%=detail[0]%>
+        </textarea>
+        <button type="submit">submit</button>
+      </form>
+    </div>
+  </main>
+  <%- include('footer.ejs') %>
 </body>

@@ -1,16 +1,21 @@
+@import "./board_list.css";
+@import "./board_upload.css";
+@import "./board_detail.css";
+
 main {
   width: 100%;
-  border: solid 1px white;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
+  /* border: solid 1px white; */
+  display: flex;
   padding: 1.5rem 5%;
   background-color: #141414;
 }
 
 section {
   width: 100%;
-  /* border: solid 1px wheat; */
+  background-color: black;
+  height: 70vh;
+  border: solid 1px white;
+  border-radius: 10px;
 }
 
 h3 {
@@ -20,114 +25,5 @@ h3 {
 
 h4 {
   font-size: 1.2rem;
-  color: #141414;
-}
-
-.con-li {
-  width: 100%;
-  margin-bottom: 20px;
-  justify-content: space-between;
-  display: flex;
-  background-color: lightgray;
-  padding: 10px;
-  align-items: center;
-  border-radius: 5px;
-}
-
-.con-li__info {
-  /* border: solid 1px teal; */
-  width: 50%;
-}
-
-.con-li__info > h3 > a {
-  font-size: 2rem;
-  color: #141414;
-}
-
-.con-li__util {
-  /* border: solid 1px teal; */
-  width: 50%;
-}
-
-.con-li__util > h4 {
-  margin-left: 28%;
-  margin-bottom: 7px;
-}
-
-.con-li__util > .con-li__btn:nth-child(2) {
-  margin-left: 59%;
-}
-
-/* .con-li__util > .con-li__btn:last-child {
-  margin-left: 85%;
-} */
-
-.con-li__btn {
-  margin-left: 1%;
-  background-color: #ad0000;
-  display: inline;
-}
-
-.profile ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.profile li {
-  position: relative;
-}
-
-.profile ul ul {
-  position: absolute;
-  top: 100%;
-  right: 0px;
-  display: none;
-  width: 150px;
-  border: solid 0.5px dimgray;
-  background-color: black;
-  padding: 3px;
-}
-
-.profile ul ul a {
-  font-size: 1.5rem;
-  margin: 10px;
-}
-
-.profile li:hover > ul {
-  display: block;
-}
-
-#upload {
-  width: 90%;
-  margin: auto;
-}
-
-#upload .upload--form {
-  border: solid 1px white;
-  justify-content: space-around;
-  width: 80%;
-  height: 260px;
-  display: flex;
-  flex-direction: column;
-}
-
-#upload .upload--form input {
-  width: 90%;
-  margin: auto;
-  height: 20px;
-}
-
-#upload .upload--form textarea {
-  width: 90%;
-  height: 70%;
-  margin: auto;
-}
-
-#upload .upload--form button {
-  width: 20%;
-  height: 20px;
-  margin: auto;
-  padding: 0;
-  background-color: #ad0000;
+  color: var();
 }
