@@ -35,7 +35,7 @@ const list = async (req, res) => {
   return res.render("board", {
     pageTitle: "Question List",
     questions: questions,
-    loggedIn: true,
+    // loggedIn: true,
   });
 };
 

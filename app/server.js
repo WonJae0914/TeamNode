@@ -8,8 +8,9 @@ const admin = require("./src/routers/adminRouter");
 const user = require("./src/routers/userRouter");
 const app = express();
 const methodOverride = require("method-override");
-
+ 
 const morgan = require("morgan");
+const { isLoggedIn } = require("./src/controller/userController");
 const logger = morgan("dev");
 
 // 뷰 엔진 및 셋팅 
@@ -44,7 +45,7 @@ app.use(session({
 
 //라우팅 미들웨어 (제일 하단 고정)
 app.use("/",browse);
-app.use("/board", boardRouter);
+app.use("/board", isLoggedIn,boardRouter);
 app.use("/admin", admin);
 app.use("/", user);
 module.exports = app;
