@@ -8,7 +8,7 @@ const admin = require("./src/routers/adminRouter");
 const user = require("./src/routers/userRouter");
 const app = express();
 const methodOverride = require("method-override");
-
+ 
 const morgan = require("morgan");
 const { isLoggedIn } = require("./src/controller/userController");
 const logger = morgan("dev");
