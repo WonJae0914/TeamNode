@@ -98,4 +98,34 @@ fullscreenButton.addEventListener('click', () => {
 
 ///////////////// 비디오 플레이어 끝 ////////////////////
 
-/////////////////
+///////////////// 영화 정보 ////////////////////////////
+
+const bookmark = document.querySelector(".fa-bookmark");
+
+
+function bookmarkHandler(){
+    bookmark.classList.toggle("fa-solid");
+}
+
+bookmark.addEventListener("click", bookmarkHandler);
+
+const stars = document.querySelectorAll('.star-rating input[type="radio"]');
+const submitBtn = document.getElementById('submit-btn');
+
+let rating;
+
+stars.forEach((star) => {
+  star.addEventListener('click', () => {
+    rating = star.value;
+  });
+});
+
+submitBtn.addEventListener('click', () => {
+  if (!rating) {
+    alert('Please select a rating!');
+    return;
+  }
+
+  // Send rating to server here
+  console.log(`User rated ${rating} stars.`);
+});

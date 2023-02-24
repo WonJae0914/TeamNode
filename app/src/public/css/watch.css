@@ -11,16 +11,13 @@
     outline: none;
     text-transform: capitalize;
     transition: 0.2s linear;
-    color: #fff;
+    color: #fff; 
     user-select: none;
     font-family: Arial, sans-serif;
 }
-body{
 
-}
 header{
-    padding-right: 1.5rem 5%;
-    padding-left: 1.5rem 5%;
+    padding: 1.5rem 5%;
 }
 
 /* -----------------비디오 플레이어 시작--------------- */
@@ -155,33 +152,153 @@ cursor: pointer;
 }
 /* -----------------비디오 플레이어 끝--------------- */
 
-/* -----------------컨텐트 정보 시작----------------- */
+/* -----------------컨텐츠 정보 시작----------------- */
 
+/* 컨테츠 정보 스타일 */
 .infomation{
     border: 1px solid var(--bg);
     width: 100%;
-    height: 500px;
+    height: 540px;
     display: flex;
     justify-content: center;
-    background-color: #fff;
     z-index: 2;
 }
-
-.content-box{
+/* 컨텐츠 정보 박스 스타일 */
+.content-container{
     border: 1px solid var(--bg);
-    width: 100%;
+    width: 80%;
     height: 500px;
-    background-color: #fff;
     z-index: 3;
+    display: flex;
+    justify-content: center;
+}
+/* 컨텐츠 이미지 스타일 */
+.content-img{
+    border: 1px solid var(--bg);
+    height: 500px;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+/* 컨텐츠 이미지 사이즈 조정 */
+.content-img img{
+    height: auto;
+    object-fit: cover;
+}
+/* 컨텐츠 디테일 정보 스타일 */
+.content-info{
+    border : 1px solid beige;
+    width: 70%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+/* 컨텐츠 헤더 정보 스타일 */
+.content-header {
+    border : 1px solid beige;
+    height: 100px;
+    width: 70%;
+}
+/* 컨텐츠 내용 정보 스타일 */
+.content-discription{
+    border : 1px solid beige;
+    height: 150px;
+    width: 100%;
+}
+/* 컨텐츠 크리에잇터 정보 스타일 */
+.content-creater{
+    border : 1px solid beige;
+    height: 80px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+/* 컨텐츠 감독 정보 스타일 */
+.director{
+    border : 1px solid beige;
+    height: 80px;
+    width: 50%;
+}
+/* 컨텐츠 주연배우 정보 스타일 */
+.actor{
+    border : 1px solid beige;
+    height: 80px;
+    width: 50%;
+}
+.rating{
+    border : 1px solid beige;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
     
 }
+.rating-bookmark{
+    width: 50px;
+    height: 50px;
+    border : 1px solid beige;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rating-bookmark button{
+    border: 0;
+    outline: 0;
+    font-size: 25px;
+    cursor: pointer;
+    background-color: var(--bg);
+}
+.star-rating {
+    display: inline-block;
+    font-size: 0;
+}
 
+.star-rating input[type="radio"] {
+display: none;
+}
 
+.star-rating label {
+display: inline-block;
+font-size: 32px;
+color: #ddd;
+transition: color 0.2s;
+cursor: pointer;
+}
 
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+color: #f7d551;
+}
 
+.star-rating input[type="radio"]:checked ~ label {
+color: #f7d551;
+}
 
+.star-rating .active {
+color: #f7d551;
+}
+
+.user-rating{
+    display: flex;
+    align-items: center;
+}
 
 
 
 
 /* -----------------컨텐트 정보 끝----------------- */
+
+/* 리뷰 댓글 시작*/
+
+.review{
+    border: 1px solid beige;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+/* 리뷰 댓글 끝 */

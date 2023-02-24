@@ -1,7 +1,6 @@
 "use strict"
-const Content = require("../models/Content");
 const fs = require("fs");
-const path = require("path");
+const path = require("path"); 
 
 const MongoClient = require('mongodb-legacy').MongoClient;
 let db;
