@@ -1,8 +1,6 @@
+// userRouter.js
 const express = require('express');
-
 const userRouter = express.Router();
-
-
 
 const {
   renderSignup,
@@ -14,7 +12,7 @@ const {
   logout, 
   userdetail,
   updateuser,
-  removeuser
+  removeuser,
 } = require('../controller/userController');
 
 userRouter.get('/signup',renderSignup);
@@ -25,7 +23,7 @@ userRouter.post('/login',login);
 userRouter.get("/user", userRouter);
 userRouter.get('/userpage', isLoggedIn ,userdetail); // user상세정보
 userRouter.post('/userpage', isLoggedIn,updateuser); // user정보변경
-userRouter.get('/userpage/delete', isLoggedIn,removeuser); // user삭제
-userRouter.get('/',logout)
+userRouter.get('/userpage/delete', removeuser); // user삭제
+userRouter.get('/userpage/logout',logout)
 
 module.exports = userRouter;
