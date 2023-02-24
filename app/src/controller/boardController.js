@@ -12,9 +12,7 @@ const Question = require("../models/Board");
 // };
 
 const uploadQuestions = (req, res) => {
-  return res.render("board_upload", {
-    pageTitle: "Question Board",
-  });
+  return res.render("board_upload");
 };
 
 const postUpload = async (req, res) => {
@@ -33,7 +31,6 @@ const postUpload = async (req, res) => {
 const list = async (req, res) => {
   const questions = await Question.find({ delete: false });
   return res.render("board", {
-    pageTitle: "Question List",
     questions: questions,
     // loggedIn: true,
   });
@@ -44,7 +41,6 @@ const detailQuestion = async (req, res) => {
   console.log("questions[0]");
   console.log(questions[0]);
   return res.render("board_detail", {
-    pageTitle: "Update Question",
     title: questions[0].title,
     detail: questions[0].detail,
   });
@@ -55,7 +51,6 @@ const updateQuestions = async (req, res) => {
   console.log("questions[0]");
   console.log(questions[0]);
   return res.render("board_update", {
-    pageTitle: "Update Question",
     title: questions[0].title,
     detail: questions[0].detail,
   });
@@ -78,9 +73,7 @@ const postUpdate = async (req, res) => {
     }
     return res.redirect("/board/list");
   } catch {
-    return res.render("board_update", {
-      pageTitle: "Update Question",
-    });
+    return res.render("board_update")
   }
 };
 
@@ -93,9 +86,7 @@ const deleteQuestions = async (req, res) => {
     );
     return res.redirect("/board/list");
   } catch {
-    return res.render("board", {
-      pageTitle: "Question List",
-    });
+    return res.render("board");
   }
 };
 
@@ -110,7 +101,6 @@ const searchQuestion = async (req, res) => {
     });
   }
   return res.render("board_search", {
-    pageTitle: "Search",
     questions,
     loggedIn: true,
   });

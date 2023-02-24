@@ -22,9 +22,7 @@ const browse = function (req, res) {
     .sort({ _id: -1 })
     .toArray(function (err, result) {
       res.render("browse.ejs", {
-        posts: result,
-        pageTitle: "Gunchim",
-      });
+        posts: result });
     });
 };
 module.exports = browse;
