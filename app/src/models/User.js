@@ -5,10 +5,14 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
   // Schema 객체 생성 
+  // _id:{
+  //   type: integer
+  // },
+
   id: {
     type: String,
     required: true,
-    minlength: 8,
+    minlength: 4,
     trim : true,
     match : /^[A-Za-z0-9]{7,15}$/g,
     unique : true
@@ -57,7 +61,12 @@ const userSchema = new mongoose.Schema({
   bookmark : {
     type : [{type : String}],
   }
-},{ timestamps: true });
+},{   timestamps: {
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  currentTime: () => new Date().toISOString(),
+  },
+ });
 
 const User = mongoose.model("User", userSchema); // .model --> document middleware
 // 첫번째 파라미터 "User" = collection명, 두번째 파라미터 contentSchema = 스키마
