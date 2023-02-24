@@ -3,6 +3,8 @@
 :root {
   --black: 13131a;
   --bg: #141414;
+  --ptcolor: #ad0000;
+  --hover: #555;
 }
 * {
   margin: 0;

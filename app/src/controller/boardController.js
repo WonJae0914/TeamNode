@@ -24,6 +24,7 @@ const postUpload = async (req, res) => {
     // path,
     title,
     detail,
+    pageTitle: "Question Upload",
   });
   return res.redirect("/board/list");
 };
@@ -32,6 +33,7 @@ const list = async (req, res) => {
   const questions = await Question.find({ delete: false });
   return res.render("board", {
     questions: questions,
+    pageTitle: "Question List",
     // loggedIn: true,
   });
 };
@@ -43,6 +45,7 @@ const detailQuestion = async (req, res) => {
   return res.render("board_detail", {
     title: questions[0].title,
     detail: questions[0].detail,
+    pageTitle: "Question Detail",
   });
 };
 
@@ -53,6 +56,7 @@ const updateQuestions = async (req, res) => {
   return res.render("board_update", {
     title: questions[0].title,
     detail: questions[0].detail,
+    pageTitle: "Question Update",
   });
 };
 
@@ -73,7 +77,7 @@ const postUpdate = async (req, res) => {
     }
     return res.redirect("/board/list");
   } catch {
-    return res.render("board_update")
+    return res.render("board_update");
   }
 };
 
@@ -103,6 +107,7 @@ const searchQuestion = async (req, res) => {
   return res.render("board_search", {
     questions,
     loggedIn: true,
+    pageTitle: "Search Results",
   });
 };
 
