@@ -28,12 +28,12 @@ const adminWriteP = async function (req, res) {
     const put = {
         _id: total + 1,
         // 작성자: req.user._id,
-        제목: req.body.title,
-        감독: req.body.director,
-        주연: req.body.actor,
+        제목: req.body.title.trim(),
+        감독: req.body.director.trim(),
+        주연: req.body.actor.trim(),
         출시년도: req.body.year,
         장르: req.body.category,
-        설명: req.body.description,
+        설명: req.body.description.trim(),
         경로: "/movies/" + req.files.profile[0].filename,
         사진경로: "/img/" + req.files.profileImg[0].filename,
         작성날짜: new Date().toLocaleString(),
@@ -91,18 +91,18 @@ const adminDetail = async (req, res) => {
 };
 
 //관리자 게시판 삭제(fake)
-const adminDelete =  (req, res) => {
+const adminDelete = (req, res) => {
     db.collection('post').updateOne({ _id: parseInt(req.body._id) },
-     {
-        $set:
         {
-            삭제: 'Y',
-            삭제날짜: new Date().toLocaleString()
-        }
-    },
-    function (err, result) {
-        console.log('삭제성공');
-        res.status(200).send('success');
+            $set:
+            {
+                삭제: 'Y',
+                삭제날짜: new Date().toLocaleString()
+            }
+        },
+        function (err, result) {
+            console.log('삭제성공');
+            res.status(200).send('success');
         })
 }
 
@@ -113,13 +113,16 @@ const adminPutG = async (req, res) => {
 }
 //관리자 게시판 수정 포스트
 const adminPutP = async (req, res) => {
-    req.body._id = parseInt(req.body._id);
     const result = await db.collection('post').updateOne({ _id: parseInt(req.body.id) },
         {
             $set:
             {
-                제목: req.body.title,
-                설명: req.body.description,
+                제목: req.body.title.trim(),
+                감독: req.body.director.trim(),
+                주연: req.body.actor.trim(),
+                출시년도: req.body.year,
+                장르: req.body.category,
+                설명: req.body.description.trim(),
                 수정날짜: new Date().toLocaleString(),
             }
         });

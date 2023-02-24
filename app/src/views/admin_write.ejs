@@ -11,11 +11,9 @@
 
 <body>
   <h4 class="container mt-4"><strong>영상 업로드</strong></h4>
-
   <div class="container mt-3">
     <form action="/admin/write/add" method="POST" enctype="multipart/form-data" id="form1">
       <div class="form-group">
-
         <div class="mb-3">
           <label for="title" class="form-label">제목</label>
           <input type="text" class="form-control" placeholder="영상제목" name="title" id="title">
@@ -28,7 +26,6 @@
           <label for="actor" class="form-label">주연배우</label>
           <input type="text" class="form-control" placeholder="주연배우" name="actor" id="actor">
         </div>
-
         <label for="year" class="form-label">출시년도</label>
         <select class="form-select mb-3" aria-label="Default select example" name="year" id="year" style="width:30%;">
           <% for (var i=new Date().getFullYear(); i>= 1980; i--) { %>
@@ -40,24 +37,20 @@
 
         <label for="category" class="form-label">장르</label>
 
-        <select class="form-select mb-3" aria-label="Default select example" name="category" id=category"
+        <select class="form-select mb-3" aria-label="Default select example" name="category" id="category"
           style="width:30%;">
-          <option value="1">액션호러</option>
-          <option value="2">코미디호러</option>
-          <option value="3">심리호러</option>
-          <option value="4">초자연호러</option>
-          <option value="5">고딕호러</option>
-          <option value="6">슬래셔</option>
+          <option value="액션호러">액션호러</option>
+          <option value="코미디호러">코미디호러</option>
+          <option value="심리호러">심리호러</option>
+          <option value="초자연호러">초자연호러</option>
+          <option value="고딕호러">고딕호러</option>
+          <option value="슬래셔">슬래셔</option>
         </select>
 
         <div class="mb-3">
           <label for="desc" class="form-label">설명</label>
           <textarea class="form-control" name="description" id="desc" rows="3" placeholder="영상내용"></textarea>
         </div>
-
-
-
-
       </div>
 
       <label for="profile"> 영상업로드 MP4
@@ -74,26 +67,46 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
   <script>
-    let form1 = document.querySelector('#form1');
-    form1.addEventListener('submit', function (event) {
+    let form = document.querySelector('#form1');
+    form.addEventListener('submit', function (event) {
       let title = document.querySelector('#title').value;
+      let director = document.querySelector('#director').value;
+      let actor = document.querySelector('#actor').value;
+      let year = document.querySelector('#year').value;
+      let category = document.querySelector('#category').value;
       let desc = document.querySelector('#desc').value;
       let movie = document.querySelector('#movie').value;
       let img = document.querySelector('#img').value;
       var mp4Reg = /\w+\.mp4/;
       var imgReg = /\w+\.(jpe?g|png)/;
-      if (title === "") {
+      if (!title) {
         alert("제목을 작성하세요");
         event.preventDefault();
-      } else if (desc === "") {
+      } else if (!director) {
+        alert("감독을 작성하세요");
+        event.preventDefault();
+      }
+      else if (!actor) {
+        alert("주연배우를 작성하세요");
+        event.preventDefault();
+      }
+      else if (!year) {
+        alert("출시년도를 선택하세요");
+        event.preventDefault();
+      }
+      else if (!category) {
+        alert("장르를 선택하세요");
+        event.preventDefault();
+      }
+      else if (!desc) {
         alert("내용을 작성하세요");
         event.preventDefault();
       }
-      else if (!mp4Reg.test(movie)) {
+      else if (!mp4Reg.test(movie) || !movie) {
         alert("영상을 업로드 해주세요.");
         event.preventDefault();
       }
-      else if (!imgReg.test(img)) {
+      else if (!imgReg.test(img) || !img) {
         alert("포스터를 선택하세요");
         event.preventDefault();
       }
