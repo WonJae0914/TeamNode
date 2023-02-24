@@ -1,0 +1,43 @@
+#upload {
+  width: 90%;
+  margin: auto;
+}
+
+#upload .upload--form {
+  /* border: solid 1px wheat; */
+  justify-content: space-around;
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#upload .upload--form input {
+  width: 90%;
+  margin: auto;
+  height: 30px;
+  color: black;
+}
+
+#upload .upload--form textarea {
+  width: 90%;
+  height: 70%;
+  margin: auto;
+  color: black;
+}
+
+#upload .upload--form label {
+  width: 90%;
+  height: 30px;
+  margin: auto;
+  font-size: 1.5rem;
+  line-height: 40px;
+}
+
+#upload .upload--form button {
+  width: 15%;
+  height: 25px;
+  margin: auto;
+  padding: 0;
+  background-color: #ad0000;
+}

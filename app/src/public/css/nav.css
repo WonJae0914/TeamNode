@@ -153,3 +153,33 @@ nav .right .bell a i {
   background-color: var(--black);
   background-color: #555;
   }
+.profile ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profile li {
+  position: relative;
+}
+
+.profile ul ul {
+  position: absolute;
+  top: 100%;
+  right: 0px;
+  display: none;
+  width: 150px;
+  border: solid 0.5px dimgray;
+  background-color: black;
+  padding: 3px;
+}
+
+.profile ul ul a {
+  font-size: 1.5rem;
+  margin: 10px;
+}
+
+.profile li:hover > ul {
+  display: block;
+}
+
