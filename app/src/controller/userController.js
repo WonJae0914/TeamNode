@@ -23,7 +23,7 @@ const signup = async (req, res) => {
       gender,
       country, 
       isAgreed, 
-      isOptedIn 
+      isOptedIn
     });
     res.send(`<script>alert("${id}님 환영합니다."); window.location.href="/login";</script>`);
   }else {

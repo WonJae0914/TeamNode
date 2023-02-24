@@ -53,7 +53,10 @@ const userSchema = new mongoose.Schema({
     type : Boolean,
     required: true,
     default: false
-  }  
+  },
+  bookmark : {
+    type : [{type : String}],
+  }
 },{ timestamps: true });
 
 const User = mongoose.model("User", userSchema); // .model --> document middleware
