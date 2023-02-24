@@ -1,74 +1,74 @@
 @import "/app/src/public/css/reset.css";
 
-:root{
-    --black : 13131a;
-    --bg : #141414;
+:root {
+  --black: 13131a;
+  --bg: #141414;
 }
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* 버튼 생성 시 기본적으로 선이 없는 버튼이 생성됨 */
-    border: none;
-    text-decoration: none;
-    /* 다음의 속성들이 어떤 역할을 하는지 검색 */
-    outline: none;
-    text-transform: capitalize;
-    transition: 0.2s linear;
-    color: #fff;
-    user-select: none;
-}
-
-html{
-    font-size: 65%;
-    overflow-x: hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* 버튼 생성 시 기본적으로 선이 없는 버튼이 생성됨 */
+  border: none;
+  text-decoration: none;
+  /* 다음의 속성들이 어떤 역할을 하는지 검색 */
+  outline: none;
+  text-transform: capitalize;
+  transition: 0.2s linear;
+  color: #fff;
+  user-select: none;
 }
 
-body{
-    background-color: var(--bg);
+html {
+  font-size: 65%;
+  overflow-x: hidden;
 }
 
-section{
-    padding: 1.5rem 5%;
+body {
+  background-color: var(--bg);
+}
+
+section {
+  padding: 1.5rem 5%;
 }
 
 /* 공통 영역 끝 */
 
 /*browse 시작*/
-.main{
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background: url("../img/jigsaw.jpg") no-repeat;
-    background-size: cover;
-    background-position: center;
-    border: none;
+.main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: url("../img/jigsaw.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  border: none;
 }
 
-.main-content{
-    max-width: 50rem;
+.main-content {
+  max-width: 50rem;
 }
 
-.main .main-content h3{
-    font-size: 6rem;
-    color: #ad0000;
-    text-transform: uppercase;
+.main .main-content h3 {
+  font-size: 6rem;
+  color: #ad0000;
+  text-transform: uppercase;
 }
 
-.main .main-content p{
-    font-size: 2rem;
-    font-weight: lighter;
-    color: #fff;
-    /* font-weight: ; */
-    line-height: 1.8rem;
-    padding: 1rem 0;
+.main .main-content p {
+  font-size: 2rem;
+  font-weight: lighter;
+  color: #fff;
+  /* font-weight: ; */
+  line-height: 1.8rem;
+  padding: 1rem 0;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-button{
+button {
   border: none;
   padding: 0.9em 2em;
   border-radius: 5px;
@@ -82,99 +82,97 @@ button{
   margin-bottom: 1rem;
   margin-top: 0.5rem;
 }
-.content-box{
-    height: 300px;
-    max-width: 100%;
-    /* border: solid 1px cornsilk; */
-    display: flex;
-    justify-content: space-between;
-    /* position: relative; */
-    /* overflow: hidden; */
-    transition: transform 1s;
-
+.content-box {
+  height: 300px;
+  max-width: 100%;
+  /* border: solid 1px cornsilk; */
+  display: flex;
+  justify-content: space-between;
+  /* position: relative; */
+  /* overflow: hidden; */
+  transition: transform 1s;
 }
-.item-box{
-    height: 300px;
-    width: 200px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;;
-    flex: 0 0 200px;
-    margin-right: 10rem;
+.item-box {
+  height: 300px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex: 0 0 200px;
+  margin-right: 10rem;
 }
 
-.item-box:last-child{
+.item-box:last-child {
   margin-right: 0;
 }
 
-.item-box img{
-    max-height: 300px;
-    max-width: 200px;
-    /* width: auto;  */
-    /* height: auto; */
+.item-box img {
+  max-height: 300px;
+  max-width: 200px;
+  /* width: auto;  */
+  /* height: auto; */
 }
 
 .main .main-content .buttons {
-    display: flex;
-    gap: 10px;
-  }
+  display: flex;
+  gap: 10px;
+}
 .main .main-content .buttons .play {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
- }
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
 .main .main-content .buttons .play * {
-    color: black;
-  }
+  color: black;
+}
 .main .main-content .buttons .play i {
-    color: black;
-    font-size: 2rem;
-  }
+  color: black;
+  font-size: 2rem;
+}
 .main .main-content .buttons .play span {
-    font-size: 2rem;
-  }
+  font-size: 2rem;
+}
 
 .main .main-content .buttons .play:hover {
-    background-color: #cccccc;
- }
-.main .main-content .buttons .detail{
-    background-color: rgba(109, 109, 110, 0.7);
-    display: flex;
-    align-items: center;
-    gap: 0.8em;
-    font-size: 2rem;
-  }
+  background-color: #cccccc;
+}
+.main .main-content .buttons .detail {
+  background-color: rgba(109, 109, 110, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  font-size: 2rem;
+}
 .main .main-content .buttons .detail i {
-    font-size: 1.7rem;
-  }
+  font-size: 1.7rem;
+}
 .main .main-content .buttons .detail:hover {
-    background-color: rgba(58, 58, 59, 0.7);
-  }
-
+  background-color: rgba(58, 58, 59, 0.7);
+}
 
 .content .carousel .prev {
-    font-size: 3rem;
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-10px);
-    cursor: pointer;
-    display: none;
-  }
+  font-size: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-10px);
+  cursor: pointer;
+  display: none;
+}
 .content .carousel .next {
-    font-size: 3rem;
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-10px);
-    cursor: pointer;
-    display: none;
+  font-size: 3rem;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-10px);
+  cursor: pointer;
+  display: none;
 }
 
 /* browse 끝 */
 
 /* 캐러셀 시작*/
-.carousel{
+.carousel {
   position: relative;
   height: 300px;
   max-width: 100%;
@@ -182,8 +180,5 @@ button{
   display: flex;
   z-index: 0.5;
   justify-content: space-between;
-  
 }
 /* 캐러셀 끝 */
-
-
