@@ -4,6 +4,7 @@ const express = require("express");
 const browse = require("../controller/browseController");
 const watch = require("../controller/watchController");
 const video = require("../controller/videoController");
+const bookmark = require("../controller/bookmarkController");
 // const bookmark = require("../controller/bookmarkController");
 const browseRouter = express.Router();
 

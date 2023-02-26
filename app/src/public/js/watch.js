@@ -101,14 +101,22 @@ fullscreenButton.addEventListener('click', () => {
 ///////////////// 영화 정보 ////////////////////////////
 
 const bookmark = document.querySelector(".fa-bookmark");
+const title = document.querySelector("#movie").dataset.title;
 
 function bookmarkHandler(){
-    var movie = document.querySelector("#movie").dataset.movie;
+    console.log(title);
     $.ajax({
       type : "post",
-      url : "/bookmark?="+ movie
+      url : "/bookmark?="+title,
+      data : { 제목 : title },
+      success : function(res){
+        if(res!==null){
+          bookmark.classList.toggle("fa-solid");
+        }
+      },
     })
-    bookmark.classList.toggle("fa-solid");
+    
+    
     
 }
 

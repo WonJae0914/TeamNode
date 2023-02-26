@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>watch</title>
     <link rel="stylesheet" href="/css/watch.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <%- include('nav.ejs') %>
@@ -46,7 +47,7 @@
               <img src="<%=posts.사진경로%>" alt="">
             </div>
             <div class="content-info">
-              <div class="content-header" data-movie="<%=posts.제목%>" id="movie">
+              <div class="content-header">
                 <h2><%=posts.제목%><span class="content-year">(<%=posts.출시년도%>년)</span></h2>
                 <p class="content-genre"><span>장르: </span><%=posts.장르%></p>
               </div>
@@ -89,8 +90,9 @@
                     <i class="active fa fa-star"></i>
                   </label>
                 </div>
+                  <div id="movie" data-title="<%=posts.제목%>"></div>
                   <div class="rating-bookmark">
-                    <button class="fa-regular fa-bookmark" type="submit"></button>
+                    <button class="fa-regular fa-bookmark"></button>
                   </div>
               </div>
               <div class="user-rating">
@@ -137,5 +139,6 @@
     <!-- 리뷰 댓글 끝 -->
     <%- include('footer.ejs') %>
     <script src="/js/watch.js"></script>
+    
 </body>
 </html>
