@@ -1,6 +1,7 @@
 "use strict"
 
 const MongoClient = require('mongodb-legacy').MongoClient;
+var ObjectId = require('mongodb-legacy').ObjectId;
 
 let db;
 MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net/?retryWrites=true&w=majority"
@@ -51,7 +52,7 @@ const adminWriteP = async function (req, res) {
 
 //관리자 게시판 리스트
 const adminList = async (req, res) => {
-    const result = db.collection('post').find({ 삭제: 'N' }).toArray();
+    const result = await db.collection('post').find({ 삭제: 'N' }).toArray();
     res.render('admin_list.ejs', { posts: result });
 };
 
@@ -61,9 +62,9 @@ const adminListG = async function (req, res) {
     const pageNumber = parseInt(req.params.page) || 1;
     const collection = db.collection('post');
     try {
-        const total = await collection.countDocuments({});
+        const total = await collection.countDocuments({ 삭제: { $eq: 'N' } });
         const totalPages = Math.ceil(total / PAGE_SIZE);
-        const result = await collection.find({})
+        const result = await collection.find({ 삭제: { $eq: 'N' } })
             .sort({ "_id": -1 })
             .skip((pageNumber - 1) * PAGE_SIZE)
             .limit(PAGE_SIZE)
@@ -79,10 +80,6 @@ const adminListG = async function (req, res) {
         res.status(500).send('Server Error');
     }
 }
-
-
-
-
 
 // 관리자 게시판 상세보기
 const adminDetail = async (req, res) => {
@@ -154,11 +151,78 @@ const adminSearchList = (req, res) => {
 
 };
 
+// 회원관리 게시판 리스트
+const adminUserList = async (req, res) => {
+    const result = await db.collection('users').find().toArray();
+    res.render('admin_user_list.ejs', { users: result });
+};
 
+// 회원관리 게시판 리스트 페이징
+const adminUserListG = async function (req, res) {
+    const PAGE_SIZE = 2;
+    const pageNumber = parseInt(req.params.page) || 1;
+    const collection = db.collection('users');
+    try {
+        const total = await collection.countDocuments();
+        const totalPages = Math.ceil(total / PAGE_SIZE);
+        const result = await collection.find()
+            .sort({ "_id": -1 })
+            .skip((pageNumber - 1) * PAGE_SIZE)
+            .limit(PAGE_SIZE)
+            .toArray();
+        const data = {
+            users: result,
+            pageSize: PAGE_SIZE,
+            total: totalPages
+        }
+        res.json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+}
+
+// 회원관리 게시판 상세보기
+const adminUserDetail = async (req, res) => {
+    var id = req.params.id;
+    var o_id = new ObjectId(id);
+    const result = await db.collection('users').findOne({ _id: o_id });
+    res.render('admin_user_detail.ejs', { data: result });
+};
+// 회원관리 게시판 수정 겟
+const adminUserPutG = async (req, res) => {
+    var id = req.params.id;
+    var o_id = new ObjectId(id);
+    const result = await db.collection('users').findOne({ _id: o_id });
+    res.render('admin_user_edit.ejs', { data: result })
+};
+const adminUserPutP = async (req, res) => {
+    var id = req.body.id;
+    var o_id = new ObjectId(id);
+    const result = await db.collection('users').updateOne({ _id: o_id },
+        {
+            $set:
+            {
+                email: req.body.email.trim(),
+                age: req.body.age.trim(),
+                gender: req.body.gender.trim(),
+                country: req.body.country,
+                isOptedIn: req.body.opt
+                
+            }
+        });
+    const message = function () {
+        console.log("회원정보 수정완료");
+        res.redirect("/admin/user/list")
+    }
+    return message();
+}
 
 
 module.exports = {
     adminHome, adminWriteG, adminWriteP,
     adminList, adminDetail, adminDelete,
-    adminPutG, adminPutP, adminSearchList, adminListG
+    adminPutG, adminPutP, adminSearchList, adminListG,
+    adminUserList, adminUserDetail, adminUserListG,
+    adminUserPutG, adminUserPutP
 }
