@@ -26,7 +26,7 @@
             <a class="nav-link" href="/admin/write">업로드</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/admin/write">회원관리</a>
+            <a class="nav-link" href="/admin/user/list">회원관리</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/admin/write">현황분석</a>
@@ -46,25 +46,27 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">글번호</th>
+        <th scope="col">회원번호</th>
         <th scope="col">회원아이디</th>
-        <th scope="col">가입날짜</th>
-        <th scope="col">작성자</th>
+        <th scope="col">이메일</th>
+        <th scope="col">삭제여부</th>
       </tr>
     </thead>
     <tbody id="post-list">
-      <% for(var i=0; i < posts.length; i++){ %>
+      <% for(var i=0; i < users.length; i++){ %>
         <tr id="frame">
           <th scope="row">
-            <%= posts[i]._id %>
+            <%= users[i]._id %>
           </th>
-          <td><a href="detail/<%= posts[i]._id %>">
-              <%= posts[i].제목 %>
+          <td><a href="detail/<%= users[i]._id %>">
+              <%= users[i].id %>
             </a></td>
           <td>
-            <%= posts[i].작성날짜 %>
+            <%= users[i].email %>
           </td>
-          <td>군침이싹</td>
+          <td>
+            <%= users[i].delete %>
+          </td>
         </tr>
         <% } %>
     </tbody>
@@ -89,11 +91,11 @@
       var currentPage = 1;
       function getPosts(page) {
         $.ajax({
-          url: '/admin/list/' + page,
+          url: '/admin/user/list/' + page,
           method: 'get',
           dataType: "json",
           success: function (data) {
-            renderPosts(data.posts);
+            renderPosts(data.users);
             renderPagination(data.pageSize, data.total, page);
           },
           error: function (jqXHR, textStatus, errorThrown) {
@@ -108,10 +110,10 @@
           postList.append('<tr id="frame' + i + '"></tr>');
           postFrame = $('#frame' + i + '');
           postFrame.append('<th scope="row">' + elem._id + '</th>');
-          postFrame.append('<td>' + '<a href="detail/' + elem._id + '">' + elem.제목 + ' </a>' + '</td>');
+          postFrame.append('<td>' + '<a href="detail/' + elem._id + '">' + elem.id + ' </a>' + '</td>');
 
-          postFrame.append('<td>' + elem.작성날짜 + '</td>');
-          postFrame.append('<td>' + '군침이' + '</td>');
+          postFrame.append('<td>' + elem.email + '</td>');
+          postFrame.append('<td>' + elem.delete + '</td>');
         });
       }
 
@@ -144,11 +146,11 @@
       getPosts(currentPage);
     });
 
-    $('#search').click(function () {
-      let put = $('#val').val();
-      console.log(put);
-      window.location.replace('/admin/search?value=' + put);
-    });
+    // $('#search').click(function () {
+    //   let put = $('#val').val();
+    //   console.log(put);
+    //   window.location.replace('/admin/search?value=' + put);
+    // });
 
   </script>
 </body>
