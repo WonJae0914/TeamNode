@@ -2,6 +2,7 @@
 
 const MongoClient = require('mongodb-legacy').MongoClient;
 var ObjectId = require('mongodb-legacy').ObjectId;
+const url = require('url');
 
 let db;
 MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net/?retryWrites=true&w=majority"
@@ -13,7 +14,7 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
     });
 
 //관리자 홈
-const adminHome = (req, res) => {   //
+const adminHome = (req, res) => {   
     res.render('admin_home.ejs');
 };
 
@@ -58,7 +59,10 @@ const adminList = async (req, res) => {
 
 // 관리자 게시판 페이징
 const adminListG = async function (req, res) {
-    const PAGE_SIZE = 10;
+    const parsedUrl = url.parse(req.url);
+    const path = parsedUrl.pathname;
+    var newone = path.replace(/^\/list\//, '').replace(/\d+$/, '') + '';
+    const PAGE_SIZE = 3;
     const pageNumber = parseInt(req.params.page) || 1;
     const collection = db.collection('post');
     try {
@@ -71,8 +75,35 @@ const adminListG = async function (req, res) {
             .toArray();
         const data = {
             posts: result,
-            pageSize: PAGE_SIZE,
-            total: totalPages
+            total: totalPages,
+            path: newone
+        }
+        res.json(data);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+}
+// 콘텐츠 삭제목록 페이징
+const adminListDeleted = async function (req, res) {
+    const parsedUrl = url.parse(req.url);
+    const path = parsedUrl.pathname;
+    var newone = path.replace(/^\/list\//, '').replace(/\d+$/, '') + '';
+    const PAGE_SIZE = 1;
+    const pageNumber = parseInt(req.params.page) || 1;
+    const collection = db.collection('post');
+    try {
+        const total = await collection.countDocuments({ 삭제: { $eq: 'Y' } });
+        const totalPages = Math.ceil(total / PAGE_SIZE);
+        const result = await collection.find({ 삭제: { $eq: 'Y' } })
+            .sort({ "_id": -1 })
+            .skip((pageNumber - 1) * PAGE_SIZE)
+            .limit(PAGE_SIZE)
+            .toArray();
+        const data = {
+            posts: result,
+            total: totalPages,
+            path: newone
         }
         res.json(data);
     } catch (err) {
@@ -172,7 +203,6 @@ const adminUserListG = async function (req, res) {
             .toArray();
         const data = {
             users: result,
-            pageSize: PAGE_SIZE,
             total: totalPages
         }
         res.json(data);
@@ -204,11 +234,10 @@ const adminUserPutP = async (req, res) => {
             $set:
             {
                 email: req.body.email.trim(),
-                age: req.body.age.trim(),
+                age:  parseInt(req.body.age),
                 gender: req.body.gender.trim(),
                 country: req.body.country,
                 isOptedIn: req.body.opt
-                
             }
         });
     const message = function () {
@@ -218,11 +247,29 @@ const adminUserPutP = async (req, res) => {
     return message();
 }
 
+// 회원 탈퇴 
+const adminUserQuit = (req, res) => {
+    var id = req.body._id;
+    var o_id = new ObjectId(id);
+    db.collection('users').updateOne({ _id: o_id },
+        {
+            $set:
+            {
+                delete: true,
+            }
+        },
+        function (err, result) {
+            console.log('삭제성공');
+            res.status(200).send('success');
+        })
+}
+
 
 module.exports = {
     adminHome, adminWriteG, adminWriteP,
     adminList, adminDetail, adminDelete,
     adminPutG, adminPutP, adminSearchList, adminListG,
     adminUserList, adminUserDetail, adminUserListG,
-    adminUserPutG, adminUserPutP
+    adminUserPutG, adminUserPutP, adminUserQuit,
+    adminListDeleted
 }
