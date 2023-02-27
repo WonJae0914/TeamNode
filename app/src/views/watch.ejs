@@ -91,13 +91,14 @@
                   </label>
                 </div>
                   <div id="movie" data-title="<%=posts.제목%>"></div>
+                  <div id="data1" data-bookmark="<%=title.includes(posts.제목)%>"></div>
                   <div class="rating-bookmark">
                     <button class="fa-regular fa-bookmark"></button>
                   </div>
               </div>
               <div class="user-rating">
                 <h2>평가하기 : </h2>
-                <form method="post">
+                <!-- <form method="post"> -->
                 <div class="star-rating">
                   <input id="star-1" type="radio" name="rating" value="1">
                   <label for="star-1" title="1 star">
@@ -123,7 +124,7 @@
                 <div>
                   <button>Submit</button>
                 </div>
-                </form>
+                <!-- </form> -->
               </div>
             </div>
         </div>
@@ -138,7 +139,7 @@
     
     <!-- 리뷰 댓글 끝 -->
     <%- include('footer.ejs') %>
-    <script src="/js/watch.js"></script>
+    <script src="/js/watch.js" defer></script>
     
 </body>
 </html>

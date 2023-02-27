@@ -4,7 +4,7 @@ const express = require("express");
 const browse = require("../controller/browseController");
 const watch = require("../controller/watchController");
 const video = require("../controller/videoController");
-const bookmark = require("../controller/bookmarkController");
+const {addbookmark,delBookmark} = require("../controller/bookmarkController");
 // const bookmark = require("../controller/bookmarkController");
 const browseRouter = express.Router();
 
@@ -13,9 +13,8 @@ browseRouter.get("/browse" , browse);
 browseRouter.get("/watch/:id", watch); 
 browseRouter.get("/video/:id", video); 
 
-//poset
-browseRouter.post("/bookmark", bookmark);
-
+//post
+browseRouter.post("/bookmark", addbookmark, delBookmark);
 
  
 module.exports = browseRouter;

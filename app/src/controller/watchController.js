@@ -17,26 +17,24 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
         console.log("몽고디비 연결 성공");
     });
 
-    const watch = async (req, res) =>{ 
-      const id = parseInt(req.params.id);
-      // const userinfo = req.user;
-
-      // await User.find({
-      //   _id : userinfo.id,
-      // }, function(err, result){
-      //   if(err) return err
-      //   console.log(result)
-      //   return result;
-      // }).exec();
-      // console.log("유저데이터:" + user);
-
-      const collection = db.collection('post');
-      await collection.findOne({
-        _id : id,
-      }, function(err, result){
-        if(err) return err;
-        return res.render("watch", { posts : result });
-      });
-   }
+const watch = async (req, res) =>{ 
+  const id = parseInt(req.params.id);
+  const user = req.user;
+  console.log(user);
+  const userInfo = await User.findOne({
+    id : user.id,
+  })
+  
+  const collection = db.collection('post');
+  await collection.findOne({
+    _id : id,
+  }, function(err, result){
+    if(err) return err;
+    return res.render("watch", { 
+      posts : result,
+      title : userInfo.bookmark
+    });
+  });
+}
 
 module.exports = watch; 

@@ -54,10 +54,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: false
   },
-  bookmark : {
-    type : [{type : String}],
-  }
-},{ timestamps: true });
+  bookmark : 
+    [{
+    type : String
+    }],
+},
+  { timestamps: true });
 
 const User = mongoose.model("User", userSchema); // .model --> document middleware
 // 첫번째 파라미터 "User" = collection명, 두번째 파라미터 contentSchema = 스키마

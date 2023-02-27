@@ -100,27 +100,46 @@ fullscreenButton.addEventListener('click', () => {
 
 ///////////////// 영화 정보 ////////////////////////////
 
-const bookmark = document.querySelector(".fa-bookmark");
+const bookmark = document.querySelector(".rating-bookmark");
 const title = document.querySelector("#movie").dataset.title;
+const icon = document.querySelector(".fa-bookmark");
+const bookmarkData = document.querySelector("#data1").dataset.bookmark;
+console.log(bookmarkData);
 
 function bookmarkHandler(){
-    console.log(title);
     $.ajax({
-      type : "post",
-      url : "/bookmark?="+title,
-      data : { 제목 : title },
+      method : "post",
+      url : "/bookmark?title="+title,
+      data : { title : title },
+      dataType : "json",
       success : function(res){
+        console.log(res);
         if(res!==null){
-          bookmark.classList.toggle("fa-solid");
+          icon.classList.toggle("fa-solid");
+        }
+      },
+    })
+  }
+
+bookmark.addEventListener("click", bookmarkHandler);
+
+window.addEventListener("DOMContentLoaded", function(){
+  if(bookmarkData==true){
+    $.ajax({
+      method : "post",
+      url : "/bookmark?title="+title,
+      data : { title : title },
+      dataType : "json",
+      success : function(res){
+        console.log(res);
+        if(res!==null){
+          icon.classList.append("fa-solid")
         }
       },
     })
     
-    
-    
-}
-
-bookmark.addEventListener("click", bookmarkHandler);
+  }
+})
 
 const stars = document.querySelectorAll('.star-rating input[type="radio"]');
 const submitBtn = document.getElementById('submit-btn');
