@@ -6,6 +6,9 @@ const bcrypt = require('bcrypt');
 const passport = require('../config/passport'); // passport 모듈 불러오기
 
 const renderSignup = (req, res) => {
+  if(req.user){
+    return res.redirect('/browse');
+  }
   res.render('user_signup'); 
 };
 
@@ -40,6 +43,9 @@ const privacypolicy = async (req, res) => {
 };
 
 const renderLogin = (req, res) => {
+  if(req.user){
+    return res.redirect('/browse');
+  }
   res.render('user_login');
 };
 

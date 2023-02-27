@@ -1,0 +1,136 @@
+      /* Style for the form container */
+      .login_container {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      /* Style for the form fieldset */
+      .login_container fieldset {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      /* Style for the form legend */
+      .login_container legend {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      /* Style for the form label */
+      .login_container label {
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: left;
+      }
+
+      /* Style for the form input */
+      .login_container input[type="text"],
+      .login_container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #343a40;
+        color: #ffffff;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        text-transform: none;
+      }
+      /* Style for the form button */
+      .login_container button[type="submit"],
+      .login_container a.btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border: 2px solid #000;
+        color: red;
+        border-color: red;
+        border-radius: 5px;
+        margin-right: 10px;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      .login_container button[type="submit"]:hover,
+      .login_container a.btn:hover {
+          background-color: #000;
+          color: #fff;
+        }
+
+        /* Style for the form error message */
+        .login_container .error {
+          color: red;
+          font-size: 14px;
+          margin-top: 10px;
+        }
+
+        .provis_container {
+          width: 50%;
+          margin: 100px auto;
+        }
+        
+        /* Style for the personal_information section */
+        .provis_container .personal_information {
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 20px;
+          margin-bottom: 20px;
+        }
+        
+        .provis_container .provis_title {
+          font-weight: 700;
+          font-size: 28px;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+        
+        /* Style for the provis_text */
+        .provis_container .provis_text {
+          font-weight: 700;
+          font-size: large;
+          margin-bottom: 20px;
+        }
+        
+        /* Style for the numbered list */
+        .provis_container .personal_information ol {
+          margin-left: 20px;
+        }
+        
+        /* Style for the list items */
+        .provis_container .personal_information li {
+          margin-bottom: 10px;
+          font-size: 16px;
+          line-height: 1.5;
+          text-align: justify;
+        }
+        
+        /* Style for the first-level headings */
+        .provis_container .personal_information h1 {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+        
+        /* Style for the second-level headings */
+        .provis_container .personal_information h2 {
+          font-size: 20px;
+          font-weight: bold;
+          margin-bottom: 10px;
+          margin-top: 20px;
+        }
+        
+        /* Style for the paragraphs */
+        .provis_container .personal_information p {
+          margin-bottom: 10px;
+          font-size: 16px;
+          line-height: 1.5;
+          text-align: justify;
+        }

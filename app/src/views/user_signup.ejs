@@ -5,144 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="/js/browse.js" defer></script> -->
-    <!-- <link rel="stylesheet" href="/css/browse.css"> -->
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/user_signup.css">
+    <title>SignUp</title>
 </head>
-<style>
- 
-/* container 스타일 */
-.container {
-max-width: 600px;
-margin: auto;
-}
 
-/* form 스타일 */
-.signupfiled {
-padding: 20px;
-background-color: #343a40;
-border-radius: 10px;
-}
-
-/* legend 스타일 */
-legend {
-font-size: 24px;
-font-weight: bold;
-margin-bottom: 20px;
-}
-
-.form-floating{
-  border-bottom: 1px solid white;
-  width: max-content;
-  display: grid ;
-}
-
-/* label 스타일 */
-label {
-font-size: 16px;
-width: auto;
-}
-
-/* input 스타일 */
-input {
-font-size: 16px;
-height: 40px;
-border-radius: 5px;
-border: none;
-background-color: #343a40;
-width: auto;
-text-transform: none;
-}
-
-input:focus {
-background-color: #ffffff;
-color: #343a40;
-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-}
-
-/* select 스타일 */
-select {
-height: 40px;
-border-radius: 5px;
-border: none;
-background-color: #343a40;
-font-size: 16px;
-}
-
-select:focus {
-background-color: #343a40;
-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-}
-
-/* checkbox 스타일 */
-.form-check-input {
-width: 20px;
-height: 20px;
-margin-right: 10px;
-}
-
-/* inputState 스타일 */
-#inputState1 {
-  background-color: #343a40;
-  color: #fff;
-}
-
-#inputState1 option:checked {
-  color: #343a40;
-}
-/* countrySelect 스타일 */
-#countrySelect {
-  background-color: #343a40;
-  color: #fff;
-}
-
-#countrySelect option:checked {
-  color: #343a40;
-}
-
-/* button 스타일 */
-.signupfiled button[type="submit"],
-      a.btn {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        border: 2px solid #000;
-        color: #28a745;
-        border-color: #28a745;
-        border-radius: 5px;
-        margin-right: 10px;
-        transition: background-color 0.3s ease-in-out;
-      }
-
-      .signupfiled button[type="submit"]:hover,
-        a.btn:hover {
-          background-color: #000;
-          color: #fff;
-        }
-</style>
 <body>
   <%- include('nav.ejs') %>
     <div class="container mt-4">
-        <form action="/signup" method="POST">
+        <form action="/signup" method="POST" class="signupform">
           <fieldset class="signupfiled">
             <legend>회원가입</legend>
             <div class="form-floating mb-3">
-              <label for="floatingInput" id="idlabel">ID</label>
+              <label for="floatingInput" id="idlabel" class="form-label1">ID</label>
               <input type="text" id="id" class="form-control" name="id" placeholder="id"  style=" text-transform: none;">
-              <!-- <button type="button" id="id_btn">id체크버튼</button> -->
+              <div id="error-messages"></div>
             </div>
             <div class="form-floating mb-3">
-              <label for="floatingInput">비밀번호</label>
+              <label for="floatingInput"  class="form-label1">비밀번호</label>
               <input type="password" id="pw" class="form-control" name="pw" placeholder="비밀번호">
             </div>
             <div class="form-floating mb-3">
-              <label for="floatingInput">이메일</label>
+              <label for="floatingInput"  class="form-label1">비밀번호확인</label>
+              <input type="password" id="pwChk" class="form-control" name="pwChk" placeholder="비밀번호확인">
+            </div>
+            <div class="form-floating mb-3">
+              <label for="floatingInput"  class="form-label1">이메일</label>
               <input type="text" id="email" class="form-control" name="email" placeholder="이메일" >
             </div>
             <div class="form-floating mb-3">
-              <label for="floatingInput">나이</label>
+              <label for="floatingInput"  class="form-label1">나이</label>
               <input type="number" id="age" class="form-control" name="age" placeholder="나이">
             </div>
             <div class="col-md-12">
@@ -188,5 +79,20 @@ margin-right: 10px;
     </div>
     <%- include('footer.ejs') %>
 </body>
+<script>
+  // let form = document.querySelector('.signupform');
+  // form.addEventListener('blur',(e)=>{
+    let pw = document.querySelector('#pw').value;
+    // let pwChkv = document.querySelector('#pwChk').value;
+    let pwChk = document.querySelector('#pwChk');
+    pwChk.addEventListener('blur',(e)=>{
+      if(pw!=pwChk.value){
+        alert('비밀번호가 틀렸습니다.');
+        e.preventDefault();
+      }
+    })
 
+  // })
+
+</script>
 </html>

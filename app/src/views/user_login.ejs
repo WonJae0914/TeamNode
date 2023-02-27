@@ -4,81 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      /* Style for the form container */
-      .login_container {
-        width: 50%;
-        margin: 0 auto;
-        text-align: center;
-      }
+    <link rel="stylesheet" href="/css/user_login.css">
+    <title>Login</title>
 
-      /* Style for the form fieldset */
-      fieldset {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 20px;
-        margin-bottom: 20px;
-      }
-
-      /* Style for the form legend */
-      legend {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-      }
-
-      /* Style for the form label */
-      label {
-        display: block;
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        text-align: left;
-      }
-
-      /* Style for the form input */
-      input[type="text"],
-      input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        background-color: #343a40;
-        color: #ffffff;
-        border-radius: 5px;
-        margin-bottom: 20px;
-        text-transform: none;
-      }
-      /* Style for the form button */
-      button[type="submit"],
-      a.btn {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        border: 2px solid #000;
-        color: #28a745;
-        border-color: #28a745;
-        border-radius: 5px;
-        margin-right: 10px;
-        transition: background-color 0.3s ease-in-out;
-      }
-
-        button[type="submit"]:hover,
-        a.btn:hover {
-          background-color: #000;
-          color: #fff;
-        }
-
-        /* Style for the form error message */
-        .error {
-          color: red;
-          font-size: 14px;
-          margin-top: 10px;
-        }
-    </style>
   </head>
   <body>
     <%- include('nav.ejs') %>
