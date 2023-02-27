@@ -1,0 +1,141 @@
+/* container 스타일 */
+.userdetail_con {
+    max-width: 500px;
+    margin: auto;
+    }
+    .userdetail_con form {
+    padding: 20px;
+    background-color: #343a40;
+    }
+    
+    /* legend 스타일 */
+    .userdetail_con legend {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    }
+    
+    /* label 스타일 */
+    .userdetail_con label {
+    font-size: 16px;
+    }
+    
+    .userdetail_con input {
+    font-size: 16px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: #343a40;
+    }
+    
+    .userdetail_con input:focus {
+    background-color: #ffffff;
+    color: #343a40;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    }
+    /* input letter */
+    .userdetail_con .form-control:first-letter {
+      text-transform: none;
+    }
+    /* select 스타일 */
+    .userdetail_con select {
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: #343a40;
+    }
+    
+    .userdetail_con select:focus {
+    background-color: #343a40;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* checkbox 스타일 */
+    .userdetail_con .form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    }
+    
+    /* inputState 스타일 */
+    .userdetail_con .col-md-12 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .userdetail_con .form-label {
+      margin-right: 1rem;
+    }
+    
+    .userdetail_con #inputState1 {
+      background-color: #343a40;
+      color: #fff;
+      width:  79%;
+      display: inline;
+    }
+    
+    .userdetail_con #inputState2 {
+      background-color: #343a40;
+      color: #fff;
+      width:  79%;
+      display: inline;
+    }
+    .userdetail_con #countrySelect {
+      background-color: #343a40;
+      color: #fff;
+      
+    }
+    
+    .userdetail_con #countrySelect option:checked {
+      color: #343a40;
+    }
+    
+    /* button 스타일 */
+    .userdetail_con .btn {
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    }
+    
+    .userdetail_con .btn-outline-dark {
+    color: #343a40;
+    border-color: #343a40;
+    }
+    
+    .userdetail_con .btn-outline-dark:hover {
+    background-color: #343a40;
+    color: #ffffff;
+    }
+    
+    
+    .userdetail_con .btn-outline-success:hover {
+    background-color: red;
+    color: #ffffff;
+    }
+    /* Style for buttons */
+    .userdetail_con button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    
+    .userdetail_con button:hover {
+      background-color: #141414;
+    }
+    .userdetail_con .button-wrapper {
+      display: inline-block; /* div 요소를 inline-block으로 변경 */
+    }
+    
+    .userdetail_con .button {
+      float: left; /* 버튼에 float: left 추가 */
+      margin-right: 10px; /* 버튼 간 간격을 주기 위해 오른쪽 마진 추가 */
+    }
