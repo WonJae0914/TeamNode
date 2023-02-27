@@ -103,6 +103,7 @@ nav .right .profile a .avatar-box {
 }
 nav .right .profile i {
   transition: all 300ms;
+  margin-right: 20px;
 }
 nav .right .profile:hover i {
   transform: rotate(180deg);
@@ -124,12 +125,12 @@ nav .right .search .search-bar input {
   outline: none;
 }
 
-nav .right .search .search-bar button {
+nav .right .search .search-bar .search--btn {
   /* background-color: transparent;
   border: none;
   color: #333;
   outline: none; */
-  width: 55px;
+  width: 60px;
   height: 30px;
   border-radius: 5px;
   background-color: #ad0000;

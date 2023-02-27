@@ -10,6 +10,8 @@ main {
   display: flex;
   padding: 1.5rem 5%;
   background-color: #141414;
+  flex-direction: column;
+  align-items: center;
 }
 
 section {

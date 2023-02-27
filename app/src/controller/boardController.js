@@ -12,7 +12,12 @@ const Question = require("../models/Board");
 // };
 
 const uploadQuestions = (req, res) => {
-  return res.render("board_upload");
+  const loggedIn = req.user;
+  console.log("loggedIn info");
+  console.log(loggedIn);
+  return res.render("board_upload", {
+    pageTitle: "Question Upload",
+  });
 };
 
 const postUpload = async (req, res) => {
@@ -24,16 +29,23 @@ const postUpload = async (req, res) => {
     // path,
     title,
     detail,
-    pageTitle: "Question Upload",
   });
   return res.redirect("/board/list");
 };
 
 const list = async (req, res) => {
+  const PAGE_SIZE = 6;
+  const currentPage = 1;
+  const pageNumber = req.params.page;
   const questions = await Question.find({ delete: false });
+  const totalPages = Math.ceil(questions.length / PAGE_SIZE);
+  // .sort({ createdDate: -1 })
+  // .skip((pageNumber - 1) * PAGE_SIZE)
+  // .limit(PAGE_SIZE);
   return res.render("board", {
     questions: questions,
     pageTitle: "Question List",
+    total: totalPages,
     // loggedIn: true,
   });
 };

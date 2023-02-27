@@ -15,7 +15,7 @@ const {
 const boardRouter = express.Router();
 
 boardRouter.route("/upload").get(uploadQuestions).post(postUpload); // board/upload
-boardRouter.route("/list").get(list); // board/list
+boardRouter.route("/list/:page").get(list); // board/list
 boardRouter.route("/:id/detail").get(detailQuestion); // board/:id/detail
 boardRouter.route("/:id/update").get(updateQuestions).post(postUpdate); // board/:id/update
 boardRouter.route("/:id/delete").get(deleteQuestions); // board/:id/delete
