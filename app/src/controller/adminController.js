@@ -120,19 +120,40 @@ const adminDetail = async (req, res) => {
 
 //관리자 게시판 삭제(fake)
 const adminDelete = (req, res) => {
-    db.collection('post').updateOne({ _id: parseInt(req.body._id) },
-        {
-            $set:
+
+    db.collection('post').findOne({ _id: parseInt(req.body._id)},function (err, result){
+
+        console.log(result.삭제);
+        if(result.삭제=='N'){
+        db.collection('post').updateOne({ _id: parseInt(req.body._id) },
             {
-                삭제: 'Y',
-                삭제날짜: new Date().toLocaleString()
-            }
-        },
-        function (err, result) {
-            console.log('삭제성공');
-            res.status(200).send('success');
-        })
+                $set:
+                {
+                    삭제: 'Y',
+                    삭제날짜: new Date().toLocaleString()
+                }
+            },
+            function (err, result) {
+                console.log('삭제성공');
+                res.status(200).send('success');
+            })
+        }else{
+            db.collection('post').updateOne({ _id: parseInt(req.body._id) },
+            {
+                $set:
+                {
+                    삭제: 'N',
+                    복구날짜: new Date().toLocaleString()
+                }
+            },
+            function (err, result) {
+                console.log('복구성공');
+                res.status(200).send('success');
+            })
+        }
+    });
 }
+
 
 //관리자 게시판 수정 겟
 const adminPutG = async (req, res) => {

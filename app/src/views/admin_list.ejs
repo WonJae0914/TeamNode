@@ -67,7 +67,7 @@
         }
         for (var i = 1; i <= total; i++) {
           if (i == currentPage) {
-            pagenation.append('<li class="page-item active"><span class="page-link" >' + i + '</span></li>');
+            pagenation.append('<li class="page-item disabled"><span class="page-link" >' + i + '</span></li>');
           } else {
             pagenation.append('<li class="page-item"><a class="page-link" href="#" data-page="' + path + i + '">' + i + '</a></li>');
           }
@@ -99,9 +99,17 @@
 
     //삭제목록 페이징 구현
     let deleted = document.querySelector('#deleted');
-    deleted.addEventListener('click', function () {
-      var currentPage = 'deleted/1'
-      getPosts(currentPage);
+    deleted.addEventListener('click', function (e) {
+        let deleted = e.target.innerHTML;
+        if(deleted =="삭제된 콘텐츠"){
+        e.target.innerHTML = "콘텐츠리스트"
+        var currentPage = 'deleted/1'
+        getPosts(currentPage);
+        }else{
+          e.target.innerHTML = "삭제된 콘텐츠"
+          var currentPage = 1;
+          getPosts(currentPage);
+        }
     })
 
 
