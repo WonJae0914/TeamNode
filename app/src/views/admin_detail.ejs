@@ -34,7 +34,11 @@
             
             <div class="text-center" id="button">
               <button class="btn btn-primary me-3" onclick="location.href='/admin/edit/<%= data._id %>'">수정</button>
-              <button class="btn btn-danger me-3" data-id="<%= data._id %>" id="delete">삭제</button>      
+              <% if(data.삭제=="N"){%>
+              <button class="btn btn-danger me-3" data-id="<%= data._id %>" id="delete">삭제</button>
+              <%}else{%>
+                <button class="btn btn-danger me-3" data-id="<%= data._id %>" id="delete">복구</button>
+              <%}%>
         </div>
     </div>
 </div>
@@ -52,7 +56,7 @@
         url: '/admin/detail/delete',
         data: { _id: number }
       }).done(function (result) {
-        alert('삭제요청 성공')
+        alert('요청 성공')
         window.location.replace("/admin/list")
       }).fail(function (xhr, textStatus, errorThrown) {
         console.log(xhr, textStatus, errorThrown);  // 실패시 실행할 코드
