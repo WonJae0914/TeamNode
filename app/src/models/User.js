@@ -4,10 +4,6 @@ const mongoose = require("mongoose"); // 몽구스 import
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  // Schema 객체 생성 
-  // _id:{
-  //   type: integer
-  // },
 
   id: {
     type: String,

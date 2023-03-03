@@ -65,10 +65,12 @@
            <ul>
              <a href="/board/list">Board List</a>
              <a href="/board/upload">Board Uplaod</a>
-             <a href="/signup">회원가입</a>
+             <% if(!isLoggedIn){ %>
              <a href="/login">Login</a>
+             <% } else { %>
              <a href="/logout">logout</a>
-           </ul>
+             <% } %>
+            </ul>
           </li>
          </ul>
        </div>
