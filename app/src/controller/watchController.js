@@ -20,7 +20,6 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
 const watch = async (req, res) =>{ 
   const id = parseInt(req.params.id);
   const user = req.user;
-  console.log(user);
   const userInfo = await User.findOne({
     id : user.id,
   })

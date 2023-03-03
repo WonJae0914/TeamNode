@@ -1,3 +1,4 @@
+@import "./reset.css";
 :root{
     --black : 13131a;
     --bg : #141414;
@@ -21,8 +22,11 @@ header{
 }
 
 /* -----------------비디오 플레이어 시작--------------- */
-.player{
-    
+.player-box{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 /* 비디오 플레이어 컨테이너 스타일 */
 .player-container {
@@ -36,120 +40,8 @@ header{
 .player {
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-}
-    
-/* 컨트롤러 컨테이너 스타일 */
-.controls-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-}
-    
-/* 플레이 버튼 스타일 */
-.play-button, .pause-button {
-    font-size: 20px;
-    border: none;
-    background-color: transparent;
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-}
-    
-/* 프로그레스 바 컨테이너 스타일 */
-.progress-container {
-    height: 10px;
-    width: 90%;
-    background-color: #888;
-    position: relative;
-}
-    
-/* 프로그레스 바 스타일 */
-.progress-bar {
-    height: 100%;
-    background-color: #fff;
-    width: 0%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-    
-/* 시간 컨테이너 스타일 */
-.time-container {
-    display: flex;
-    align-items: center;
-    color: #fff;
-    margin: 0 10px;
-}
-    
-/* 볼륨 컨테이너 스타일 */
-.volume-container {
-    display: flex;
-    align-items: center;
-    margin: 0 10px;
-}
-    
-/* 볼륨 버튼 스타일 */
-.volume-button {
-    font-size: 24px;
-    border: none;
-    background-color: transparent;
-    color: #fff;
-    cursor: pointer;
-}
-    
-/* 볼륨 바 스타일 */
-.volume-bar {
-    height: 10px;
-    width: 50px;
-    margin: 0 10px;
-    -webkit-appearance: none;
-    background-color: #888;
-    outline: none;
-}
-    
-.volume-bar::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 10px;
-    height: 10px;
-    background-color: #fff;
-cursor: pointer;
-}
-    
-/* 전체화면 버튼 스타일 */
-.fullscreen-container {
-    display: flex;
-    align-items: center;
-    margin: 0 10px;
 }   
     
-.fullscreen-button {
-    font-size: 24px;
-    border: none;
-    background-color: transparent;
-    color: #fff;
-    cursor: pointer;
-}
-    
-/* 전체화면 모드 스타일 */
-.fullscreen-mode {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-    background-color: #000;
-}
 /* -----------------비디오 플레이어 끝--------------- */
 
 /* -----------------컨텐츠 정보 시작----------------- */
@@ -249,43 +141,36 @@ cursor: pointer;
     cursor: pointer;
     background-color: var(--bg);
 }
-.star-rating {
+/* 별점을 표시할 div 요소를 인라인 요소로 표시 */
+.start-rating {
     display: inline-block;
-    font-size: 0;
 }
-
-.star-rating input[type="radio"] {
-display: none;
+  
+  /* 각 별 요소의 스타일 */
+.star {
+    font-size: 3rem; /* 별의 크기 */
+    color: grey; /* 별의 색상 */
+    cursor: pointer; /* 마우스 커서 모양 */
 }
-
-.star-rating label {
-display: inline-block;
-font-size: 32px;
-color: #ddd;
-transition: color 0.2s;
-cursor: pointer;
+  
+/* 각 별 요소의 콘텐츠를 별 모양으로 추가 */
+.star::before {
+    content: "\2606"; /* 별 빈 모양 */
 }
-
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-color: #f7d551;
+  
+/* 선택된 별 요소의 콘텐츠를 별 채워진 모양으로 변경 */
+.star.selected::before {
+    content: "\2605"; /* 별 채워진 모양 */
+    color: #f5c518; /* 색상 */
 }
-
-.star-rating input[type="radio"]:checked ~ label {
-color: #f7d551;
-}
-
-.star-rating .active {
-color: #f7d551;
-}
-
-.user-rating{
-    display: flex;
-    align-items: center;
-}
-
-
-
+/* 선택된 별 요소의 콘텐츠를 반만 채워진 모양으로 변경 */
+.star.harfselected::before {
+    content: "\2605";
+    color: #f5c518;
+    background: linear-gradient(to right, #f5c518 50%, grey 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
 /* -----------------컨텐트 정보 끝----------------- */
 

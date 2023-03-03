@@ -58,6 +58,11 @@ const userSchema = new mongoose.Schema({
     [{
     type : String
     }],
+  score : 
+    [{
+      title : {type : String},
+      userScore : {type : String}
+    }]
 },
   { timestamps: true });
 
