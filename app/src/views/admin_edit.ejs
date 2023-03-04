@@ -20,31 +20,35 @@
                         <input type="text" class="form-control" value="<%=post.주연%>" name="actor" id="actor">
                     </div>
 
-                    <label for="year" class="form-label">출시년도</label>
-                    <select class="form-select mb-3" aria-label="Default select example" name="year" id="year"
-                        style="width:30%;">
-                        <option value="<%= post.출시년도 %>" selected>
-                            <%= post.출시년도 %>
-                        </option>
-                        <% for (var i=new Date().getFullYear(); i>= 1980; i--) { %>
-                            <option value="<%= i %>">
-                                <%= i %>
-                            </option>
-                            <% } %>
-                    </select>
-                    <label for="category" class="form-label">장르</label>
-                    <select class="form-select mb-3" aria-label="Default select example" name="category" id="category"
-                        style="width:30%;">
-                        <option value="<%= post.장르 %>" selected>
-                            <%= post.장르 %>
-                        </option>
-                        <option value="액션호러">액션호러</option>
-                        <option value="코미디호러">코미디호러</option>
-                        <option value="심리호러">심리호러</option>
-                        <option value="초자연호러">초자연호러</option>
-                        <option value="고딕호러">고딕호러</option>
-                        <option value="슬래셔">슬래셔</option>
-                    </select>
+                    <div class="row row-cols-4">
+                        <div class="col">
+                            <label for="year" class="form-label">출시년도</label>
+                            <select class="form-select mb-3" aria-label="Default select example" name="year" id="year">
+                                <option value="<%= post.출시년도 %>" selected>
+                                    <%= post.출시년도 %>
+                                </option>
+                                <% for (var i=new Date().getFullYear(); i>= 1980; i--) { %>
+                                    <option value="<%= i %>">
+                                        <%= i %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="category" class="form-label">장르</label>
+                            <select class="form-select mb-3" aria-label="Default select example" name="category">
+                                <option value="<%= post.장르 %>" selected>
+                                    <%= post.장르 %>
+                                </option>
+                                <option value="액션호러">액션호러</option>
+                                <option value="코미디호러">코미디호러</option>
+                                <option value="심리호러">심리호러</option>
+                                <option value="초자연호러">초자연호러</option>
+                                <option value="고딕호러">고딕호러</option>
+                                <option value="슬래셔">슬래셔</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label for="desc" class="form-label">설명</label>
                         <textarea class="form-control" name="description" id="desc" rows="3"><%= post.설명 %></textarea>
@@ -97,6 +101,6 @@
             }
         });
     </script>
-</body>
+    </body>
 
-</html>
+    </html>

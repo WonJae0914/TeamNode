@@ -1,8 +1,7 @@
 <%- include('admin_nav.ejs') %>
-  <header>
-    <h2 class="header__title mb-3" >영상 목록</h1>
-  </header>
-  <table class="table table-hover w-75" style="margin-left: auto; margin-right: auto;">
+
+  <table class="table table-hover w-75 caption-top mb-3" style="margin-left: auto; margin-right: auto;">
+    <caption class="mb-3"><h2>영상목록</h2></caption>
     <thead class="table-dark">
       <tr>
         <th scope="col">글번호</th>
@@ -14,9 +13,9 @@
     <tbody id="post-list">
     </tbody>
   </table>
-  <div class=" d-md-flex justify-content-md-end me-5">
-
-    <button type="button" class="btn btn-secondary  justify-content-end" id="deleted">삭제된 콘텐츠</button>
+ 
+  <div class="text-end ms-auto">
+    <button type="button" class="btn btn-secondary mb-3" id="deleted" style="margin-right: 10% !important;">삭제된 콘텐츠</button>
   </div>
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
@@ -111,70 +110,6 @@
           getPosts(currentPage);
         }
     })
-
-
-    // window.addEventListener("DOMContentLoaded", function () {
-
-    //   var currentPage = 1;
-    //   function getPosts(page) {
-    //     $.ajax({
-    //       url: '/admin/list/' + page,
-    //       method: 'get',
-    //       dataType: "json",
-    //       success: function (data) {
-    //         renderPosts(data.posts);
-    //         renderPagination( data.total, page);
-    //       },
-    //       error: function (jqXHR, textStatus, errorThrown) {
-    //         console.error(errorThrown);
-    //       }
-    //     });
-    //   }
-    //   function renderPosts(posts) {
-    //     var postList = $('#post-list');
-    //     postList.empty();
-    //     posts.forEach(function (elem, i) {
-    //       postList.append('<tr id="frame' + i + '"></tr>');
-    //       postFrame = $('#frame' + i + '');
-    //       postFrame.append('<th scope="row">' + elem._id + '</th>');
-    //       postFrame.append('<td>' + '<a href="detail/' + elem._id + '">' + elem.제목 + ' </a>' + '</td>');
-
-    //       postFrame.append('<td>' + elem.작성날짜 + '</td>');
-    //       postFrame.append('<td>' + '군침이' + '</td>');
-    //     });
-    //   }
-
-    //   function renderPagination( total, currentPage) {
-    //     var pagenation = $('.pagination');
-    //     pagenation.empty();
-    //     if (total > 1) {
-    //       if (currentPage > 1) {
-    //         pagenation.append('<li class="page-item"><a class="page-link" data-page=' + (parseInt(currentPage) - 1) + ' href="">Previous</a></li>')
-    //       }
-    //       for (var i = 1; i <= total; i++) {
-    //         if (i == currentPage) {
-    //           pagenation.append('<li class="page-item active"><span class="page-link">' + i + '</span></li>');
-    //         } else {
-    //           pagenation.append('<li class="page-item"><a class="page-link" href="#" data-page="' + i + '">' + i + '</a></li>');
-    //         }
-    //       }
-    //       if (currentPage < total) {
-    //         pagenation.append('<li class="page-item"><a class="page-link"  data-page=' + (parseInt(currentPage) + 1) + ' href="">Next</a></li>')
-    //       }
-    //       $('.page-link').click(function (e) {
-    //         e.preventDefault();
-    //         var page = e.target.dataset.page
-    //         currentPage = page;
-    //         getPosts(page);
-    //       });
-    //     }
-    //   }
-    //   getPosts(currentPage);
-    // });
-
-
-
-
 
   </script>
   </body>
