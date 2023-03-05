@@ -250,6 +250,7 @@ const adminUserPutG = async (req, res) => {
 const adminUserPutP = async (req, res) => {
     var id = req.body.id;
     var o_id = new ObjectId(id);
+    console.log(parseInt(req.body.age));
     const result = await db.collection('users').updateOne({ _id: o_id },
         {
             $set:
