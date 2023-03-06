@@ -89,7 +89,7 @@ const adminListDeleted = async function (req, res) {
     const parsedUrl = url.parse(req.url);
     const path = parsedUrl.pathname;
     var newone = path.replace(/^\/list\//, '').replace(/\d+$/, '') + '';
-    const PAGE_SIZE = 1;
+    const PAGE_SIZE = 3;
     const pageNumber = parseInt(req.params.page) || 1;
     const collection = db.collection('post');
     try {

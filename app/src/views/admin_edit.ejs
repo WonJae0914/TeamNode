@@ -8,16 +8,18 @@
                     <div class="mb-3">
                         <label for="title" class="form-label">제목</label>
                         <input type="text" class="form-control" value="<%=post.제목%>" name="title" id="title">
+                        <span id="titleError" style="color: red; display: none;"></span>
                     </div>
                     <div class="mb-3">
                         <label for="director" class="form-label">감독</label>
                         <input type="text" class="form-control" value="<%=post.감독%>" name="director" id="director">
+                        <span id="dirError" style="color: red; display: none;"></span>
                     </div>
                     <div class="mb-3">
                         <label for="actor" class="form-label">주연배우</label>
                         <input type="text" class="form-control" value="<%=post.주연%>" name="actor" id="actor">
+                        <span id="actorError" style="color: red; display: none;"></span>
                     </div>
-
                     <div class="row row-cols-4">
                         <div class="col">
                             <label for="year" class="form-label">출시년도</label>
@@ -34,7 +36,7 @@
                         </div>
                         <div class="col">
                             <label for="category" class="form-label">장르</label>
-                            <select class="form-select mb-3" aria-label="Default select example" name="category">
+                            <select class="form-select mb-3" aria-label="Default select example" id="category" name="category">
                                 <option value="<%= post.장르 %>" selected>
                                     <%= post.장르 %>
                                 </option>
@@ -50,6 +52,7 @@
                     <div class="mb-3">
                         <label for="desc" class="form-label">설명</label>
                         <textarea class="form-control" name="description" id="desc" rows="3"><%= post.설명 %></textarea>
+                        <span id="descError" style="color: red; display: none;"></span>
                     </div>
                 </div>
                 <p style="color: crimson; ">👻 파일수정은 불가능 합니다. 해당 게시물 삭제 후 재업로드 해주세요.👻</p>
@@ -70,32 +73,42 @@
             let category = document.querySelector('#category').value;
             let desc = document.querySelector('#desc').value;
             if (!title) {
-                alert("제목을 작성하세요");
+                const titleError = document.getElementById("titleError");
+                titleError.innerHTML = "제목을 입력하세요.";
+                titleError.style.display = "block";
                 event.preventDefault();
-            } else if (!director) {
-                alert("감독을 작성하세요");
-                event.preventDefault();
+            } else {
+                document.getElementById("titleError").style.display = "none";
             }
-            else if (!actor) {
-                alert("주연배우를 작성하세요");
+            if (!director) {
+                const dirError = document.getElementById("dirError");
+                dirError.innerHTML = "감독을 입력하세요.";
+                dirError.style.display = "block";
                 event.preventDefault();
+            } else {
+                document.getElementById("dirError").style.display = "none";
             }
-            else if (!year) {
-                alert("출시년도를 선택하세요");
+            if (!actor) {
+                const actorError = document.getElementById("actorError");
+                actorError.innerHTML = "배우를 입력하세요.";
+                actorError.style.display = "block";
                 event.preventDefault();
+            } else {
+                document.getElementById("actorError").style.display = "none";
             }
-            else if (!category) {
-                alert("장르를 선택하세요");
+            if (!desc) {
+                const descError = document.getElementById("descError");
+                descError.innerHTML = "내용을 입력하세요.";
+                descError.style.display = "block";
                 event.preventDefault();
+            } else {
+                document.getElementById("descError").style.display = "none";
             }
-            else if (!desc) {
-                alert("내용을 작성하세요");
-                event.preventDefault();
-            }
-            else {
+            if (title && director && actor && desc) {
                 alert("작성이 완료되었습니다.");
             }
         });
     </script>
     </body>
+
     </html>
