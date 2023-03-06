@@ -17,6 +17,7 @@ browseRouter.get("/browse" , browse); // 메인 페이지
 browseRouter.get("/watch/:id", watch); // 비디오 디테일 
 browseRouter.get("/video/:id", video); // 북마크 
 
+
 //post
 browseRouter.post("/bookmark", addbookmark, delBookmark); // 북마크 
 browseRouter.post("/score", starScore);

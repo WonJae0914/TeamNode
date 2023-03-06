@@ -3,6 +3,8 @@
 :root {
   --black: 13131a;
   --bg: #141414;
+  --ptcolor: #ad0000;
+  --hover: #555;
 }
 * {
   margin: 0;
@@ -68,7 +70,8 @@ a {
   text-decoration: none;
 }
 
-button {
+.play,
+.detail {
   border: none;
   padding: 0.9em 2em;
   border-radius: 5px;

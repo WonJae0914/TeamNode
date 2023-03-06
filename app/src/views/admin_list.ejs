@@ -1,164 +1,115 @@
-<!doctype html>
-<html lang="en">
+<%- include('admin_nav.ejs') %>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>관리자페이지</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-lg bg-light mb-3">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/admin/home">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/browse">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/write">업로드</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/write">회원관리</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/write">현황분석</a>
-          </li>
-        </ul>
-        <div class="d-flex">
-          <input id="val" class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
-          <button id="search" class="btn btn-outline-success" type="button">Search</button>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <header>
-    <h2 class="header__title mb-3">영상 목록</h1>
-  </header>
-
-  <table class="table">
-    <thead>
+  <table class="table table-hover w-75 caption-top mb-3" style="margin-left: auto; margin-right: auto;">
+    <caption class="mb-3"><h2>영상목록</h2></caption>
+    <thead class="table-dark">
       <tr>
         <th scope="col">글번호</th>
         <th scope="col">제목</th>
-        <th scope="col">날짜</th>
+        <th scope="col">작성날짜</th>
         <th scope="col">작성자</th>
       </tr>
     </thead>
     <tbody id="post-list">
-      <% for(var i=0; i < posts.length; i++){ %>
-        <tr id="frame">
-          <th scope="row">
-            <%= posts[i]._id %>
-          </th>
-          <td><a href="detail/<%= posts[i]._id %>">
-              <%= posts[i].제목 %>
-            </a></td>
-          <td>
-            <%= posts[i].작성날짜 %>
-          </td>
-          <td>군침이싹</td>
-        </tr>
-        <% } %>
     </tbody>
   </table>
+ 
+  <div class="text-end ms-auto">
+    <button type="button" class="btn btn-secondary mb-3" id="deleted" style="margin-right: 10% !important;">삭제된 콘텐츠</button>
+  </div>
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
   </nav>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
   <script>
-    window.addEventListener("DOMContentLoaded", function () {
-
-      var currentPage = 1;
-      function getPosts(page) {
-        $.ajax({
-          url: '/admin/list/' + page,
-          method: 'get',
-          dataType: "json",
-          success: function (data) {
-            renderPosts(data.posts);
-            renderPagination(data.pageSize, data.total, page);
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-            console.error(errorThrown);
-          }
-        });
-      }
-      function renderPosts(posts) {
-        var postList = $('#post-list');
-        postList.empty();
-        posts.forEach(function (elem, i) {
-          postList.append('<tr id="frame' + i + '"></tr>');
-          postFrame = $('#frame' + i + '');
-          postFrame.append('<th scope="row">' + elem._id + '</th>');
-          postFrame.append('<td>' + '<a href="detail/' + elem._id + '">' + elem.제목 + ' </a>' + '</td>');
-
-          postFrame.append('<td>' + elem.작성날짜 + '</td>');
-          postFrame.append('<td>' + '군침이' + '</td>');
-        });
-      }
-
-      function renderPagination(pageSize, total, currentPage) {
-        var pagenation = $('.pagination');
-        pagenation.empty();
-        if (total > 1) {
-          if (currentPage > 1) {
-            pagenation.append('<li class="page-item"><a class="page-link" data-page=' + (parseInt(currentPage) - 1) + ' href="">Previous</a></li>')
-          }
-          for (var i = 1; i <= total; i++) {
-            if (i == currentPage) {
-              pagenation.append('<li class="page-item active"><span class="page-link">' + i + '</span></li>');
-            } else {
-              pagenation.append('<li class="page-item"><a class="page-link" href="#" data-page="' + i + '">' + i + '</a></li>');
-            }
-          }
-          if (currentPage < total) {
-            pagenation.append('<li class="page-item"><a class="page-link"  data-page=' + (parseInt(currentPage) + 1) + ' href="">Next</a></li>')
-          }
-          $('.page-link').click(function (e) {
-            e.preventDefault();
-            var page = e.target.dataset.page
-            currentPage = page;
-            getPosts(page);
-          });
+    // 일반페이지 페이징 함수
+    function getPosts(page) {
+      $.ajax({
+        url: '/admin/list/' + page,
+        method: 'get',
+        dataType: "json",
+        success: function (data) {
+          renderPosts(data.posts);
+          renderPagination(data.total, page, data.path);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.error(errorThrown);
         }
+      });
+    }
+
+    // 목록만들기 함수
+    function renderPosts(posts) {
+      var postList = $('#post-list');
+      postList.empty();
+      posts.forEach(function (elem, i) {
+        postList.append('<tr id="frame' + i + '"></tr>');
+        postFrame = $('#frame' + i + '');
+        postFrame.append('<th scope="row">' + elem._id + '</th>');
+        postFrame.append('<td>' + '<a href="detail/' + elem._id + '">' + elem.제목 + ' </a>' + '</td>');
+
+        postFrame.append('<td>' + elem.작성날짜 + '</td>');
+        postFrame.append('<td>' + '군침이' + '</td>');
+      });
+    }
+    // 페이지번호 만들기 함수
+    function renderPagination(total, currentPage, path) {
+      var pagenation = $('.pagination');
+      pagenation.empty();
+      if (total > 1) {
+        if (currentPage > 1) {
+          pagenation.append('<li class="page-item"><a class="page-link" data-page=' + (parseInt(currentPage) - 1) + ' href="">Previous</a></li>')
+        }
+        for (var i = 1; i <= total; i++) {
+          if (i == currentPage) {
+            pagenation.append('<li class="page-item disabled"><span class="page-link" >' + i + '</span></li>');
+          } else {
+            pagenation.append('<li class="page-item"><a class="page-link" href="#" data-page="' + path + i + '">' + i + '</a></li>');
+          }
+        }
+        if (currentPage < total) {
+          pagenation.append('<li class="page-item"><a class="page-link"  data-page=' + (parseInt(currentPage) + 1) + ' href="">Next</a></li>')
+        }
+        $('.page-link').click(function (e) {
+          e.preventDefault();
+          var page = e.target.dataset.page
+          currentPage = page;
+          getPosts(page);
+        });
       }
+    }
 
+    //목록 페이징 구현
+    window.addEventListener('DOMContentLoaded', function (e) {
+      var currentPage = 1;
       getPosts(currentPage);
-    });
+    })
 
-
-
-
-
-
-
-
-
+    //검색기능
     $('#search').click(function () {
       let put = $('#val').val();
       console.log(put);
       window.location.replace('/admin/search?value=' + put);
     });
 
-  </script>
-</body>
+    //삭제목록 페이징 구현
+    let deleted = document.querySelector('#deleted');
+    deleted.addEventListener('click', function (e) {
+        let deleted = e.target.innerHTML;
+        if(deleted =="삭제된 콘텐츠"){
+        e.target.innerHTML = "콘텐츠리스트"
+        var currentPage = 'deleted/1'
+        getPosts(currentPage);
+        }else{
+          e.target.innerHTML = "삭제된 콘텐츠"
+          var currentPage = 1;
+          getPosts(currentPage);
+        }
+    })
 
-</html>
+  </script>
+  </body>
+
+  </html>

@@ -12,7 +12,12 @@ const Question = require("../models/Board");
 // };
 
 const uploadQuestions = (req, res) => {
-  return res.render("board_upload");
+  const loggedIn = req.user;
+  console.log("loggedIn info");
+  console.log(loggedIn);
+  return res.render("board_upload", {
+    pageTitle: "Question Upload",
+  });
 };
 
 const postUpload = async (req, res) => {
@@ -25,13 +30,23 @@ const postUpload = async (req, res) => {
     title,
     detail,
   });
-  return res.redirect("/board/list");
+  return res.redirect("/board/list/1");
 };
 
 const list = async (req, res) => {
-  const questions = await Question.find({ delete: false });
+  const PAGE_SIZE = 6;
+  const pageNumber = req.params.page;
+  const currentPage = parseInt(pageNumber);
+  const questions = await Question.find({ delete: false })
+    .sort({ createdDate: -1 })
+    .skip((pageNumber - 1) * PAGE_SIZE)
+    .limit(PAGE_SIZE);
+  const totalPages = Math.ceil(questions.length / PAGE_SIZE);
   return res.render("board", {
     questions: questions,
+    pageTitle: "Question List",
+    total: totalPages,
+    currentPage: currentPage,
     // loggedIn: true,
   });
 };
@@ -43,6 +58,7 @@ const detailQuestion = async (req, res) => {
   return res.render("board_detail", {
     title: questions[0].title,
     detail: questions[0].detail,
+    pageTitle: "Question Detail",
   });
 };
 
@@ -53,6 +69,7 @@ const updateQuestions = async (req, res) => {
   return res.render("board_update", {
     title: questions[0].title,
     detail: questions[0].detail,
+    pageTitle: "Question Update",
   });
 };
 
@@ -61,6 +78,7 @@ const postUpdate = async (req, res) => {
   console.log("updateBoard");
   console.log(updateBoard);
   try {
+    const questionIdx = Question.find;
     const questions = await Question.findOneAndUpdate(
       { _id: req.params.id },
       { $set: updateBoard },
@@ -71,9 +89,9 @@ const postUpdate = async (req, res) => {
     if (!questions) {
       return res.status(404).send("Board not found");
     }
-    return res.redirect("/board/list");
+    return res.redirect("/board/list/1");
   } catch {
-    return res.render("board_update")
+    return res.render("board_update");
   }
 };
 
@@ -96,13 +114,14 @@ const searchQuestion = async (req, res) => {
   if (kw) {
     questions = await Question.find({
       title: {
-        $regex: new RegExp(`${kw}$`, "i"),
+        $regex: new RegExp(`${kw}`, "i"),
       },
     });
   }
   return res.render("board_search", {
     questions,
     loggedIn: true,
+    pageTitle: "Search Results",
   });
 };
 

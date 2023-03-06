@@ -34,34 +34,14 @@
 }
 
 /* .con-li__util > .con-li__btn:last-child {
-    margin-left: 85%;
-  } */
+      margin-left: 85%;
+    } */
 
 .con-li__btn {
   width: 65px;
   height: 30px;
   border-radius: 5px;
   margin-left: 1%;
-  background-color: var(--ptcolor);
+  background-color: #ad0000;
   display: inline;
-}
-
-.page {
-  margin-top: 20px;
-  background-color: #141414;
-  width: 30%;
-}
-
-.page ul {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-}
-
-.page ul li {
-  list-style: none;
-}
-
-.page ul li a {
-  font-size: 1.8rem;
 }

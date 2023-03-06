@@ -1,22 +1,10 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>관리자페이지</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-</head>
-
-<body>
+<%- include('admin_nav.ejs') %>
     <h4 class="container mt-4"><strong>글 수정페이지</strong></h4>
     <div class="container mt-3">
         <div class="form-group">
             <form action="/admin/edit?_method=PUT" method="POST" id="form1">
                 <input type="text" name="id" value="<%= post._id %>" style="display:none;">
                 <div class="form-group">
-
                     <div class="mb-3">
                         <label for="title" class="form-label">제목</label>
                         <input type="text" class="form-control" value="<%=post.제목%>" name="title" id="title">
@@ -30,31 +18,35 @@
                         <input type="text" class="form-control" value="<%=post.주연%>" name="actor" id="actor">
                     </div>
 
-                    <label for="year" class="form-label">출시년도</label>
-                    <select class="form-select mb-3" aria-label="Default select example" name="year" id="year"
-                        style="width:30%;">
-                        <option value="<%= post.출시년도 %>" selected>
-                            <%= post.출시년도 %>
-                        </option>
-                        <% for (var i=new Date().getFullYear(); i>= 1980; i--) { %>
-                            <option value="<%= i %>">
-                                <%= i %>
-                            </option>
-                            <% } %>
-                    </select>
-                    <label for="category" class="form-label">장르</label>
-                    <select class="form-select mb-3" aria-label="Default select example" name="category" id="category"
-                        style="width:30%;">
-                        <option value="<%= post.장르 %>" selected>
-                            <%= post.장르 %>
-                        </option>
-                        <option value="액션호러">액션호러</option>
-                        <option value="코미디호러">코미디호러</option>
-                        <option value="심리호러">심리호러</option>
-                        <option value="초자연호러">초자연호러</option>
-                        <option value="고딕호러">고딕호러</option>
-                        <option value="슬래셔">슬래셔</option>
-                    </select>
+                    <div class="row row-cols-4">
+                        <div class="col">
+                            <label for="year" class="form-label">출시년도</label>
+                            <select class="form-select mb-3" aria-label="Default select example" name="year" id="year">
+                                <option value="<%= post.출시년도 %>" selected>
+                                    <%= post.출시년도 %>
+                                </option>
+                                <% for (var i=new Date().getFullYear(); i>= 1980; i--) { %>
+                                    <option value="<%= i %>">
+                                        <%= i %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="category" class="form-label">장르</label>
+                            <select class="form-select mb-3" aria-label="Default select example" name="category">
+                                <option value="<%= post.장르 %>" selected>
+                                    <%= post.장르 %>
+                                </option>
+                                <option value="액션호러">액션호러</option>
+                                <option value="코미디호러">코미디호러</option>
+                                <option value="심리호러">심리호러</option>
+                                <option value="초자연호러">초자연호러</option>
+                                <option value="고딕호러">고딕호러</option>
+                                <option value="슬래셔">슬래셔</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label for="desc" class="form-label">설명</label>
                         <textarea class="form-control" name="description" id="desc" rows="3"><%= post.설명 %></textarea>
@@ -66,10 +58,8 @@
             </form>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <script>
         let form = document.querySelector('#form1');
         form.addEventListener('submit', function (event) {
@@ -107,6 +97,5 @@
             }
         });
     </script>
-</body>
-
-</html>
+    </body>
+    </html>

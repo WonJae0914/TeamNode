@@ -1,14 +1,14 @@
 "use strict"
 
 const mongoose = require("mongoose"); // 몽구스 import
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt'); // 암호화 하려고 사용
 
 const userSchema = new mongoose.Schema({
-  // Schema 객체 생성 
+
   id: {
     type: String,
     required: true,
-    minlength: 8,
+    minlength: 4,
     trim : true,
     match : /^[A-Za-z0-9]{7,15}$/g,
     unique : true
@@ -54,12 +54,16 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: false
   },
-  bookmark : 
-    [{
-    type : String
-    }],
-},
-  { timestamps: true });
+  bookmark : {
+    type : [{type : String}],
+  }
+},{   timestamps: {
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  currentTime: () => new Date().toISOString(),
+  },
+ });
+
 
 const User = mongoose.model("User", userSchema); // .model --> document middleware
 // 첫번째 파라미터 "User" = collection명, 두번째 파라미터 contentSchema = 스키마
