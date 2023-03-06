@@ -30,22 +30,23 @@ const postUpload = async (req, res) => {
     title,
     detail,
   });
-  return res.redirect("/board/list");
+  return res.redirect("/board/list/1");
 };
 
 const list = async (req, res) => {
   const PAGE_SIZE = 6;
-  const currentPage = 1;
   const pageNumber = req.params.page;
-  const questions = await Question.find({ delete: false });
+  const currentPage = parseInt(pageNumber);
+  const questions = await Question.find({ delete: false })
+    .sort({ createdDate: -1 })
+    .skip((pageNumber - 1) * PAGE_SIZE)
+    .limit(PAGE_SIZE);
   const totalPages = Math.ceil(questions.length / PAGE_SIZE);
-  // .sort({ createdDate: -1 })
-  // .skip((pageNumber - 1) * PAGE_SIZE)
-  // .limit(PAGE_SIZE);
   return res.render("board", {
     questions: questions,
     pageTitle: "Question List",
     total: totalPages,
+    currentPage: currentPage,
     // loggedIn: true,
   });
 };
@@ -77,6 +78,7 @@ const postUpdate = async (req, res) => {
   console.log("updateBoard");
   console.log(updateBoard);
   try {
+    const questionIdx = Question.find;
     const questions = await Question.findOneAndUpdate(
       { _id: req.params.id },
       { $set: updateBoard },
@@ -87,7 +89,7 @@ const postUpdate = async (req, res) => {
     if (!questions) {
       return res.status(404).send("Board not found");
     }
-    return res.redirect("/board/list");
+    return res.redirect("/board/list/1");
   } catch {
     return res.render("board_update");
   }
@@ -112,7 +114,7 @@ const searchQuestion = async (req, res) => {
   if (kw) {
     questions = await Question.find({
       title: {
-        $regex: new RegExp(`${kw}$`, "i"),
+        $regex: new RegExp(`${kw}`, "i"),
       },
     });
   }
