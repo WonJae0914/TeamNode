@@ -172,10 +172,10 @@ header{
     -webkit-text-fill-color: transparent;
   }
 
+
 /* -----------------컨텐트 정보 끝----------------- */
 
 /* 리뷰 댓글 시작*/
-
 .review{
     border: 1px solid beige;
     width: 100%;
@@ -183,7 +183,6 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 /* 리뷰 댓글 끝 */

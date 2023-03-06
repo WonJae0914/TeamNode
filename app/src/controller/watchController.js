@@ -23,17 +23,25 @@ const watch = async (req, res) =>{
   const userInfo = await User.findOne({
     id : user.id,
   })
-  
-  const collection = db.collection('post');
-  await collection.findOne({
+  console.log(userInfo);
+
+  const result2 = await db.collection("contentScore").findOne({
+    userId : user.id,
+  });
+  console.log("리절트2" + result2);
+
+  await db.collection('post').findOne({
     _id : id,
   }, function(err, result){
     if(err) return err;
     return res.render("watch", { 
       posts : result,
-      title : userInfo.bookmark
+      title : userInfo.bookmark,
+      score : result2
     });
   });
+
+  
 }
 
 module.exports = watch; 
