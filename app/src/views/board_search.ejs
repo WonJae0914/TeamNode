@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title></title>
+  </head>
+</html>
+<body>
+  <%- include('nav.ejs') %>
+    <main>
+      <section>
+        <%if(questions.length == 0) {%>
+          <h3>There are no registered questions</h3>
+        <%} else {%> <%for(var question of questions) {%>
+        <div class="con-li">
+          <div class="con-li__info">
+            <h3><a class="title" href="<%=question._id%>/detail">Title : <%=question.title%></a></h3>
+            <!-- <h3>Detail : <%=question.detail%></h3> -->
+          </div>
+          <div class="con-li__util">
+            <h4><%=question.createdDate%> / 조회수 <%=question.views%></h4>
+            <button class="con-li__btn" type="submit"><a href="<%=question._id%>/detail">detail</a></button>
+            <button class="con-li__btn" type="submit"><a href="<%=question._id%>/update">edit</a></button>
+            <button class="con-li__btn" type="submit"><a href="<%=question._id%>/delete">delete</a></button>
+          </div>
+          <br/>
+        </div>
+        <%}%> <%}%>
+      </section>
+    </main>
+    <%- include('footer.ejs') %>
+  </body>
+</html>

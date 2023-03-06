@@ -17,8 +17,6 @@ const contentSchema = new mongoose.Schema({
     views: { type: Number, default: 0, required: true },
     score: { type: Number, default: 0, required: true },
   },
-  fileUrl : { type : String },
-  image : { type : String} , 
 });
 
 const Content = mongoose.model("Content", contentSchema); // .model --> document middleware

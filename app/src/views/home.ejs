@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="UTF-8">
+	<title>gunchimfilx</title>
+	<link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+	<main>
+        <section class="hero">
+          <div class="hero__container">
+            <h1 class="hero__title">이 프로그램은 구트에서 처음 시작되어 <br> 무제한으로 시청할 수 있습니다. </h1>
+            <p class="hero__text">다양한 디바이스에서 시청하세요. 언제든지 해지하실 수 있습니다.
+                <br> 심약자, 노약자, 임산부, 18세 이하 어린이는 취급주의
+            </p>
+            <form action="/login" class="hero__form">
+              <button class="hero__formButton">시작하기 &gt;</button>
+            </form>
+          </div>
+        </section>
+        <section class="devices">
+            <div class="devices__container">
+              <div class="devices__content devices__content--left">
+                <img src="../img/tv.jpg" alt="TV로 즐기세요">
+                <div class="devices__text">
+                  <h3>TV로 즐기세요</h3>
+                  <p>스마트 TV, PlayStation, Xbox, Chromecast, Apple TV, 블루레이 플레이어 등 다양한 디바이스에서 시청하세요.</p>
+                </div>
+              </div>
+              <div class="devices__content devices__content--right">
+                <img src="../img/pc.jpg" alt="다양한 디바이스에서 시청하세요.">
+                <div class="devices__text">
+                  <h3>PC에서 즐기세요</h3>
+                  <p>브라우저에서 바로 시청하거나 Windows 앱을 다운로드하여 쉽게 시청하세요.</p>
+                </div>
+              </div>
+              <div class="devices__content devices__content--left">
+                <img src="../img/mobile.jpg" alt="PC에서 즐기세요">
+                <div class="devices__text">
+                  <h3>핸드폰으로 즐기세요</h3>
+                  <p>iOS, Android 기기에서 언제 어디서나 즐겨보세요.</p>
+                </div>
+              </div>
+              <div class="devices__content devices__content--right">
+                <img src="../img/age18.jpg" alt="핸드폰으로 즐기세요">
+                <div class="devices__text">
+                  <h3>18세 이하는 취급불가</h3>
+                  <p>심약자, 노약자, 임산부, 어린이는 다른 사이트 가서 놀아주세요</p>
+                </div>
+              </div>
+            </div>
+          </section>
+      </main>
+      <%- include('footer.ejs') %>
+</body>
+</html>

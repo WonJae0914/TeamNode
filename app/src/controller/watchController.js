@@ -1,17 +1,27 @@
 "use strict"
-// const Content = require("../models/Content");
+const fs = require("fs");
+const path = require("path"); 
 
-// 비디오 데이터 불러오기 
-// const watch = function(req, res){
-//   const findContent = Content.find({});
-//   return res.render("watch", {
-//     title : "Video List",
-//     findContent 
-//   });
-// };
+const MongoClient = require('mongodb-legacy').MongoClient;
+let db;
+MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net/?retryWrites=true&w=majority"
+    , { useNewUrlParser: true },
+    function (err, client) {
+        if (err) { return console.log('DB연결 실패'); }
+        db = client.db('test');
+        console.log("몽고디비 연결 성공");
+    });
 
-const watch = (req, res) =>{ 
-  res.render("watch")
-}
+    const watch = (req, res) =>{ 
+      const id = parseInt(req.params.id);
+      console.log(id);
+      const collection = db.collection('post');
+      collection.findOne({
+        _id : id,
+      }, function(err, result){
+        console.log(result);
+        res.render("watch", { posts : result})
+      });
+    }
 
 module.exports = watch; 

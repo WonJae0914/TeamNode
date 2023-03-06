@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title></title>
+  </head>
+</html>
+<body>
+  <%- include('nav.ejs') %>
+  <main>
+    <div id="upload">
+      <form class="upload--form" method="post">
+        <label for="title">제목</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="input title"
+          required
+          value="<%=title%>"
+        />
+        <label for="detail">내용</label>
+        <textarea
+          type="text"
+          name="detail"
+          id="detail"
+          placeholder="input detail"
+          required
+        >
+          <%=detail[0]%>
+        </textarea>
+        <button type="submit">submit</button>
+      </form>
+    </div>
+  </main>
+  <%- include('footer.ejs') %>
+</body>

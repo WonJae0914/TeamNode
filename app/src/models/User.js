@@ -4,11 +4,11 @@ const mongoose = require("mongoose"); // 몽구스 import
 const bcrypt = require('bcrypt'); // 암호화 하려고 사용
 
 const userSchema = new mongoose.Schema({
-  // Schema 객체 생성
+
   id: {
     type: String,
     required: true,
-    minlength: 8,
+    minlength: 4,
     trim : true,
     match : /^[A-Za-z0-9]{7,15}$/g,
     unique : true
@@ -16,22 +16,15 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    match : /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+    trim : true,
+    match : /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    unique : true
   },
   pw: {
     type: String,
     minlength: 8,
     required: true,
-    // match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/,
-    // validate: {
-    //   validator: function(pw) {
-    //     return pw === this.pwChk;
-    //   },
-    //   message: 'Password confirmation does not match'
-    // },
-    // set: function(pw) {
-    //   return bcrypt.hashSync(pw, 10);
-    // }
+    match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/
   },
   age: { type: Number, 
     required: true, 
@@ -41,12 +34,35 @@ const userSchema = new mongoose.Schema({
     enum: ['men', 'women'], 
     required: true,
     default: 'men' 
-},
-});
-
-userSchema.methods.comparePassword = async function (pw) {
-  return await bcrypt.compare(pw, this.pw);
-};
+  },
+  country: { type: String, 
+    enum: ['Korea', 'america', 'french', 'UK'], 
+    required: true ,
+    default: 'Korea'},
+  isAgreed: { 
+    type: String, 
+    required: true },
+  isOptedIn : { 
+    type: String, 
+    required: false, 
+    default: function () {
+      return this.isOptedIn === 'on' ? 'on' : 'off';
+    },
+  },
+  delete : {
+    type : Boolean,
+    required: true,
+    default: false
+  },
+  bookmark : {
+    type : [{type : String}],
+  }
+},{   timestamps: {
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  currentTime: () => new Date().toISOString(),
+  },
+ });
 
 const User = mongoose.model("User", userSchema); // .model --> document middleware
 // 첫번째 파라미터 "User" = collection명, 두번째 파라미터 contentSchema = 스키마
