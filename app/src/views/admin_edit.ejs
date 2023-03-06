@@ -1,12 +1,10 @@
 <%- include('admin_nav.ejs') %>
-
     <h4 class="container mt-4"><strong>글 수정페이지</strong></h4>
     <div class="container mt-3">
         <div class="form-group">
             <form action="/admin/edit?_method=PUT" method="POST" id="form1">
                 <input type="text" name="id" value="<%= post._id %>" style="display:none;">
                 <div class="form-group">
-
                     <div class="mb-3">
                         <label for="title" class="form-label">제목</label>
                         <input type="text" class="form-control" value="<%=post.제목%>" name="title" id="title">
@@ -60,10 +58,8 @@
             </form>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <script>
         let form = document.querySelector('#form1');
         form.addEventListener('submit', function (event) {
@@ -102,5 +98,4 @@
         });
     </script>
     </body>
-
     </html>
