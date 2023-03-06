@@ -21,10 +21,6 @@ const renderSignup = (req, res) => {
   res.render('user_signup'); 
 };
 
-const PrivacyPolicy = async (req, res) => {
-  res.render('privacypolicy');
-};
-
 // 회원 가입 처리
 const signup = async (req, res) => {
   const { id, email, pw, age, gender, country, isAgreed, isOptedIn } = req.body;
@@ -39,8 +35,8 @@ const signup = async (req, res) => {
       age,
       gender,
       country, 
-      agreedToPrivacyPolicy, 
-      subscribedToPromotions
+      isAgreed, 
+      isOptedIn
     });
     res.send(`<script>alert("${id}님 환영합니다."); window.location.href="/login";</script>`);
   }else {
@@ -50,7 +46,6 @@ const signup = async (req, res) => {
     console.log(err);
     res.status(500).send('Error creating user');
   }
-  res.redirect('/signup');
 };
 
 // 개인정보 처리 방침 페이지 렌더링
@@ -150,4 +145,7 @@ const logout = (req, res) => {
   }
 };
 
-module.exports = { renderSignup, signup, renderLogin, login , privacypolicy};
+module.exports = { 
+  renderSignup, privacypolicy, signup , 
+  renderLogin, isLoggedIn, login , logout, 
+  userdetail, updateuser, removeuser,localLoggedIn};
