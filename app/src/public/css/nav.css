@@ -103,6 +103,7 @@ nav .right .profile a .avatar-box {
 }
 nav .right .profile i {
   transition: all 300ms;
+  margin-right: 20px;
 }
 nav .right .profile:hover i {
   transform: rotate(180deg);
@@ -123,6 +124,18 @@ nav .right .search .search-bar input {
   color: #333;
   outline: none;
 }
+
+nav .right .search .search-bar .search--btn {
+  /* background-color: transparent;
+  border: none;
+  color: #333;
+  outline: none; */
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #ad0000;
+}
+
 nav .right .bell {
   display: flex;
   align-items: center;
@@ -132,7 +145,7 @@ nav .right .bell a i {
   font-size: 1.8rem;
 }
 
-.login-button, .logout-button {
+.logout-button {
   background-color: #333;
   color: white;
   transition: background-color 0.3s ease-in-out;
@@ -142,17 +155,20 @@ nav .right .bell a i {
   font-weight: bold;
   padding: 0.5em 1em;
   margin-right: 0.5em;
-  }
-  
-  .login-button a, .logout-button a {
+}
+
+.login-button a,
+.logout-button a {
   color: var(--black);
   text-decoration: none;
-  }
-  
-  .login-button:hover, .logout-button:hover {
+}
+
+.login-button:hover,
+.logout-button:hover {
   background-color: var(--black);
   background-color: #555;
-  }
+}
+
 .profile ul {
   list-style: none;
   margin: 0;
@@ -182,4 +198,3 @@ nav .right .bell a i {
 .profile li:hover > ul {
   display: block;
 }
-
