@@ -1,0 +1,116 @@
+<%- include('admin_nav.ejs') %>
+	<div class="container">
+		<form action="/admin/user/edit?_method=PUT" method="POST" id="form1">
+			<img src="https://via.placeholder.com/150" alt="Profile Picture">
+			<h1>
+				<%=data.id%>
+			</h1>
+			<div class="info">
+				<input type="text" name="id" value="<%=data._id%>" style="display:none;">
+				<div class="form-group mb-3">
+					<label for="email">email:</label>
+					<input type="text" name="email" id="email" class="form-control" value="<%=data.email%>" required>
+				</div>
+				<div class="container">
+					<div class="row row-cols-6">
+					  <div class="col mb-3">
+						<label for="age" class="form-label">나이</label>
+						<select class="form-select"  name="age" id="age" >
+							<option value="<%=data.age%>">
+							<%=data.age%>
+							</option>
+							<% for (var i=70; i>= 19; i--) { %>
+							<option value="<%=i%>">
+							<%= i %>
+							</option>
+							<% } %>
+						</select>
+					  </div>
+					  <div class="col">
+						<label for="gender" class="form-label">성별</label>
+						<select class="form-select" name="gender" id="gender" >
+							<%if(data.gender=="men"){%>
+							<option value="men" selected>남성
+							</option>
+							<option value="women">여성
+							</option>
+							<%}else{%>
+							<option value="women" selected>여성
+							</option>
+							<option value="man">남성
+							</option>
+							<%}%>
+						</select>
+					  </div>
+					</div>
+				  </div>
+				<div class="form-group mb-3">
+					<label for="country">국가:</label>
+					<input type="text" name="country" id="country" class="form-control" value="<%=data.country%>"
+						required>
+				</div>
+				<div class="form-group mb-3">
+					<label for="is-opted-in">광고동의:</label>
+					<input type="text" name="opt" id="is-opted-in" class="form-control" value="<%=data.isOptedIn%>"
+						required>
+				</div>
+			</div>
+			<div class="text-center" id="button">
+
+				<button type="submit" class="btn btn-success me-3">확인</button>
+		</form>
+		<button type="button" class="btn btn-danger me-3" data-id="<%=data._id%>" id="delete">탈퇴</button>
+	</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+	<script>
+		let form = document.querySelector('#form1');
+		form.addEventListener('submit', function (event) {
+			let email = document.querySelector('#email').value;
+			let age = document.querySelector('#age').value;
+			let gender = document.querySelector('#gender').value;
+			let country = document.querySelector('#country').value;
+			let opt = document.querySelector('#is-opted-in').value;
+			console.log(email);
+			var emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+			console.log(email);
+			if (!emailReg.test(email) || !email) {
+				alert("올바른 이메일 형식을 작성하세요");
+				event.preventDefault();
+			} else if (!age) {
+				alert("나이를 선택하세요");
+				event.preventDefault();
+			}
+			else if (!gender) {
+				alert("성별을 선택하세요");
+				event.preventDefault();
+			}
+			else if (!country) {
+				alert("국가를 선택하세요");
+				event.preventDefault();
+			}
+			else if (!opt) {
+				alert("광고동의를 선택하세요");
+				event.preventDefault();
+			}
+			else {
+				alert("수정이 완료되었습니다.");
+			}
+		});
+		let quit = document.querySelector('#delete');
+		quit.addEventListener('click', function (e) {
+			var id = e.target.dataset.id;
+			$.ajax({
+				method: 'put',
+				url: '/admin/user/quit',
+				data: { _id: id }
+			}).done(function (data) {
+				alert("탈퇴요청 성공");
+				window.location.replace('/admin/user/list');
+			})
+		})
+	</script>
+	</body>
+
+	</html>
