@@ -21,7 +21,7 @@ const uploadQuestions = (req, res) => {
 };
 
 const postUpload = async (req, res) => {
-  // const { originalname, path } =req.file;
+  // const { originalname, path } = req.file;
   const { title, detail } = req.body;
   console.log(req.body);
   console.log(req.file);
@@ -35,18 +35,32 @@ const postUpload = async (req, res) => {
 
 const list = async (req, res) => {
   const PAGE_SIZE = 6;
+  const MAX_PAGE = 5;
+
   const pageNumber = req.params.page;
   const currentPage = parseInt(pageNumber);
+
+  const startPage = Math.floor((currentPage - 1) / MAX_PAGE) * MAX_PAGE + 1;
+  const endPage = startPage + MAX_PAGE - 1;
+
+  const totQuestions = await Question.find({ delete: false });
   const questions = await Question.find({ delete: false })
     .sort({ createdDate: -1 })
     .skip((pageNumber - 1) * PAGE_SIZE)
     .limit(PAGE_SIZE);
-  const totalPages = Math.ceil(questions.length / PAGE_SIZE);
+
+  const totalPages = Math.ceil(totQuestions.length / PAGE_SIZE);
+  console.log(totalPages);
+  console.log(totQuestions.length);
+
   return res.render("board", {
     questions: questions,
     pageTitle: "Question List",
     total: totalPages,
+    max: MAX_PAGE,
     currentPage: currentPage,
+    startPage: startPage,
+    endPage: endPage,
     // loggedIn: true,
   });
 };
