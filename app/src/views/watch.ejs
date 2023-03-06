@@ -49,8 +49,12 @@
               </div>
             </div>
             <div class="rating">  
+              <% if(score != null) { %>
+              <div id="userScore" data-userScore="<%=score.score%>"></div>
+              <h2>평점 : <%=score.score%></h2>
+              <% } else { %>
               <h2>평점 : </h2>
-              <h3></h3>     
+              <%}%>
                 <div id="movie" data-title="<%=posts.제목%>"></div>              
                 <div id="data1" data-bookmark="<%=title.includes(posts.제목)%>"></div>
                 <div class="rating-bookmark">
@@ -72,7 +76,9 @@
                 <span class="star" data-rating="4"></span>
                 <span class="star" data-rating="5"></span>
               </div> 
+              <% if(score == null) { %>
                 <button type="button" class="subStar">평점</button>
+              <% } %>
             </div>
            </div>
           </div>

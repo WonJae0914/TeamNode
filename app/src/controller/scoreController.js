@@ -37,5 +37,11 @@ const addScore = async function(req,res){
         res.status(400).json({message : "북마크 실패!"})
     }
 }
+// 평균계산
+const avgScore = async function(req,res){
+    const data = await db.collection("contentScore").findOne({
+        
+    })
+}
 
 module.exports = addScore;
