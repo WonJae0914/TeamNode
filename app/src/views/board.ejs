@@ -15,37 +15,41 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title></title>
+    <title><%=pageTitle%></title>
   </head>
 </html>
 <body>
-    <%- include('nav.ejs') %>
-    <%if(loggedIn) {%>
-    <header>
-        <li><a href="board/question">글작성</a></li>
-    </header>
-    <main style="margin-left: 100px;">
-    <a href="logout">로그아웃</a>
-    <%if(questions.length == 0) {%>
-    <h3>There are no registered questions</h3>
-    <%} else {%> <%for(var question of questions) {%>
-    <h3 class="key">Title</h3>
-    <%=question.title%>
-    <h3 class="key">Detail</h3>
-    <%=question.detail%>
-    <h3 class="key">Created Date</h3>
-    <%=question.createdDate%>
-    <h3 class="key">Views</h3>
-    <%=question.views%>
-    <br />
-    <button type="submit" onclick="/board/edit">edit</button>
-    <button type="submit">delete</button>
-    <hr />
-    <%}%> <%}%> <%} else { %>
-    <a href="login">로그인</a>
-    <p>아직 회원이 아니신가요?</p>
-    <p>지금 바로 <a href="signup">회원가입</a>하세요</p>
-    <%}%>
-    <%- include('footer.ejs') %>
+  <%- include('nav.ejs') %>
+    <main>
+      <section>
+        <%if(questions.length == 0) {%>
+          <h3>There are no registered questions</h3>
+          <div class="con-li">
+          <%} else {%> <%for(var question of questions) {%>
+          <div class="con-li__info">
+            <h3><a class="title" href="<%=question._id%>/detail">Title : <%=question.title%></a></h3>
+            <!-- <h3>Detail : <%=question.detail%></h3> -->
+          </div>
+          <div class="con-li__util">
+            <h4><%=question.createdDate%> / 조회수 <%=question.views%></h4>
+            <button class="con-li__btn" type="submit"><a href="/board/<%=question._id%>/detail">detail</a></button>
+            <button class="con-li__btn" type="submit"><a href="/board/<%=question._id%>/update">edit</a></button>
+            <button class="con-li__btn" type="submit"><a href="/board/<%=question._id%>/delete">delete</a></button>
+          </div>
+          <br/>
+          <%}%>
+        </div>
+         <%}%> 
+      </section>
+      <div aria-label="Page navigation example" class="page">
+        <ul class="pagination">
+          <li><a href="<%=currentPage-2%>"><%=currentPage-2%></a></li>
+          <li><a href="<%=currentPage-1%>"><%=currentPage-1%></a></li>
+          <li><a href="<%=currentPage%>"><%=currentPage%></a></li>
+          <li><a href="<%=currentPage+1%>"><%=currentPage+1%></a></li>
+          <li><a href="<%=currentPage+2%>"><%=currentPage+2%></a></li>
+        </ul>
+      </div>
+    </main>
   </body>
 </html>
