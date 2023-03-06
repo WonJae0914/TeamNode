@@ -11,7 +11,7 @@ const browseRouter = express.Router();
 browseRouter.get("/browse" , browse);
 browseRouter.get("/watch/:id", watch); 
 // browseRouter.post("bookmark/:id", bookmark);
-browseRouter.get("/video/:id", video); 
+browseRouter.get("/video/:id",video); 
 
 
  

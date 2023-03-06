@@ -4,152 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Helvetica Neue', sans-serif;
-  background-color: #f2f2f2;
-}
-
-/* container 스타일 */
-.container {
-max-width: 500px;
-margin: auto;
-}
-form {
-padding: 20px;
-background-color: #343a40;
-border-radius: 10px;
-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-}
-
-/* legend 스타일 */
-legend {
-font-size: 24px;
-font-weight: bold;
-margin-bottom: 20px;
-}
-
-/* label 스타일 */
-label {
-font-size: 16px;
-}
-
-input {
-font-size: 16px;
-height: 40px;
-border-radius: 5px;
-border: none;
-background-color: #343a40;
-}
-
-input:focus {
-background-color: #ffffff;
-color: #343a40;
-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-}
-/* input letter */
-.form-control:first-letter {
-  text-transform: none;
-}
-/* select 스타일 */
-select {
-height: 40px;
-border-radius: 5px;
-border: none;
-background-color: #343a40;
-}
-
-select:focus {
-background-color: #343a40;
-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-}
-
-/* checkbox 스타일 */
-.form-check-input {
-width: 20px;
-height: 20px;
-margin-right: 10px;
-}
-
-/* inputState 스타일 */
-#inputState1 {
-  background-color: #343a40;
-  color: #fff;
-}
-
-#inputState1 option:checked {
-  color: #343a40;
-}
-/* countrySelect 스타일 */
-#countrySelect {
-  background-color: #343a40;
-  color: #fff;
-}
-
-#countrySelect option:checked {
-  color: #343a40;
-}
-
-/* button 스타일 */
-.btn {
-font-size: 16px;
-font-weight: bold;
-border-radius: 5px;
-}
-
-.btn-outline-dark {
-color: #343a40;
-border-color: #343a40;
-}
-
-.btn-outline-dark:hover {
-background-color: #343a40;
-color: #ffffff;
-}
-
-.btn-outline-success {
-color: #28a745;
-border-color: #28a745;
-}
-
-.btn-outline-success:hover {
-background-color: #28a745;
-color: #ffffff;
-}
-/* Style for buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #3e8e41;
-}
-.button-wrapper {
-  display: inline-block; /* div 요소를 inline-block으로 변경 */
-}
-
-.button {
-  float: left; /* 버튼에 float: left 추가 */
-  margin-right: 10px; /* 버튼 간 간격을 주기 위해 오른쪽 마진 추가 */
-}
-    </style>    
+    <link rel="stylesheet" href="/css/user_detail.css">
+    <title>UserPage</title>
+ 
 </head>
 <body>
     <%- include('nav.ejs') %>
-    <div class="container mt-4">
+    <div class="userdetail_con mt-4">
     <form action="/userpage" method="POST">
         <fieldset>
             <legend>userpage</legend>
@@ -201,9 +62,9 @@ button:hover {
           </div>
         </form>
 
-        <form action="/" method="GET">
+        <!-- <form action="/" method="GET">
           <button type="submit" id="logout"><a href="/logout">로그아웃</button>
-        </form>
+        </form> -->
     </div>
     <%- include('footer.ejs') %>
 </body>

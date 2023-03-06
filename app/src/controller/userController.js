@@ -1,14 +1,27 @@
 "use strict"
 
 //userController.js
+// 모델과 모듈 불러오기
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
 const passport = require('../config/passport'); // passport 모듈 불러오기
 
+// const renderhome = (req, res) =>{
+//  if(req.user){
+//   return res.render('/home');
+//  }
+// }
+
+
+// 회원 가입 페이지 렌더링
 const renderSignup = (req, res) => {
+  if(req.user){
+    return res.redirect('/home');
+  }
   res.render('user_signup'); 
 };
 
+// 회원 가입 처리
 const signup = async (req, res) => {
   const { id, email, pw, age, gender, country, isAgreed, isOptedIn } = req.body;
   
@@ -35,14 +48,21 @@ const signup = async (req, res) => {
   }
 };
 
+// 개인정보 처리 방침 페이지 렌더링
 const privacypolicy = async (req, res) => {
     res.render('user_privacypolicy');
 };
-
+//userController.js
+// 로그인 페이지 렌더링
 const renderLogin = (req, res) => {
+  if(req.user){
+    return res.redirect('/browse');
+  }
   res.render('user_login');
 };
 
+
+// 로그인 확인 함수
 function isLoggedIn(req, res, next) { // 로그인했는지 안했는지 확인하는 함수
   if (req.isAuthenticated()) {
     return next();
@@ -50,8 +70,13 @@ function isLoggedIn(req, res, next) { // 로그인했는지 안했는지 확인�
   res.redirect('/login');
 }
 
+function localLoggedIn(req, res, next) {
+  res.locals.isLoggedIn = req.isAuthenticated();
+  next();}
+
+// 로그인 처리
 const login = (req, res, next) => {
-  passport.authenticate('local',(err, user, info) => { // 로컬에 정보 따오는거 
+  passport.authenticate('local',(err, user, info) => { // 로컬에 정보 가져오기 
     if (err) {
       return next(err);
     }
@@ -66,14 +91,14 @@ const login = (req, res, next) => {
     });
   })(req, res, next);
 };
-
+// 유저 상세 정보 페이지 렌더링
 const userdetail =  (req, res) => {
   if (!req.user) {
     return res.redirect('/login');
   }
   res.render('user_detail', { user: req.user });
 }
-
+// 유저 정보 업데이트 처리
 const updateuser = async(req, res) => {
   const userinfo = req.user;
   console.log(req.body, userinfo);
@@ -89,7 +114,7 @@ const updateuser = async(req, res) => {
     res.status(500).send('Error creating user');
   }
 };
-
+// 유저 탈퇴 처리
 const removeuser = async (req, res) => {
   const userInfo = req.user;
   const confirmed = req.query.confirmed;
@@ -109,9 +134,10 @@ const removeuser = async (req, res) => {
     res.redirect('/userpage');
   }
 };
+// 유저 로그아웃 처리
 const logout = (req, res) => {
   try {
-    req.session.destroy();
+    req.session.destroy(); // 세션만료
     return res.redirect('/login');
   } catch (err) {
     console.error(err);
@@ -122,4 +148,4 @@ const logout = (req, res) => {
 module.exports = { 
   renderSignup, privacypolicy, signup , 
   renderLogin, isLoggedIn, login , logout, 
-  userdetail, updateuser, removeuser};
+  userdetail, updateuser, removeuser,localLoggedIn};
