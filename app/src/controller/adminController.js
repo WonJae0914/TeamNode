@@ -14,7 +14,7 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
     });
 
 //관리자 홈
-const adminHome = (req, res) => {   
+const adminHome = (req, res) => {
     res.render('admin_home.ejs');
 };
 
@@ -121,35 +121,35 @@ const adminDetail = async (req, res) => {
 //관리자 게시판 삭제(fake)
 const adminDelete = (req, res) => {
 
-    db.collection('post').findOne({ _id: parseInt(req.body._id)},function (err, result){
+    db.collection('post').findOne({ _id: parseInt(req.body._id) }, function (err, result) {
 
         console.log(result.삭제);
-        if(result.삭제=='N'){
-        db.collection('post').updateOne({ _id: parseInt(req.body._id) },
-            {
-                $set:
-                {
-                    삭제: 'Y',
-                    삭제날짜: new Date().toLocaleString()
-                }
-            },
-            function (err, result) {
-                console.log('삭제성공');
-                res.status(200).send('success');
-            })
-        }else{
+        if (result.삭제 == 'N') {
             db.collection('post').updateOne({ _id: parseInt(req.body._id) },
-            {
-                $set:
                 {
-                    삭제: 'N',
-                    복구날짜: new Date().toLocaleString()
-                }
-            },
-            function (err, result) {
-                console.log('복구성공');
-                res.status(200).send('success');
-            })
+                    $set:
+                    {
+                        삭제: 'Y',
+                        삭제날짜: new Date().toLocaleString()
+                    }
+                },
+                function (err, result) {
+                    console.log('삭제성공');
+                    res.status(200).send('success');
+                })
+        } else {
+            db.collection('post').updateOne({ _id: parseInt(req.body._id) },
+                {
+                    $set:
+                    {
+                        삭제: 'N',
+                        복구날짜: new Date().toLocaleString()
+                    }
+                },
+                function (err, result) {
+                    console.log('복구성공');
+                    res.status(200).send('success');
+                })
         }
     });
 }
@@ -184,23 +184,37 @@ const adminPutP = async (req, res) => {
 
 // 관리자 게시판 검색
 const adminSearchList = (req, res) => {
-    var condition = [
+    // var condition = [
+    //     {
+    //         $match: {
+    //           $text: {
+    //             $search: req.query.value,
+    //             $language: 'ko',
+    //             $caseSensitive: false,
+    //             $diacriticSensitive: false,
+    //           }
+    //         }
+    //       }
+    // ]
+    // var condition2 = [{
+    //     $search: {
+    //         index: '제목_text',
+    //         text: {
+    //             query: { $regex: req.query.value },
+    //             path: '제목'
+    //         }
+    //     }
+    // }]
+    // db.collection('post').aggregate(condition)
+    db.collection('post').find({
+        제목:
         {
-            $search: {
-                index: 'korean',
-                text: {
-                    query: req.query.value,
-                    path: '제목'  // 제목날짜 둘다 찾고 싶으면 ['제목', '날짜']
-                }
-            }
+            $regex: new RegExp(`${req.query.value}`, "i")
         }
-    ]
-    console.log(req.query.value);
-    db.collection('post').aggregate(condition).toArray((err, result) => {
+    }).toArray((err, result) => {
         console.log(result);
         res.render('admin_search_list.ejs', { posts: result })
     })
-
 };
 
 // 회원관리 게시판 리스트
@@ -256,7 +270,7 @@ const adminUserPutP = async (req, res) => {
             $set:
             {
                 email: req.body.email.trim(),
-                age:  parseInt(req.body.age),
+                age: parseInt(req.body.age),
                 gender: req.body.gender.trim(),
                 country: req.body.country,
                 isOptedIn: req.body.opt
