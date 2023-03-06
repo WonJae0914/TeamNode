@@ -13,37 +13,37 @@
 				</div>
 				<div class="container">
 					<div class="row row-cols-6">
-					  <div class="col mb-3">
-						<label for="age" class="form-label">나이</label>
-						<select class="form-select"  name="age" id="age" >
-							<option value="<%=data.age%>">
-							<%=data.age%>
-							</option>
-							<% for (var i=70; i>= 19; i--) { %>
-							<option value="<%=i%>">
-							<%= i %>
-							</option>
-							<% } %>
-						</select>
-					  </div>
-					  <div class="col">
-						<label for="gender" class="form-label">성별</label>
-						<select class="form-select" name="gender" id="gender" >
-							<%if(data.gender=="men"){%>
-							<option value="men" selected>남성
-							</option>
-							<option value="women">여성
-							</option>
-							<%}else{%>
-							<option value="women" selected>여성
-							</option>
-							<option value="man">남성
-							</option>
-							<%}%>
-						</select>
-					  </div>
+						<div class="col mb-3">
+							<label for="age" class="form-label">나이</label>
+							<select class="form-select" name="age" id="age">
+								<option value="<%=data.age%>">
+									<%=data.age%>
+								</option>
+								<% for (var i=70; i>= 19; i--) { %>
+									<option value="<%=i%>">
+										<%= i %>
+									</option>
+									<% } %>
+							</select>
+						</div>
+						<div class="col">
+							<label for="gender" class="form-label">성별</label>
+							<select class="form-select" name="gender" id="gender">
+								<%if(data.gender=="men"){%>
+									<option value="men" selected>남성
+									</option>
+									<option value="women">여성
+									</option>
+									<%}else{%>
+										<option value="women" selected>여성
+										</option>
+										<option value="man">남성
+										</option>
+										<%}%>
+							</select>
+						</div>
 					</div>
-				  </div>
+				</div>
 				<div class="form-group mb-3">
 					<label for="country">국가:</label>
 					<input type="text" name="country" id="country" class="form-control" value="<%=data.country%>"
