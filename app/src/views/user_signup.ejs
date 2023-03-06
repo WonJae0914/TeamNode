@@ -13,7 +13,7 @@
 body {
   background-color: #343a40;
 }
- 
+
 /* container 스타일 */
 .container {
 max-width: 500px;
@@ -26,10 +26,6 @@ padding: 20px;
 background-color: #343a40;
 border-radius: 10px;
 box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-}
-/* input letter */
-.form-control:first-letter {
-  text-transform: none;
 }
 
 /* legend 스타일 */
@@ -133,7 +129,7 @@ color: #ffffff;
             <legend>회원가입</legend>
             <div class="form-floating mb-3">
               <label for="floatingInput" id="idlabel">ID</label>
-              <input type="text" id="id" class="form-control" name="id" placeholder="id"  style=" text-transform: none;">
+              <input type="text" id="id" class="form-control" name="id" placeholder="id" >
               <!-- <button type="button" id="id_btn">id체크버튼</button> -->
             </div>
             <div class="form-floating mb-3">
@@ -143,6 +139,10 @@ color: #ffffff;
             <div class="form-floating mb-3">
               <label for="floatingInput">이메일</label>
               <input type="text" id="email" class="form-control" name="email" placeholder="이메일" >
+            </div>
+            <div class="form-floating mb-3">
+              <label for="floatingInput">비밀번호 확인</label>
+              <input type="password" id="pwChk" class="form-control" name="pwChk" placeholder="비밀번호 확인" >
             </div>
             <div class="form-floating mb-3">
               <label for="floatingInput">나이</label>
@@ -167,9 +167,9 @@ color: #ffffff;
             <div class="row mb-3">
               <div class="col-sm-10">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck1" name="isAgreed">
+                  <input class="form-check-input" type="checkbox" id="gridCheck1">
                   <label class="form-check-label" for="gridCheck1">
-                   예, 저는 <span><a href="/privacypolicy" target="_blank" style="color: red;">개인정보처리방침</a></span>에 따른 개인정보 수집 및 활용에 동의합니다.  
+                   예, 저는 <span><a href="/privacypolicy" target="_blank" >개인정보처리방침</a></span>에 따른 개인정보 수집 및 활용에 동의합니다.  
                   </label>
                 </div>
               </div>
@@ -177,7 +177,7 @@ color: #ffffff;
             <div class="row mb-3">
               <div class="col-sm-10">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck2" name="isOptedIn">
+                  <input class="form-check-input" type="checkbox" id="gridCheck2">
                   <label class="form-check-label" for="gridCheck2">
                     예, gunchimfilx 특별 할인 알림 이메일을 보내주세요(선택사항)
                   </label>

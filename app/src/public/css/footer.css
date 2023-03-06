@@ -1,9 +1,18 @@
+:root {
+  --black: 13131a;
+  --bg: #141414;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   color: #fff;
   user-select: none;
+}
+
+body {
+  background-color: var(--bg);
 }
 
 footer {
