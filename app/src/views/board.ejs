@@ -1,47 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="http://unpkg.com/mvp.css" /> -->
-    <title>Document</title>
-</head>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="stylesheet" href="/css/board.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title></title>
+  </head>
+</html>
 <body>
     <%- include('nav.ejs') %>
     <%if(loggedIn) {%>
-    <header style="margin-left: 100px;">
+    <header>
         <li><a href="board/question">글작성</a></li>
     </header>
     <main style="margin-left: 100px;">
     <a href="logout">로그아웃</a>
     <%if(questions.length == 0) {%>
-        <h3>There are no registered questions</h3>
-        <%} else {%>
-    <%for(var question of questions) {%>
-        <h3 class="key">Title</h3>
-        <%=question.title%>
-        <h3 class="key">Detail</h3>
-        <%=question.detail%>
-        <h3 class="key">Created Date</h3>
-        <%=question.createdDate%>
-        <h3 class="key">Views</h3>
-        <%=question.views%>
-        <br>
-        <button type="submit" onclick="/views/edit">edit</button>
-        <button type="submit">delete</button>
-        <hr>
-        <%}%>
-        <%}%>
-    <%} else { %>
+    <h3>There are no registered questions</h3>
+    <%} else {%> <%for(var question of questions) {%>
+    <h3 class="key">Title</h3>
+    <%=question.title%>
+    <h3 class="key">Detail</h3>
+    <%=question.detail%>
+    <h3 class="key">Created Date</h3>
+    <%=question.createdDate%>
+    <h3 class="key">Views</h3>
+    <%=question.views%>
+    <br />
+    <button type="submit" onclick="/board/edit">edit</button>
+    <button type="submit">delete</button>
+    <hr />
+    <%}%> <%}%> <%} else { %>
     <a href="login">로그인</a>
     <p>아직 회원이 아니신가요?</p>
     <p>지금 바로 <a href="signup">회원가입</a>하세요</p>
     <%}%>
-    </main>
     <%- include('footer.ejs') %>
   </body>
 </html>
-
-
-  

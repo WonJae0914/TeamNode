@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>watch</title>
+    <link rel="stylesheet" href="/css/watch.css">
+</head>
+<body>
+    <%- include('nav.ejs') %>
+    <!-- 비디오 플레이어 시작 -->
+    <header class="player">
+        <div class="player-container">
+            <video class="player" src="<%=posts.경로%>"></video>
+            <div class="controls-container">
+              <div class="play-pause-button">
+                <button class="play-button">▶</button>
+                <button class="pause-button">⏸</button>
+              </div>
+              <div class="progress-container">
+                <div class="progress-bar"></div>
+              </div>
+              <div class="time-container">
+                <span class="current-time">00:00</span>
+                <span class="total-time">00:00</span>
+              </div>
+              <div class="volume-container">
+                <button class="volume-button">🔊</button>
+                <input type="range" class="volume-bar" min="0" max="1" step="0.1" value="1">
+              </div>
+              <div class="fullscreen-container">
+                <button class="fullscreen-button">
+                    <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+    </header>
+    <!-- 비디오 플레이어 끝 -->
+
+    <!-- 영화 정보 -->
+    <header class="infomation">
+        <div class="content-container">
+            <div class="content-img">
+              <img src="<%=posts.사진경로%>" alt="">
+            </div>
+            <div class="content-info">
+              <div class="content-header">
+                <h2><%=posts.제목%><span class="content-year">(<%=posts.출시년도%>년)</span></h2>
+                <p class="content-genre"><span>장르: </span><%=posts.장르%></p>
+              </div>
+              <div class="content-discription">
+                <h1>개요</h1>
+                <h3><%=posts.설명%></h3>
+              </div>
+              <div class="content-creater">
+                <div class="director">
+                  <h1>감독</h1>
+                  <h2><%=posts.감독%></h2>
+                </div>
+                <div class="actor">
+                  <h1>주연</h1>
+                  <h2><%=posts.주연%></h2>
+                </div>
+              </div>
+              <div class="rating">  
+                <h2>평점 : </h2>
+                <h3></h3>     
+                <div class="star-rating">
+                  <input id="star-1" type="radio" name="rating" value="1">
+                  <label for="star-1" title="1 star">
+                    <i class="active fa fa-star"></i>
+                  </label>
+                  <input id="star-2" type="radio" name="rating" value="2">
+                  <label for="star-2" title="2 stars">
+                    <i class="active fa fa-star"></i>
+                  </label>
+                  <input id="star-3" type="radio" name="rating" value="3">
+                  <label for="star-3" title="3 stars">
+                    <i class="active fa fa-star"></i>
+                  </label>
+                  <input id="star-4" type="radio" name="rating" value="4">
+                  <label for="star-4" title="4 stars">
+                    <i class="active fa fa-star"></i>
+                  </label>
+                  <input id="star-5" type="radio" name="rating" value="5">
+                  <label for="star-5" title="5 stars">
+                    <i class="active fa fa-star"></i>
+                  </label>
+                </div>
+                <form method="post">
+                  <div class="rating-bookmark">
+                    <button class="fa-regular fa-bookmark" type="submit"></button>
+                  </div>
+                </form>
+              </div>
+              <div class="user-rating">
+                <h2>평가하기 : </h2>
+                <form method="post">
+                <div class="star-rating">
+                  <input id="star-1" type="radio" name="rating" value="1">
+                  <label for="star-1" title="1 star">
+                    <i class="active fa fa-star"></i>
+                  </label>
+                  <input id="star-2" type="radio" name="rating" value="2">
+                  <label for="star-2" title="2 stars">
+                    <i class="active fa fa-star"></i>
+                  </label>
+                  <input id="star-3" type="radio" name="rating" value="3">
+                  <label for="star-3" title="3 stars">
+                    <i class="active fa fa-star"></i>
+                  </label>
+                  <input id="star-4" type="radio" name="rating" value="4">
+                  <label for="star-4" title="4 stars">
+                    <i class="active fa fa-star"></i>
+                  </label>
+                  <input id="star-5" type="radio" name="rating" value="5">
+                  <label for="star-5" title="5 stars">
+                    <i class="active fa fa-star"></i>
+                  </label>
+                </div>
+                <div>
+                  <button>Submit</button>
+                </div>
+                </form>
+              </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 리뷰 댓글 시작 -->
+    <section class="review">
+      <div>
+        <h1> 리뷰 댓글 </h1>
+      </div>
+    </section>
+    
+    <!-- 리뷰 댓글 끝 -->
+    <%- include('footer.ejs') %>
+    <script src="/js/watch.js"></script>
+</body>
+</html>

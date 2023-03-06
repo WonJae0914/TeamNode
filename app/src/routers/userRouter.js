@@ -1,35 +1,31 @@
+// userRouter.js
 const express = require('express');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const session = require('express-session');
-const bcrypt = require('bcrypt');
+const userRouter = express.Router();
 
 const {
   renderSignup,
   signup,
-  PrivacyPolicy,
   renderLogin,
+  isLoggedIn,
   login,
-  getMypage
-  
+  privacypolicy,
+  logout, 
+  userdetail,
+  updateuser,
+  removeuser,
 } = require('../controller/userController');
-const userRouter = express.Router();
-
-userRouter.use(session({
-  secret: '비밀코드',
-  resave: true,
-  saveUninitialized: false
-}));
-
-userRouter.use(passport.initialize());
-userRouter.use(passport.session());
-
 
 userRouter.get('/signup',renderSignup);
-userRouter.get('/privacypolicy',PrivacyPolicy);
-userRouter.post('/signup',signup);
+userRouter.get('/privacypolicy', privacypolicy); // 개인정보처리방침
+userRouter.post('/signup',signup); // user 회원가입
 userRouter.get('/login',renderLogin);
-userRouter.post('/login',login);
-userRouter.get('/mypage', getMypage);
+userRouter.post('/login',login); // user로그인
+userRouter.get('/userpage', isLoggedIn ,userdetail); // user상세정보
+userRouter.post('/userpage', isLoggedIn,updateuser); // user정보변경
+userRouter.get('/userpage/delete', removeuser); // user 탈퇴
+userRouter.get('/logout',isLoggedIn ,logout); // user로그아웃
+
+
+
 
 module.exports = userRouter;

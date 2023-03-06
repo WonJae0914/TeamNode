@@ -1,43 +1,68 @@
+"use strict"
+
 const mongoose = require("mongoose"); // 몽구스 import
+const bcrypt = require('bcrypt'); // 암호화 하려고 사용
 
 const userSchema = new mongoose.Schema({
+
   id: {
     type: String,
     required: true,
-    unique: true,
-  },
-  pw: {
-    type: String,
-    required: true,
+    minlength: 4,
+    trim : true,
+    match : /^[A-Za-z0-9]{7,15}$/g,
+    unique : true
   },
   email: {
     type: String,
     required: true,
-    unique: true,
+    trim : true,
+    match : /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    unique : true
   },
-  age: {
-    type: Number,
-    min: 1,
-  },
-  gender: {
+  pw: {
     type: String,
-    enum: ['men', 'women'],
+    minlength: 8,
     required: true,
+    match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/
   },
-  country: {
-    type: String,
-    enum: ['Korea', 'america', 'french', 'UK'],
+  age: { type: Number, 
+    required: true, 
+    min: 18 
+  },
+  gender: { type: String, 
+    enum: ['men', 'women'], 
     required: true,
+    default: 'men' 
   },
-  isAgreed: {
-    type: Boolean,
-    required: true
+  country: { type: String, 
+    enum: ['Korea', 'america', 'french', 'UK'], 
+    required: true ,
+    default: 'Korea'},
+  isAgreed: { 
+    type: String, 
+    required: true },
+  isOptedIn : { 
+    type: String, 
+    required: false, 
+    default: function () {
+      return this.isOptedIn === 'on' ? 'on' : 'off';
+    },
   },
-  isOptedIn: {
-    type: Boolean,
-    required: true
+  delete : {
+    type : Boolean,
+    required: true,
+    default: false
+  },
+  bookmark : {
+    type : [{type : String}],
   }
-});
+},{   timestamps: {
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  currentTime: () => new Date().toISOString(),
+  },
+ });
 
 const User = mongoose.model("User", userSchema); // .model --> document middleware
 // 첫번째 파라미터 "User" = collection명, 두번째 파라미터 contentSchema = 스키마

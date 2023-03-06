@@ -1,0 +1,304 @@
+:root{
+    --black : 13131a;
+    --bg : #141414;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    text-transform: capitalize;
+    transition: 0.2s linear;
+    color: #fff; 
+    user-select: none;
+    font-family: Arial, sans-serif;
+}
+
+header{
+    padding: 1.5rem 5%;
+}
+
+/* -----------------비디오 플레이어 시작--------------- */
+.player{
+    
+}
+/* 비디오 플레이어 컨테이너 스타일 */
+.player-container {
+    position: relative;
+    height: 500px;;
+    width: 80%;
+    background-color: #000;
+}
+    
+/* 비디오 플레이어 스타일 */
+.player {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+    
+/* 컨트롤러 컨테이너 스타일 */
+.controls-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+    
+/* 플레이 버튼 스타일 */
+.play-button, .pause-button {
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+    
+/* 프로그레스 바 컨테이너 스타일 */
+.progress-container {
+    height: 10px;
+    width: 90%;
+    background-color: #888;
+    position: relative;
+}
+    
+/* 프로그레스 바 스타일 */
+.progress-bar {
+    height: 100%;
+    background-color: #fff;
+    width: 0%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+    
+/* 시간 컨테이너 스타일 */
+.time-container {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    margin: 0 10px;
+}
+    
+/* 볼륨 컨테이너 스타일 */
+.volume-container {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+    
+/* 볼륨 버튼 스타일 */
+.volume-button {
+    font-size: 24px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+    
+/* 볼륨 바 스타일 */
+.volume-bar {
+    height: 10px;
+    width: 50px;
+    margin: 0 10px;
+    -webkit-appearance: none;
+    background-color: #888;
+    outline: none;
+}
+    
+.volume-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+cursor: pointer;
+}
+    
+/* 전체화면 버튼 스타일 */
+.fullscreen-container {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}   
+    
+.fullscreen-button {
+    font-size: 24px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+    
+/* 전체화면 모드 스타일 */
+.fullscreen-mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: #000;
+}
+/* -----------------비디오 플레이어 끝--------------- */
+
+/* -----------------컨텐츠 정보 시작----------------- */
+
+/* 컨테츠 정보 스타일 */
+.infomation{
+    border: 1px solid var(--bg);
+    width: 100%;
+    height: 540px;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+}
+/* 컨텐츠 정보 박스 스타일 */
+.content-container{
+    border: 1px solid var(--bg);
+    width: 80%;
+    height: 500px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+}
+/* 컨텐츠 이미지 스타일 */
+.content-img{
+    border: 1px solid var(--bg);
+    height: 500px;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+/* 컨텐츠 이미지 사이즈 조정 */
+.content-img img{
+    height: auto;
+    object-fit: cover;
+}
+/* 컨텐츠 디테일 정보 스타일 */
+.content-info{
+    border : 1px solid beige;
+    width: 70%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+/* 컨텐츠 헤더 정보 스타일 */
+.content-header {
+    border : 1px solid beige;
+    height: 100px;
+    width: 70%;
+}
+/* 컨텐츠 내용 정보 스타일 */
+.content-discription{
+    border : 1px solid beige;
+    height: 150px;
+    width: 100%;
+}
+/* 컨텐츠 크리에잇터 정보 스타일 */
+.content-creater{
+    border : 1px solid beige;
+    height: 80px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+/* 컨텐츠 감독 정보 스타일 */
+.director{
+    border : 1px solid beige;
+    height: 80px;
+    width: 50%;
+}
+/* 컨텐츠 주연배우 정보 스타일 */
+.actor{
+    border : 1px solid beige;
+    height: 80px;
+    width: 50%;
+}
+.rating{
+    border : 1px solid beige;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    
+}
+.rating-bookmark{
+    width: 50px;
+    height: 50px;
+    border : 1px solid beige;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rating-bookmark button{
+    border: 0;
+    outline: 0;
+    font-size: 25px;
+    cursor: pointer;
+    background-color: var(--bg);
+}
+.star-rating {
+    display: inline-block;
+    font-size: 0;
+}
+
+.star-rating input[type="radio"] {
+display: none;
+}
+
+.star-rating label {
+display: inline-block;
+font-size: 32px;
+color: #ddd;
+transition: color 0.2s;
+cursor: pointer;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+color: #f7d551;
+}
+
+.star-rating input[type="radio"]:checked ~ label {
+color: #f7d551;
+}
+
+.star-rating .active {
+color: #f7d551;
+}
+
+.user-rating{
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+/* -----------------컨텐트 정보 끝----------------- */
+
+/* 리뷰 댓글 시작*/
+
+.review{
+    border: 1px solid beige;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+/* 리뷰 댓글 끝 */

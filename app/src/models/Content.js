@@ -1,3 +1,5 @@
+"use strict"
+
 const mongoose = require("mongoose"); // 몽구스 import
 
 const contentSchema = new mongoose.Schema({
@@ -8,7 +10,7 @@ const contentSchema = new mongoose.Schema({
   language: { type: String, required: true, trim: true },
   rating: { type: Number, default: 0, required: true },
   length: { type: Number, required: true },
-  uploadDate: { type: Date },
+  uploadDate: { type: Date }, 
   makingDate: { type: Date, required: true },
   modifyDate: { type: Date },
   meta: {
