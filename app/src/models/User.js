@@ -64,6 +64,7 @@ const userSchema = new mongoose.Schema({
   },
  });
 
+
 const User = mongoose.model("User", userSchema); // .model --> document middleware
 // 첫번째 파라미터 "User" = collection명, 두번째 파라미터 contentSchema = 스키마
 // 몽구스에서는 첫번째 글자가 대문자인 collection명칭을 사용하지만

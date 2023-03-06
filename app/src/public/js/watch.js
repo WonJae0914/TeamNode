@@ -1,131 +1,74 @@
 
-///////////////// 비디오 플레이어 시작 ////////////////////
+const stars = document.querySelectorAll(".star");
+const subStarbtn = document.querySelector(".subStar");
+const userTitle = document.querySelector("#movie").dataset.title;
+let rating=-1;
 
-// 비디오 요소 참조
-const video = document.querySelector('.player');
+// 각 별 요소에 클릭이벤트 부여
 
-// 컨트롤러 요소 참조
-const playButton = document.querySelector('.play-button');
-const pauseButton = document.querySelector('.pause-button');
-const progressContainer = document.querySelector('.progress-container');
-const progressBar = document.querySelector('.progress-bar');
-const currentTime = document.querySelector('.current-time');
-const totalTime = document.querySelector('.total-time');
-const volumeButton = document.querySelector('.volume-button');
-const volumeBar = document.querySelector('.volume-bar');
-const fullscreenButton = document.querySelector('.fullscreen-button');
-
-// 플레이/일시정지 버튼 클릭 이벤트 핸들러
-playButton.addEventListener('click', () => {
-video.play();
-playButton.style.display = 'none';
-pauseButton.style.display = 'block';
+stars.forEach(function (star) {
+  star.addEventListener("click", setRating);
 });
-
-pauseButton.addEventListener('click', () => {
-video.pause();
-pauseButton.style.display = 'none';
-playButton.style.display = 'block';
-});
-
-// 비디오 로딩 완료 이벤트 핸들러
-video.addEventListener('loadedmetadata', () => {
-// 비디오 총 재생 시간을 표시
-const duration = video.duration;
-const totalMinutes = Math.floor(duration / 60);
-const totalSeconds = Math.floor(duration % 60).toString().padStart(2, '0');
-totalTime.textContent = `${totalMinutes}:${totalSeconds}`;
-});
-
-// 비디오 재생 중 이벤트 핸들러
-video.addEventListener('timeupdate', () => {
-// 비디오 재생 시간을 표시
-const currentTimeValue = video.currentTime;
-const currentMinutes = Math.floor(currentTimeValue / 60);
-const currentSeconds = Math.floor(currentTimeValue % 60).toString().padStart(2, '0');
-currentTime.textContent = `${currentMinutes}:${currentSeconds}`;
-
-// 프로그레스 바 업데이트
-const progressPercent = (currentTimeValue / video.duration) * 100;
-progressBar.style.width = `${progressPercent}%`;
-});
-
-// 프로그레스 바 클릭 이벤트 핸들러
-progressContainer.addEventListener('click', (e) => {
-const clickX = e.offsetX;
-const containerWidth = progressContainer.clientWidth;
-const progressPercent = (clickX / containerWidth) * 100;
-const duration = video.duration;
-const newTime = (progressPercent * duration) / 100;
-video.currentTime = newTime;
-});
-
-// 볼륨 버튼 클릭 이벤트 핸들러
-volumeButton.addEventListener('click', () => {
-if (video.muted) {
-video.muted = false;
-volumeButton.textContent = '🔊';
-volumeBar.value = video.volume;
-} else {
-video.muted = true;
-volumeButton.textContent = '🔇';
-volumeBar.value = 0;
-}
-});
-
-// 볼륨 바 변경 이벤트 핸들러
-volumeBar.addEventListener('input', () => {
-video.volume = volumeBar.value;
-if (volumeBar.value == 0) {
-video.muted = true;
-volumeButton.textContent = '🔇';
-} else {
-video.muted = false;
-volumeButton.textContent = '🔊';
-}
-});
-
-// 전체화면 버튼 클릭 이벤트 핸들러
-fullscreenButton.addEventListener('click', () => {
-    if (document.fullscreenElement) {
-    document.exitFullscreen();
-    fullscreenButton.textContent = '🔍';
-    } else {
-    video.requestFullscreen();
-    fullscreenButton.textContent = '❌';
-    }
+  function setRating(e) {
+    // 클릭한 별의 요소를 가져옴
+    const clickedStar = e.target;
+    //클릭한 별 요소의 등급을 가져옴. 해당 요소의 지정한 값을 가져옴
+    rating = clickedStar.getAttribute("data-rating");
+    // 모든 별 요소에 대해 반복
+    stars.forEach(function (star) { // star = class명 star인 모든 span
+       // 클릭한 별 이하의 모든 별에 대해
+      if (star.getAttribute("data-rating") <= rating) {
+        // 선택된 별 스타일을 적용
+        star.classList.add("selected");
+      } else {
+        // 선택되지 않은 별 스타일을 제거
+        star.classList.remove("selected");
+      }
     });
-
-///////////////// 비디오 플레이어 끝 ////////////////////
-
-///////////////// 영화 정보 ////////////////////////////
-
-const bookmark = document.querySelector(".fa-bookmark");
-
-
-function bookmarkHandler(){
-    bookmark.classList.toggle("fa-solid");
-}
-
-bookmark.addEventListener("click", bookmarkHandler);
-
-const stars = document.querySelectorAll('.star-rating input[type="radio"]');
-const submitBtn = document.getElementById('submit-btn');
-
-let rating;
-
-stars.forEach((star) => {
-  star.addEventListener('click', () => {
-    rating = star.value;
-  });
-});
-
-submitBtn.addEventListener('click', () => {
-  if (!rating) {
-    alert('Please select a rating!');
-    return;
   }
 
-  // Send rating to server here
-  console.log(`User rated ${rating} stars.`);
-});
+  subStarbtn.addEventListener("click", function(){
+    $.ajax({
+      method : "post",
+      url : "/score?score=" + rating,
+      data : { userScore : rating,
+               userTitle : userTitle },
+      success : function(msg){
+        console.log(msg);     
+      }
+    })
+  })
+
+
+// ------------------ 컨텐츠 정보 시작 ------------------------
+
+//////////// 북마크 시작 ////////////
+
+// 북마크 참조 요소
+const bookmark = document.querySelector(".rating-bookmark");
+const title = document.querySelector("#movie").dataset.title;
+const icon = document.querySelector(".fa-bookmark");
+const bookmarkData = document.querySelector("#data1").dataset.bookmark;
+
+// 북마크 비동기 함수 
+function bookmarkHandler(){
+    $.ajax({
+      method : "post",
+      url : "/bookmark?title="+title,
+      data : { title : title },
+      dataType : "json",
+      success : function(res){
+        if(res!==null){
+          icon.classList.toggle("fa-solid");
+        };
+      },
+    });
+  };
+// 북마크 클릭 이벤트 
+bookmark.addEventListener("click", bookmarkHandler);
+
+//////////// 북마크 끝 ////////////
+
+
+
+// ------------------ 컨텐츠 정보 끝 ------------------------
