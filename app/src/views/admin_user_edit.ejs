@@ -59,7 +59,11 @@
 
 				<button type="submit" class="btn btn-success me-3">확인</button>
 		</form>
+		<%if (data.delete==false){%>
 		<button type="button" class="btn btn-danger me-3" data-id="<%=data._id%>" id="delete">탈퇴</button>
+		<%}else{%>
+	    <button type="button" class="btn btn-danger me-3" data-id="<%=data._id%>" id="delete">복구</button>
+			<%}%>
 	</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js"></script>
@@ -106,7 +110,7 @@
 				url: '/admin/user/quit',
 				data: { _id: id }
 			}).done(function (data) {
-				alert("탈퇴요청 성공");
+				alert("탈퇴/복구 요청 성공");
 				window.location.replace('/admin/user/list');
 			})
 		})
