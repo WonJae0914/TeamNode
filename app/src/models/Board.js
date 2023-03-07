@@ -12,6 +12,7 @@ const questionSchema = new mongoose.Schema({
     required: true,
     default: () => Date.now(), // 따로 값을 지정하지 않을 시 디폴트 값으로 출력
   },
+  comments: [{ type: String }],
   modified: { type: Boolean, default: false },
   views: { type: Number, default: 0, required: true },
   loggedIn: { type: Boolean, default: true },

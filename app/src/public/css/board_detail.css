@@ -15,3 +15,20 @@
   font-size: 1.3rem;
   line-height: 23px;
 }
+
+.comment-box {
+  width: 80%;
+  margin: auto;
+  height: auto;
+}
+.comment-box textarea {
+  width: 85%;
+  height: 70%;
+  color: black;
+}
+.comment-box button {
+  width: 10%;
+  height: 40px;
+  background-color: #ad0000;
+  border-radius: 5px;
+}

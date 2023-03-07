@@ -21,17 +21,30 @@
 <body>
   <%- include('nav.ejs') %>
   <main>
-    <div class="detail-box">
+    <section class="detail-box">
       <h3><%=title%></h3>
       <p><%=detail[0]%></p>
-    </div>
-    <%if(questions.length == 0) {%>
-    <h3>There are no registered questions</h3>
-    <%} else {%> <%for(var question of questions) {%>
-    <form method="post">
-      <input type="text" placeholder="input your comment" />
-      <button type="submit">submit</button>
-    </form>
+    </section>
+    <section class="comment-box">
+      <%if(comments.length == 0) {%>
+      <h3>There are no registered questions</h3>
+      <%}else{%>
+      <h1>Comments List</h1>
+      <pre>
+        <%for(var comment of comments) {%> 
+        <%=comment%> 
+        <%}%>
+      </pre>
+      <%}%>
+      <form method="post">
+        <textarea
+          name="comment"
+          type="text"
+          placeholder="input your comment"
+        ></textarea>
+        <button type="submit">submit</button>
+      </form>
+    </section>
   </main>
   <%- include('footer.ejs') %>
 </body>
