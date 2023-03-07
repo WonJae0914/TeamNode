@@ -28,6 +28,7 @@ const browse = function (req, res) {
 
 // 검색 get
 const search = async (req, res) => {
+ 
   const { seachwd } = req.query;
   console.log(seachwd);
   const result = await db.collection("post")

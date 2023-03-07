@@ -87,9 +87,23 @@
   </header>
 
   <!-- 리뷰 댓글 시작 -->
-  <section class="review">
-    <div>
-      <h1> <%=score%> </h1>
+
+  <!-- 댓글 영역 -->
+  <section class="comments">
+
+    <!-- 댓글 작성 폼 -->
+    <h2>리뷰 0 </h2>
+    <form class="comment-form" method="post">
+      <div class="form-row">
+        <textarea style="color:black;" id="comment" name="review" required></textarea>
+        <button id="reviewbtn" type="submit">작성</button>
+      </div>
+      
+    </form>
+
+    <!-- 댓글 목록 -->
+    <div class="comment-list">
+      <p style="color:black;">댓글 목록</p>
     </div>
   </section>
   
