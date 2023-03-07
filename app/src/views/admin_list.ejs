@@ -1,151 +1,103 @@
 <%- include('admin_nav.ejs') %>
 
-  <div class="d-flex justify-content-end me-5">
-    <input id="val" class="form-control" type="search" placeholder="제목 검색" style="width: 15%;">
-    <button id="search" class="btn btn-dark" type="button">Search</button>
-  </div>
-
-
-  <table class="table table-hover w-75 caption-top mb-3" style="margin-left: auto; margin-right: auto;">
-    <caption class="mb-3">
-      <h2>영상목록</h2>
-    </caption>
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">글번호</th>
-        <th scope="col">제목</th>
-        <th scope="col">작성날짜</th>
-        <th scope="col">작성자</th>
-      </tr>
-    </thead>
-    <tbody id="post-list">
-      <%for(var i=0; i < content.length; i++) {%>
-        <tr id="fram">
-          <th scope="row">
-            <%=content[i]._id%>
-          </th>
-          <td><a href="/admin/detail/<%=content[i]._id%>">
-              <%=content[i].제목%>
-            </a> </td>
-          <td>
-            <%=content[i].작성날짜%>
-          </td>
-          <td> + '군침이' + </td>
-        </tr>
-        <%}%>
-    </tbody>
-  </table>
-
-  <div class="text-end ms-auto">
-
-    <button type="button" class="btn btn-secondary mb-3" id="deleted" style="margin-right: 10% !important;">
-      <% if(content[0].삭제==="N"){ %>
-       삭제된 컨텐츠</button>
-      <%}else if(content[0].삭제==="Y"){%>
-         컨텐츠 목록</button>
-        <%}%>
-  </div>
-  <nav>
-    <ul class="pagination justify-content-center">
-      <%if(startPage>1){%>
-        <li class="page-item"><a class="page-link" href="<%=startPage-1%>">prev</a></li>
-        <%}%>
-          <% if(endPage> total) {%>
-            <% max=total%max %>
+  <%if(content[0].삭제==="N" ){%>
+    <div class="d-flex justify-content-end me-5">
+      <input id="val" class="form-control" type="search" placeholder="제목 검색" style="width: 15%;">
+      <button id="search" class="btn btn-dark" type="button">Search</button>
+    </div>
+    <%}else{%>
+      <div class="d-flex justify-content-end me-5">
+        <input id="valDel" class="form-control" type="search" placeholder="삭제컨텐츠 검색" style="width: 15%;">
+        <button id="searchDel" class="btn btn-dark" type="button">Search</button>
+      </div>
+      <%}%>
+        <table class="table table-hover w-75 caption-top mb-3" style="margin-left: auto; margin-right: auto;">
+          <caption class="mb-3">
+            <h2>영상목록</h2>
+          </caption>
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">글번호</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성날짜</th>
+              <th scope="col">작성자</th>
+            </tr>
+          </thead>
+          <tbody id="post-list">
+            <%for(var i=0; i < content.length; i++) {%>
+              <tr id="fram">
+                <th scope="row">
+                  <%=content[i]._id%>
+                </th>
+                <td><a href="/admin/detail/<%=content[i]._id%>">
+                    <%=content[i].제목%>
+                  </a> </td>
+                <td>
+                  <%=content[i].작성날짜%>
+                </td>
+                <td> + '군침이' + </td>
+              </tr>
               <%}%>
-                <% for(var i=0; i<max; i++ ) {%>
-                  <li class="page-item"><a class="page-link" href="<%=startPage+i%>">
-                      <%=startPage+i%>
-                    </a></li>
-                  <%}%>
-                    <% if(startPage+max>5) {%>
-                      <li class="page-item"><a class="page-link" href="<%=startPage+max%>">next</a></li>
-                      <%}%>
-    </ul>
-  </nav>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-  <script>
-    // 일반페이지 페이징 함수
-    // function getPosts(page) {
-    //   $.ajax({
-    //     url: '/admin/list/' + page,
-    //     method: 'get',
-    //     dataType: "json",
-    //     success: function (data) {
-    //       renderPosts(data.posts);
-    //       renderPagination(data.total, page, data.path);
-    //     },
-    //     error: function (jqXHR, textStatus, errorThrown) {
-    //       console.error(errorThrown);
-    //     }
-    //   });
-    // }
+          </tbody>
+        </table>
+        <div class="text-end ms-auto">
+          <button type="button" class="btn btn-secondary mb-3" id="deleted" style="margin-right: 10% !important;">
+            <% if(content[0].삭제==="N" ){ %>
+              삭제된 컨텐츠
+          </button>
+          <%}else if(content[0].삭제==="Y" ){%>
+            컨텐츠 목록</button>
+            <%}%>
+        </div>
+        <nav>
+          <ul class="pagination justify-content-center">
+            <%if(startPage>1){%>
+              <li class="page-item"><a class="page-link" href="<%=startPage-1%>">prev</a></li>
+            <%}%>
+            <% if(endPage> total) {%>
+            <% max=total%max %>
+            <%}%>
+            <% for(var i=0; i<max; i++ ) {%>
+              <%if(startPage+i===currentPage){%>
+              <li class="page-item active"><a class="page-link" href="<%=startPage+i%>">
+              <%}else{%>
+              <li class="page-item"><a class="page-link" href="<%=startPage+i%>">
+              <%}%>
+            <%=startPage+i%>
+            </a></li>
+            <%}%>
+            <% if(startPage+max>5) {%>
+            <li class="page-item"><a class="page-link" href="<%=startPage+max%>">next</a></li>
+            <%}%>
+          </ul>
+        </nav>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+        <script>
 
-    // 목록만들기 함수
-    // function renderPosts(posts) {
-    //   var postList = $('#post-list');
-    //   postList.empty();
-    //   posts.forEach(function (elem, i) {
-    //     postList.append('<tr id="frame' + i + '"></tr>');
-    //     postFrame = $('#frame' + i + '');
-    //     postFrame.append('<th scope="row">' + elem._id + '</th>');
-    //     postFrame.append('<td>' + '<a href="detail/' + elem._id + '">' + elem.제목 + ' </a>' + '</td>');
+          //검색기능
+          $('#search').click(function () {
+            let put = $('#val').val();
+            window.location.href = '/admin/search/1?value=' + put
+          });
+          //삭제목록 검색
+          $('#searchDel').click(function () {
+            let put = $('#valDel').val();
+            window.location.href = '/admin/searchDeleted/1?value=' + put
+          });
 
-    //     postFrame.append('<td>' + elem.작성날짜 + '</td>');
-    //     postFrame.append('<td>' + '군침이' + '</td>');
-    //   });
-    // }
-    // 페이지번호 만들기 함수
-    // function renderPagination(total, currentPage, path) {
-    //   var pagenation = $('.pagination');
-    //   pagenation.empty();
-    //   if (total > 1) {
-    //     if (currentPage > 1) {
-    //       pagenation.append('<li class="page-item"><a class="page-link" data-page=' + (parseInt(currentPage) - 1) + ' href="">Previous</a></li>')
-    //     }
-    //     for (var i = 1; i <= total; i++) {
-    //       if (i == currentPage) {
-    //         pagenation.append('<li class="page-item disabled"><span class="page-link" >' + i + '</span></li>');
-    //       } else {
-    //         pagenation.append('<li class="page-item"><a class="page-link" href="#" data-page="' + path + i + '">' + i + '</a></li>');
-    //       }
-    //     }
-    //     if (currentPage < total) {
-    //       pagenation.append('<li class="page-item"><a class="page-link"  data-page=' + (parseInt(currentPage) + 1) + ' href="">Next</a></li>')
-    //     }
-    //     $('.page-link').click(function (e) {
-    //       e.preventDefault();
-    //       var page = e.target.dataset.page
-    //       currentPage = page;
-    //       getPosts(page);
-    //     });
-    //   }
-    // }
-    //목록 페이징 구현
-    // window.addEventListener('DOMContentLoaded', function (e) {
-    //   var currentPage = 1;
-    //   getPosts(currentPage);
-    // })
+          //일반목록, 삭제목록 변환
+          let deleted = document.querySelector('#deleted');
+          deleted.addEventListener('click', function (e) {
+            let path = window.location.pathname;
+            const regex = /\/deleted\//i;
+            if (regex.test(path)) {
+              window.location.href = '/admin/list/1'
+            } else {
+              window.location.href = '/admin/list/deleted/1'
+            }
+          })
+        </script>
+        </body>
 
-
-    //검색기능
-    $('#search').click(function () {
-      let put = $('#val').val();
-      window.location.replace('/admin/search/1?value='+ put);
-    });
-
-    let deleted = document.querySelector('#deleted');
-    deleted.addEventListener('click', function (e) {
-      let path = window.location.pathname;
-      const regex = /\/deleted\//i;
-      if (regex.test(path)) {
-        window.location.replace('/admin/list/1')
-      } else {
-        window.location.replace('/admin/list/deleted/1')
-      }
-    })
-  </script>
-  </body>
-
-  </html>
+        </html>

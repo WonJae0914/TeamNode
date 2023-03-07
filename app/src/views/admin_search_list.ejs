@@ -32,19 +32,21 @@
       <%if(startPage>1){%>
         <li class="page-item"><a class="page-link" href="<%=startPage-1%>">prev</a></li>
         <%}%>
-          <% if(endPage> total) {%>
-            <% max=total%max %>
-              <%}%>
-                <% for(var i=0; i<max; i++ ) {%>
-                  <li class="page-item"><a class="page-link" href="<%=startPage+i%>">
-                      <%=startPage+i%>
-                    </a></li>
-                  <%}%>
-                    <% if(startPage+max>5) {%>
-                      <li class="page-item"><a class="page-link" href="<%=startPage+max%>">next</a></li>
-                      <%}%>
+        <% if(endPage> total) {%>
+        <% max=total%max %>
+        <%}%>
+        <% for(var i=0; i<max; i++ ) {%>
+          <%if(startPage+i===currentPage){%>
+          <li class="page-item active"><a class="page-link" href="<%=startPage+i%>?value=<%=value%>">
+          <%}else{%>
+          <li class="page-item"><a class="page-link" href="<%=startPage+i%>?value=<%=value%>">
+          <%}%>
+        <%=startPage+i%></a></li>
+        <%}%>
+        <% if(startPage+max>5) {%>
+        <li class="page-item"><a class="page-link" href="<%=startPage+max%>">next</a></li>
+        <%}%>
     </ul>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.js"></script>
     </body>
 
