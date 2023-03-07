@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/browse_search.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+
+    <!-- 네비 -->
+    <%- include('nav.ejs') %>
+    <!-- 네비 -->
+
+    <!-- 컨텐츠 시작 -->
+    <section class="content">
+        <h1>다음과 관련된 콘텐츠 : 검색어 | 검색어 카테고리 영화</h1> 
+        <div class="carousel">
+            <div class="content-box"> 
+                <% for(var i=0; i < searchdb.length; i++){ %>
+                <div class="item-box" data-value="<%=searchdb[i]._id%>">
+                    <a href="watch/<%= searchdb[i]._id %>"><img src="<%= searchdb[i].사진경로 %>" alt=""></a>
+                    <div id="title" data-title="<%=searchdb[i].제목%>"></div>
+                </div>
+                <% } %>
+            </div>
+            <div class="prev"><i class="fa-solid fa-angle-left prev-arrow"></i></div>
+            <div class="next"><i class="fa-solid fa-angle-right"></i></div>
+        </div>
+        
+    </section>
+    <!-- 컨텐츠 끝 -->
+
+     <!-- 풋터 -->
+     <%- include('footer.ejs') %>
+     <!-- 풋터 -->
+
+</body>
+</html>

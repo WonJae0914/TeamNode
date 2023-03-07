@@ -1,5 +1,4 @@
 "use strict"
-
 // 모델에서 유저 모델 불러오기 
 const User = require("../models/User");
 // 패스포트 불러오기 (로그인한 유저 세션 정보 받기 위함)
@@ -21,9 +20,6 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
 
 // 평점 추가
 const addScore = async function(req,res){
-    console.log("??")
-    console.log(req.body);
-    console.log("파람스:" + req.params.id);
     const { userScore } = req.body
     const { userTitle } = req.body
     try {
@@ -31,10 +27,9 @@ const addScore = async function(req,res){
             { userId : req.user.id,
               title : userTitle,
               score : parseInt(userScore) })
-            //   contentId : req.param.id
-        res.status(200).json({message : "북마크 추가!"})
+        res.status(200).json({message : "평점 추가!"})
     } catch (error) {
-        res.status(400).json({message : "북마크 실패!"})
+        res.status(400).json({message : "평점 실패!"})
     }
 }
 

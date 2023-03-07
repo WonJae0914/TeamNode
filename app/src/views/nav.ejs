@@ -45,9 +45,9 @@
   <div class="right">
     <div class="icon search">
       <div class="search-bar">
-        <form action="/board/search" method="get">
+        <form action="/search" method="get">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" name="kw" placeholder="검색" />
+          <input type="text" name="seachwd" placeholder="검색" />
           <button class="search--btn" type="submit">검색</button>
         </form>
       </div>
@@ -63,7 +63,7 @@
             <i class="fa-solid fa-caret-down"></i>
            </a>
            <ul>
-             <a href="/board/list">Board List</a>
+             <a href="/board/list/1">Board List</a>
              <a href="/board/upload">Board Uplaod</a>
              <% if(!isLoggedIn){ %>
              <a href="/login">Login</a>
