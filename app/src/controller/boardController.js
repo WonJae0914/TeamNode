@@ -74,25 +74,29 @@ const detailQuestion = async (req, res) => {
     title: questions[0].title,
     detail: questions[0].detail,
     pageTitle: "Question Detail",
+    comments: questions[0].comments,
   });
 };
 
 const postComment = async (req, res) => {
-  const comment = req.body;
+  const { comment } = req.body;
   const questionId = req.params.id;
-  try {
-    const uploadComments = await Question.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: comment },
-      { returnOriginal: false }
-    );
-    if (!uploadComments) {
-      return res.status(404).send("No comments yet");
-    }
-    return res.redirect(`/board/${questionId}/detail`);
-  } catch {
-    return res.render("board_detail");
+  // try {
+  const uploadComments = await Question.findOneAndUpdate(
+    { _id: req.params.id },
+    { $addToSet: { comments: comment } },
+    { returnOriginal: false }
+  );
+  if (!uploadComments) {
+    return res.status(404).send("No comments yet");
   }
+  return res.redirect(`/board/${questionId}/detail`);
+  // } catch {
+  //   return res.render("board_detail", {
+  //     pageTitle: "Question Detail",
+  //     title
+  //   });
+  // }
 };
 
 const updateQuestions = async (req, res) => {
@@ -134,7 +138,7 @@ const deleteQuestions = async (req, res) => {
       { delete: true },
       { returnOriginal: false }
     );
-    return res.redirect("/board/list");
+    return res.redirect("/board/list/1");
   } catch {
     return res.render("board");
   }
