@@ -52,7 +52,7 @@ pwField.addEventListener('keyup', function(event) {
     pwerror.style.color = 'red';
   } else if(/\s/.test(pw)) {
     pwerror.innerText = 'password에는 공백이 포함될 수 없습니다.';
-    pwerror.style.color = 'red';
+    pwerror.style.color = 'red'; 
   } else {
     pwerror.innerText = '사용가능한 비밀번호입니다';
     pwerror.style.color = 'green';
