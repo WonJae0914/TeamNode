@@ -27,19 +27,35 @@
         <%} else {%> <%for(var question of questions) {%>
         <div class="con-search">
           <div class="con-search__info">
-            <h3><a class="title" href="<%=question._id%>/detail">Title : <%=question.title%></a></h3>
+            <h3><a class="title" href="/board/<%=question._id%>/detail">Title : <%=question.title%></a></h3>
             <!-- <h3>Detail : <%=question.detail%></h3> -->
           </div>
           <div class="con-search__util">
             <h4><%=question.createdDate%> / 조회수 <%=question.views%></h4>
-            <button class="con-search__btn" type="submit"><a href="<%=question._id%>/detail">detail</a></button>
-            <button class="con-search__btn" type="submit"><a href="<%=question._id%>/update">edit</a></button>
-            <button class="con-search__btn" type="submit"><a href="<%=question._id%>/delete">delete</a></button>
+            <button class="con-search__btn" type="submit"><a href="/board/<%=question._id%>/detail">detail</a></button>
+            <button class="con-search__btn" type="submit"><a href="/board/<%=question._id%>/update">edit</a></button>
+            <button class="con-search__btn" type="submit"><a href="/board/<%=question._id%>/delete">delete</a></button>
           </div>
           <br/>
         </div>
         <%}%> <%}%>
       </section>
+      <div aria-label="Page navigation example" class="page">
+        <ul class="pagination">
+          <%if(startPage>1){%>
+            <li><a href="<%=startPage-1%>?kw=<%=kw%>">prev</a></li>
+            <%}%>
+          <% if(endPage > total) {%>
+            <% max = total%max %>
+            <%}%>
+            <% for(var i = 0;i<max; i++ ) {%>
+              <li><a href="<%=startPage+i%>?kw=<%=kw%>"><%=startPage+i%></a></li>
+              <%}%> 
+              <%if(endPage*6<questionNum){%>
+            <li><a href="<%=startPage+max%>?kw=<%=kw%>">next</a></li>
+            <%}%>
+          </ul>
+      </div>
     </main>
     <%- include('footer.ejs') %>
   </body>

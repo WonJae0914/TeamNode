@@ -3,6 +3,9 @@
 const { db } = require("../models/Board");
 const Question = require("../models/Board");
 
+const PAGE_SIZE = 6;
+const MAX_PAGE = 5;
+
 // const home = async (req, res) => {
 //   const questions = await Question.find({});
 //   return res.render("board", {
@@ -34,9 +37,6 @@ const postUpload = async (req, res) => {
 };
 
 const list = async (req, res) => {
-  const PAGE_SIZE = 6;
-  const MAX_PAGE = 5;
-
   const pageNumber = req.params.page;
   const currentPage = parseInt(pageNumber);
 
@@ -56,11 +56,12 @@ const list = async (req, res) => {
   return res.render("board", {
     questions: questions,
     pageTitle: "Question List",
-    total: totalPages,
+    totalPages: totalPages,
     max: MAX_PAGE,
     currentPage: currentPage,
     startPage: startPage,
     endPage: endPage,
+    questionNum: totQuestions.length,
     // loggedIn: true,
   });
 };
@@ -74,6 +75,24 @@ const detailQuestion = async (req, res) => {
     detail: questions[0].detail,
     pageTitle: "Question Detail",
   });
+};
+
+const postComment = async (req, res) => {
+  const comment = req.body;
+  const questionId = req.params.id;
+  try {
+    const uploadComments = await Question.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: comment },
+      { returnOriginal: false }
+    );
+    if (!uploadComments) {
+      return res.status(404).send("No comments yet");
+    }
+    return res.redirect(`/board/${questionId}/detail`);
+  } catch {
+    return res.render("board_detail");
+  }
 };
 
 const updateQuestions = async (req, res) => {
@@ -92,7 +111,6 @@ const postUpdate = async (req, res) => {
   console.log("updateBoard");
   console.log(updateBoard);
   try {
-    const questionIdx = Question.find;
     const questions = await Question.findOneAndUpdate(
       { _id: req.params.id },
       { $set: updateBoard },
@@ -124,18 +142,42 @@ const deleteQuestions = async (req, res) => {
 
 const searchQuestion = async (req, res) => {
   const { kw } = req.query;
+  const pageNumber = req.params.page;
+  const currentPage = parseInt(pageNumber);
+
+  const startPage = Math.floor((currentPage - 1) / MAX_PAGE) * MAX_PAGE + 1;
+  const endPage = startPage + MAX_PAGE - 1;
+
+  const totQuestions = await Question.find({
+    title: {
+      $regex: new RegExp(`${kw}`, "i"),
+    },
+    delete: false,
+  });
+  const totalPages = Math.ceil(totQuestions.length / PAGE_SIZE);
   let questions = [];
   if (kw) {
     questions = await Question.find({
       title: {
         $regex: new RegExp(`${kw}`, "i"),
       },
-    });
+      delete: false,
+    })
+      .sort({ createdDate: -1 })
+      .skip((pageNumber - 1) * PAGE_SIZE)
+      .limit(PAGE_SIZE);
   }
   return res.render("board_search", {
     questions,
     loggedIn: true,
     pageTitle: "Search Results",
+    total: totalPages,
+    max: MAX_PAGE,
+    currentPage: currentPage,
+    startPage: startPage,
+    endPage: endPage,
+    questionNum: totQuestions.length,
+    kw,
   });
 };
 
@@ -148,4 +190,5 @@ module.exports = {
   deleteQuestions,
   postUpload,
   searchQuestion,
+  postComment,
 };

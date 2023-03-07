@@ -43,16 +43,20 @@
       </section>
       <div aria-label="Page navigation example" class="page">
         <ul class="pagination">
-          <li><a href="<%=startPage-1%>">prev</a></li>
-          <% if(endPage > total) {%>
-            <% max = total%max %>
+          <%if(startPage>1){%>
+            <li><a href="<%=startPage-1%>">prev</a></li>
+            <%}%>
+          <% if(endPage > totalPages) {%>
+            <% max = totalPages%max %>
             <%}%>
             <% for(var i = 0;i<max; i++ ) {%>
                 <li><a href="<%=startPage+i%>"><%=startPage+i%></a></li>
                 <%}%> 
+          <%if(endPage*6<questionNum){%>
               <li><a href="<%=startPage+max%>">next</a></li>
+              <%}%>
           </ul>
-      </div>
+        </div>
     </main>
     <%- include('footer.ejs') %>
   </body>
