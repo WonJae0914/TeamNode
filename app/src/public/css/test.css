@@ -1,0 +1,113 @@
+/* 전체 페이지 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* 헤더 스타일 */
+  header {
+    background-color: #141414;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+  }
+  
+  header h1 {
+    font-size: 36px;
+    margin: 0;
+  }
+  
+  header nav ul {
+    list-style-type: none;
+    display: flex;
+  }
+  
+  header nav li {
+    margin-right: 30px;
+  }
+  
+  header nav li:last-child {
+    margin-right: 0;
+  }
+  
+  header nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  
+  header nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* 메인 스타일 */
+  main {
+    padding: 50px;
+  }
+  
+  main section {
+    margin-bottom: 50px;
+  }
+  
+  main h2 {
+    font-size: 24px;
+    margin-top: 0;
+  }
+  
+  main ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .review {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .review-header h3 {
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  .review-date {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .review-rating {
+    font-size: 16px;
+    color: #ffbf00;
+  }
+  
+  .review p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* 푸터 스타일 */
+  footer {
+    background-color: #141414;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  footer a {
+    color: #fff;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
