@@ -23,8 +23,10 @@ const renderSignup = (req, res) => {
 
 // 회원 가입 처리
 const signup = async (req, res) => {
-  const { id, email, pw, age, gender, country, isAgreed, isOptedIn } = req.body;
+  const { id, email, pw, year, month, day, gender, country, isAgreed, isOptedIn } = req.body;
+  const birthday = { year, month, day };
   
+  // 유효성 검사
   try {
     const hash = await bcrypt.hash(pw, 10);
     if(isAgreed==='on'){
@@ -32,7 +34,7 @@ const signup = async (req, res) => {
       id,
       email,
       pw : hash,
-      age,
+      birthday,
       gender,
       country, 
       isAgreed, 
@@ -70,6 +72,13 @@ function isLoggedIn(req, res, next) { // 로그인했는지 안했는지 확인�
   res.redirect('/login');
 }
 
+function adminisLoggedIn(req, res, next){
+  if(req.user.admin==true){
+    return next();
+  }
+  res.redirect('/admin/home');
+}
+
 function localLoggedIn(req, res, next) {
   res.locals.isLoggedIn = req.isAuthenticated();
   next();}
@@ -101,17 +110,28 @@ const userdetail =  (req, res) => {
 // 유저 정보 업데이트 처리
 const updateuser = async(req, res) => {
   const userinfo = req.user;
-  console.log(req.body, userinfo);
+  const { year, month, day, gender, country, isOptedIn } = req.body;
+  const upyear = parseInt(req.body.year, 10);
+  const upmonth = parseInt(req.body.month, 10);
+  const upday = parseInt(req.body.day, 10);
+  const birthday={year:upyear, month:upmonth, day:upday}
   try {
     await User.updateOne(
       {id: userinfo.id},
-      {$set : req.body },
+      {
+        $set: {
+          birthday,
+          gender,
+          country,
+          isOptedIn,
+        }
+      },
       {returnOriginal : false}
     );
     res.send(`<script>alert("${userinfo.id}님 수정되었습니다."); window.location.href="/userpage";</script>`);
   } catch (err) {
     console.log(err);
-    res.status(500).send('Error creating user');
+    res.status(500).send('Error update user');
   }
 };
 // 유저 탈퇴 처리
@@ -148,4 +168,4 @@ const logout = (req, res) => {
 module.exports = { 
   renderSignup, privacypolicy, signup , 
   renderLogin, isLoggedIn, login , logout, 
-  userdetail, updateuser, removeuser,localLoggedIn};
+  userdetail, updateuser, removeuser,localLoggedIn, adminisLoggedIn};

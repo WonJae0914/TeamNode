@@ -7,10 +7,11 @@ const userSchema = new mongoose.Schema({
 
   id: {
     type: String,
-    required: true,
+    required: [true, '아이디를 입력해주세요.'],
     minlength: 4,
+    maxlength: 15,
     trim : true,
-    match : /^[A-Za-z0-9]{7,15}$/g,
+    match: /^[a-zA-Z0-9]+$/g,
     unique : true
   },
   email: {
@@ -26,9 +27,16 @@ const userSchema = new mongoose.Schema({
     required: true,
     match: /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/
   },
-  age: { type: Number, 
-    required: true, 
-    min: 18 
+  birthday: {
+    year: {
+        type: Number,
+    },
+    month: {
+        type: Number
+    },
+    day: {
+        type: Number
+    }
   },
   gender: { type: String, 
     enum: ['men', 'women'], 
@@ -56,7 +64,9 @@ const userSchema = new mongoose.Schema({
   },
   bookmark : {
     type : [{type : String}],
-  }
+  },
+  admin :{type: Boolean,
+  default: false }
 },{   timestamps: {
   createdAt: 'created_at',
   updatedAt: 'updated_at',
