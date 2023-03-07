@@ -21,6 +21,13 @@
 <body>
   <%- include('nav.ejs') %>
     <main>
+      <div class="search-bar">
+        <form action="/board/search/1" method="get">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" name="kw" placeholder="검색" />
+          <button class="search--btn" type="submit">검색</button>
+        </form>
+      </div>
       <section>
         <%if(questions.length == 0) {%>
           <h3>There are no registered questions</h3>
@@ -41,7 +48,7 @@
         </div>
          <%}%> 
       </section>
-      <div aria-label="Page navigation example" class="page">
+      <div class="page">
         <ul class="pagination">
           <%if(startPage>1){%>
             <li><a href="<%=startPage-1%>">prev</a></li>
