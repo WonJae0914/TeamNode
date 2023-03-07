@@ -25,6 +25,13 @@
       <h3><%=title%></h3>
       <p><%=detail[0]%></p>
     </div>
+    <%if(questions.length == 0) {%>
+    <h3>There are no registered questions</h3>
+    <%} else {%> <%for(var question of questions) {%>
+    <form method="post">
+      <input type="text" placeholder="input your comment" />
+      <button type="submit">submit</button>
+    </form>
   </main>
   <%- include('footer.ejs') %>
 </body>
