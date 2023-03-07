@@ -25,38 +25,60 @@ const watch = async (req, res) =>{
   const userInfo = await User.findOne({
     id : user.id,
   })
-  console.log("확인1 : " + userInfo.bookmark);
   // 클릭한 컨텐츠 DB 정보 가져오기
   const result = await db.collection("post").findOne({
     _id : id
   })
-  console.log("확인2 : " + result.제목);
-  // 유저의 컨텐츠스코어 DB정보 가져오기
-  const result2 = await db.collection("contentScore").findOne({
+  // 해당 컨텐츠의 컨텐츠스코어 DB정보 가져오기
+  const result2 = await db.collection("contentScore").find({
     title : result.제목
-  });
-  console.log("확인3 : " + JSON.stringify(result2));
-  console.log(result2.length);
-  const result3 = function() {
+  }).toArray();
+  console.log(result2);
+
+  // 해당 컨텐츠에 유저가 평가한 점수 가져오기
+  function userScore(){
+    for(let i=0; i<result2.length; i++){
+      if(result2[i].userId == user.id && result2[i].title == result.제목){
+        return result2[i].score
+      }
+    }
+  }
+  // 컨텐츠 조회수 
+  const post = await db.collection("post").findOne({_id : id});
+  let views = post.view;
+  if(isNaN(views)){
+    views = 0;
+  }
+  views += 1;
+  const postUpate = await db.collection("post").updateOne(
+    {_id : id},
+    { $set : {view : parseInt(views)}}
+  )
+  
+  
+
+  // 유저의 컨텐츠스코어 DB 개수
+  const contentCnt = await db.collection("contentScore")
+                  .countDocuments({title: result.제목, score: {"$exists": true}})
+  // 별점 평균 내기
+
+  let avg = 0;
+
+  const scoreAvg = function() {
     let sumScore = 0;
-    let avg = 0;
-    let cnt = 1;
-    for(let i=0; i<result2.score.length; i++){
-      console.log("스코어갯수 : " + result2.score.length);
-      sumScore += result2.score[i];
-      cnt += [i];
+    let notNum = 0;
+    for(let i=0; i<contentCnt; i++){
+      sumScore += result2[i].score;
     }
-      console.log("확인4 : " + cnt);
-      console.log("확인5 : " + sumScore);
-      avg = sumScore/cnt;
-      return avg;
-    }
-  console.log("확인6 : " + result3());
+    avg = sumScore/contentCnt;
+    return isNaN(avg) ? notNum : avg
+  }
 
   res.render("watch", { 
     posts : result,
     title : userInfo.bookmark,
-    score : result2
+    score : userScore(),
+    avg : scoreAvg()
   })
 
 }

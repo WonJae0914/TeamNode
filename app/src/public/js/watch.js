@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 if(subStarbtn){
-
 // 각 별 요소에 클릭이벤트 부여
 stars.forEach(function (star) {
   star.addEventListener("click", setRating);

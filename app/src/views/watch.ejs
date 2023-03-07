@@ -50,8 +50,8 @@
             </div>
             <div class="rating">  
               <% if(score != null) { %>
-              <div id="userScore" data-userScore="<%=score.score%>"></div>
-              <h2>평점 : <%=score.score%></h2>
+              <div id="userScore" data-userScore="<%=score%>"></div>
+              <h2>평점 : <%=avg%></h2>
               <% } else { %>
               <h2>평점 : </h2>
               <%}%>
@@ -79,6 +79,7 @@
               <% if(score == null) { %>
                 <button type="button" class="subStar">평점</button>
               <% } %>
+              
             </div>
            </div>
           </div>
@@ -88,7 +89,7 @@
   <!-- 리뷰 댓글 시작 -->
   <section class="review">
     <div>
-      <h1> 리뷰 댓글 </h1>
+      <h1> <%=score%> </h1>
     </div>
   </section>
   
