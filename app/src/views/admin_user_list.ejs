@@ -1,4 +1,8 @@
 <%- include('admin_nav.ejs') %>
+<div class="d-flex justify-content-end me-5">
+  <input id="val" class="form-control" type="search" placeholder="아이디 검색" style="width: 15%;">
+  <button id="search" class="btn btn-dark" type="button">Search</button>
+</div>
   <table class="table table-hover w-75 caption-top"  style="margin-left: auto; margin-right: auto;">
     <caption class="mb-3"><h2>회원 목록</h2></caption>
     <thead class="table-dark">
@@ -6,7 +10,7 @@
         <th scope="col">회원번호</th>
         <th scope="col">회원아이디</th>
         <th scope="col">이메일</th>
-        <th scope="col">삭제여부</th>
+        <th scope="col">탈퇴여부</th>
       </tr>
     </thead>
     <tbody id="post-list">
@@ -68,6 +72,11 @@
           postFrame.append('<td>' + '<a href="detail/' + elem._id + '">' + elem.id + ' </a>' + '</td>');
 
           postFrame.append('<td>' + elem.email + '</td>');
+          if(elem.delete===true){
+            elem.delete="탈퇴"
+          }else{
+            elem.delete="가입"
+          }
           postFrame.append('<td>' + elem.delete + '</td>');
         });
       }
@@ -101,11 +110,12 @@
       getPosts(currentPage);
     });
 
-    // $('#search').click(function () {
-    //   let put = $('#val').val();
-    //   console.log(put);
-    //   window.location.replace('/admin/search?value=' + put);
-    // });
+ 
+    $('#search').click(function () {
+      let put = $('#val').val();
+      console.log(put);
+      window.location.replace('/admin/user/search?value=' + put);
+    });
 
   </script>
   </body>

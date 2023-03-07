@@ -55,7 +55,7 @@
         data: { _id: number }
       }).done(function (result) {
         alert('요청 성공')
-        window.location.replace("/admin/list")
+        window.location.replace("/admin/list/1")
       }).fail(function (xhr, textStatus, errorThrown) {
         console.log(xhr, textStatus, errorThrown);  // 실패시 실행할 코드
       });
