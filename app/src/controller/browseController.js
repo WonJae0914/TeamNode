@@ -15,14 +15,37 @@ MongoClient.connect(
   }
 );
 
-//get 방식
+// 화면 띄우기 get
 const browse = function (req, res) {
   db.collection("post")
     .find()
     .sort({ _id: -1 })
     .toArray(function (err, result) {
-      res.render("browse.ejs", {
+      res.render("browse", {
         posts: result });
     });
 };
-module.exports = browse;
+
+// 검색 get
+const search = async (req, res) => {
+  const { seachwd } = req.query;
+  console.log(seachwd);
+  const result = await db.collection("post")
+    .find({
+      $or : [
+        {장르 : {$regex: new RegExp(seachwd, "i")}}, // 정규식 : 부분검색O, 대소문자 구분X
+        {감독 : {$regex: new RegExp(seachwd, "i")}},
+        {주연 : {$regex: new RegExp(seachwd, "i")}},
+        {제목 : {$regex: new RegExp(seachwd, "i")}}
+      ]})
+    .sort({ _id: -1 })
+    .toArray()
+  console.log(result);
+  res.render("browse_search", {
+      searchdb: result })
+};
+
+module.exports = {
+  browse,
+  search
+};
