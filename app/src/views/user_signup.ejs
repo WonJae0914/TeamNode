@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="/js/browse.js" defer></script> -->
+    <script src="/js/user_signup.js" defer></script>
     <link rel="stylesheet" href="/css/user_signup.css">
     <title>Document</title>
 </head>
@@ -55,6 +55,7 @@
                   <% } %>
               </select>
           </div>
+          <p id="dateerror">생년월일을 선택해주세요</p>
             <div class="col-md-12">
               <label for="inputState" class="form-label">성별</label>
               <select id="inputState1" class="form-select" id="genderSelect" name="gender" >
@@ -99,87 +100,4 @@
     <%- include('footer.ejs') %>
 </body>
 </html>
-<script>
-const signupForm = document.querySelector("#signupform");
-const idField = document.querySelector("#id");
-const iderror = document.querySelector("#iderror");
-const pwField = document.querySelector("#pw");
-const pwerror = document.querySelector("#pwerror")
-const emailField = document.querySelector("#email");
-const emailerror = document.querySelector("#emailerror");
-const pwChk = document.querySelector("#pwChk");
-const pwChkText = document.querySelector("#pwchktext");
-const yearSelect = document.querySelector('#year');
-const monthSelect = document.querySelector('#month');
-const daySelect = document.querySelector('#day');
-const genderSelect = document.querySelector('#inputState1');
-const countrySelect = document.querySelector('#inputState2');
-const isAgreedInput = document.querySelector('#gridCheck1');
-const isOptedInInput = document.querySelector('#gridCheck2');
-
-idField.addEventListener('keyup', function(event) {
-  const id = event.target.value;
-  const regex = /^[a-zA-Z0-9]$/;
-  const isValid = regex.test(id);
-
-  if (id.length < 4 || id.length > 15) {
-    iderror.innerText = 'ID는 4자리 이상 15자리 이하이어야 합니다.';
-    // event.preventDefault();
-  } else if (!isValid) {
-    iderror.innerText = 'ID는 영문 대소문자와 숫자로만 작성이 가능합니다.';
-    // event.preventDefault();
-  } else if (/\s/.test(id)) {
-    iderror.innerText = 'ID에는 공백이 포함될 수 없습니다.';
-    // event.preventDefault();
-  } else {
-    iderror.innerText = '';
-  }
-});
-
-pwField.addEventListener('keyup', function(event) {
-  const pw = event.target.value;
-  const regex = /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/;
-  const isValid = regex.test(pw);
-
-  if (pw.length < 8 || pw.length > 15) {
-    pwerror.innerText = 'password는 영문, 숫자, 특수문자가 포함된 8자리 이상 15자리 이하이어야 합니다.';
-    event.preventDefault();
-  }
-  else if(!isValid) {
-    pwerror.innerText = 'password는 영문, 숫자, 특수문자가 포함된 8자리 이상 15자리 이하이어야 합니다.';
-    event.preventDefault();
-  }
-  else{
-    pwerror.innerText = '사용가능한 비밀번호입니다';
-  }
-});
-
-emailField.addEventListener('keyup', function(event) {
-  const email = event.target.value;
-  const regex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-
-  if(email.metch(regex)){
-    emailerror.innerText = '이메일 형식을 사용해주세요';
-  }
-
-});
-
-function validatePassword() {
-  if (pwField.value !== pwChk.value) {
-    pwChkText.innerText = '비밀번호가 일치하지 않습니다.';
-    event.preventDefault();
-  } else {
-    pwChkText.innerText = '';
-  }
-}
-pwChk.addEventListener('keyup', validatePassword);
-
-
-
-
-
-
-
-  
-</script>
 

@@ -13,10 +13,14 @@ const {
   userdetail,
   updateuser,
   removeuser,
+  checkDuplicateId,
+  checkDuplicateEmail
 } = require('../controller/userController');
 
 
 userRouter.get('/signup',renderSignup);
+userRouter.get('/checkDuplicateId/:id',checkDuplicateId); // 중복체크
+userRouter.get('/checkDuplicateId/:email',checkDuplicateEmail);
 userRouter.get('/privacypolicy', privacypolicy); // 개인정보처리방침
 userRouter.post('/signup',signup); // user 회원가입
 userRouter.get('/login',renderLogin);
