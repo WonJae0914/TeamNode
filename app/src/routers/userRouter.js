@@ -15,6 +15,7 @@ const {
   removeuser,
 } = require('../controller/userController');
 
+
 userRouter.get('/signup',renderSignup);
 userRouter.get('/privacypolicy', privacypolicy); // 개인정보처리방침
 userRouter.post('/signup',signup); // user 회원가입

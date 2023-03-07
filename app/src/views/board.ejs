@@ -27,7 +27,7 @@
           <div class="con-li">
           <%} else {%> <%for(var question of questions) {%>
           <div class="con-li__info">
-            <h3><a class="title" href="<%=question._id%>/detail">Title : <%=question.title%></a></h3>
+            <h3><a class="title" href="/board/<%=question._id%>/detail">Title : <%=question.title%></a></h3>
             <!-- <h3>Detail : <%=question.detail%></h3> -->
           </div>
           <div class="con-li__util">
@@ -43,13 +43,21 @@
       </section>
       <div aria-label="Page navigation example" class="page">
         <ul class="pagination">
-          <li><a href="<%=currentPage-2%>"><%=currentPage-2%></a></li>
-          <li><a href="<%=currentPage-1%>"><%=currentPage-1%></a></li>
-          <li><a href="<%=currentPage%>"><%=currentPage%></a></li>
-          <li><a href="<%=currentPage+1%>"><%=currentPage+1%></a></li>
-          <li><a href="<%=currentPage+2%>"><%=currentPage+2%></a></li>
-        </ul>
-      </div>
+          <%if(startPage>1){%>
+            <li><a href="<%=startPage-1%>">prev</a></li>
+            <%}%>
+          <% if(endPage > totalPages) {%>
+            <% max = totalPages%max %>
+            <%}%>
+            <% for(var i = 0;i<max; i++ ) {%>
+                <li><a href="<%=startPage+i%>"><%=startPage+i%></a></li>
+                <%}%> 
+          <%if(endPage*6<questionNum){%>
+              <li><a href="<%=startPage+max%>">next</a></li>
+              <%}%>
+          </ul>
+        </div>
     </main>
+    <%- include('footer.ejs') %>
   </body>
 </html>

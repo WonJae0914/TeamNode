@@ -5,152 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="/js/browse.js" defer></script> -->
-    <!-- <link rel="stylesheet" href="/css/browse.css"> -->
+    <link rel="stylesheet" href="/css/user_signup.css">
     <title>Document</title>
 </head>
-<style>
-  /* body 스타일 */
-body {
-  background-color: #343a40;
-}
-
-/* container 스타일 */
-.container {
-max-width: 500px;
-margin: auto;
-}
-
-/* form 스타일 */
-form {
-padding: 20px;
-background-color: #343a40;
-border-radius: 10px;
-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-}
-
-/* legend 스타일 */
-legend {
-font-size: 24px;
-font-weight: bold;
-margin-bottom: 20px;
-}
-
-/* label 스타일 */
-label {
-font-size: 16px;
-}
-
-/* input 스타일 */
-input {
-font-size: 16px;
-height: 40px;
-border-radius: 5px;
-border: none;
-background-color: #343a40;
-}
-
-input:focus {
-background-color: #ffffff;
-color: #343a40;
-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-}
-
-/* select 스타일 */
-select {
-height: 40px;
-border-radius: 5px;
-border: none;
-background-color: #343a40;
-}
-
-select:focus {
-background-color: #343a40;
-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-}
-
-/* checkbox 스타일 */
-.form-check-input {
-width: 20px;
-height: 20px;
-margin-right: 10px;
-}
-
-/* inputState 스타일 */
-#inputState1 {
-  background-color: #343a40;
-  color: #fff;
-}
-
-#inputState1 option:checked {
-  color: #343a40;
-}
-/* countrySelect 스타일 */
-#countrySelect {
-  background-color: #343a40;
-  color: #fff;
-}
-
-#countrySelect option:checked {
-  color: #343a40;
-}
-
-/* button 스타일 */
-.btn {
-font-size: 16px;
-font-weight: bold;
-border-radius: 5px;
-}
-
-.btn-outline-dark {
-color: #343a40;
-border-color: #343a40;
-}
-
-.btn-outline-dark:hover {
-background-color: #343a40;
-color: #ffffff;
-}
-
-.btn-outline-success {
-color: #28a745;
-border-color: #28a745;
-}
-
-.btn-outline-success:hover {
-background-color: #28a745;
-color: #ffffff;
-}
-</style>
 <body>
   <%- include('nav.ejs') %>
-    <div class="container mt-4">
-        <form action="/signup" method="POST">
+    <div class="signupfiled container mt-4">
+        <form action="/signup" method="POST" id="signupform">
           <fieldset>
             <legend>회원가입</legend>
             <div class="form-floating mb-3">
               <label for="floatingInput" id="idlabel">ID</label>
-              <input type="text" id="id" class="form-control" name="id" placeholder="id" >
-              <!-- <button type="button" id="id_btn">id체크버튼</button> -->
+              <input type="text" id="id" class="form-control" name="id" placeholder="id" required>
             </div>
+            <p id="iderror">id를 입력바랍니다.</p>
             <div class="form-floating mb-3">
               <label for="floatingInput">비밀번호</label>
-              <input type="password" id="pw" class="form-control" name="pw" placeholder="비밀번호">
+              <input type="password" id="pw" class="form-control" name="pw" placeholder="비밀번호" required>
             </div>
+            <p id="pwerror">비밀번호는 필수 기재사항입니다.</p>
             <div class="form-floating mb-3">
               <label for="floatingInput">이메일</label>
-              <input type="text" id="email" class="form-control" name="email" placeholder="이메일" >
+              <input type="text" id="email" class="form-control" name="email" placeholder="이메일" required>
             </div>
+            <p id="emailerror"></p>
             <div class="form-floating mb-3">
               <label for="floatingInput">비밀번호 확인</label>
-              <input type="password" id="pwChk" class="form-control" name="pwChk" placeholder="비밀번호 확인" >
+              <input type="password" id="pwChk" class="form-control" name="pwChk" placeholder="비밀번호 확인" required>
             </div>
+            <p id="pwchktext">비밀번호 확인은 필수사항입니다.</p>
             <div class="form-floating mb-3">
-              <label for="floatingInput">나이</label>
-              <input type="number" id="age" class="form-control" name="age" placeholder="나이">
-            </div>
+              <label for="birthday">생년월일</label>
+              <select id="year" class="form-select" name="year">
+                  <option selected>태어난 해</option>
+                  <% for (let i = new Date().getFullYear(); i >= 1900; i--) { %>
+                      <option value="<%= i %>"><%= i %>년</option>
+                  <% } %>
+              </select>
+              <select id="month" class="form-select" name="month">
+                  <option selected>태어난 달</option>
+                  <% for (let i = 1; i <= 12; i++) { %>
+                      <option value="<%= i %>"><%= i %>월</option>
+                  <% } %>
+              </select>
+              <select id="day" class="form-select" name="day">
+                  <option selected>태어난 날짜</option>
+                  <% for (let i = 1; i <= 31; i++) { %>
+                      <option value="<%= i %>"><%= i %>일</option>
+                  <% } %>
+              </select>
+          </div>
             <div class="col-md-12">
               <label for="inputState" class="form-label">성별</label>
-              <select id="inputState1" class="form-select" id="genderSelect" name="gender">
+              <select id="inputState1" class="form-select" id="genderSelect" name="gender" >
                 <option selected value="men">남자</option>
                 <option value="women">여자</option>
               </select>
@@ -169,7 +76,7 @@ color: #ffffff;
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" id="gridCheck1" name="isAgreed">
                   <label class="form-check-label" for="gridCheck1">
-                   예, 저는 <span><a href="/privacypolicy" target="_blank" >개인정보처리방침</a></span>에 따른 개인정보 수집 및 활용에 동의합니다.  
+                   예, 저는 <span><a href="/privacypolicy" target="_blank" style="color: red;" >개인정보처리방침</a></span>에 따른 개인정보 수집 및 활용에 동의합니다.  
                   </label>
                 </div>
               </div>
@@ -177,7 +84,7 @@ color: #ffffff;
             <div class="row mb-3">
               <div class="col-sm-10">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck2">
+                  <input class="form-check-input" type="checkbox" id="gridCheck2" name="isOptedIn">
                   <label class="form-check-label" for="gridCheck2">
                     예, gunchimfilx 특별 할인 알림 이메일을 보내주세요(선택사항)
                   </label>
@@ -191,5 +98,88 @@ color: #ffffff;
     </div>
     <%- include('footer.ejs') %>
 </body>
-
 </html>
+<script>
+const signupForm = document.querySelector("#signupform");
+const idField = document.querySelector("#id");
+const iderror = document.querySelector("#iderror");
+const pwField = document.querySelector("#pw");
+const pwerror = document.querySelector("#pwerror")
+const emailField = document.querySelector("#email");
+const emailerror = document.querySelector("#emailerror");
+const pwChk = document.querySelector("#pwChk");
+const pwChkText = document.querySelector("#pwchktext");
+const yearSelect = document.querySelector('#year');
+const monthSelect = document.querySelector('#month');
+const daySelect = document.querySelector('#day');
+const genderSelect = document.querySelector('#inputState1');
+const countrySelect = document.querySelector('#inputState2');
+const isAgreedInput = document.querySelector('#gridCheck1');
+const isOptedInInput = document.querySelector('#gridCheck2');
+
+idField.addEventListener('keyup', function(event) {
+  const id = event.target.value;
+  const regex = /^[a-zA-Z0-9]$/;
+  const isValid = regex.test(id);
+
+  if (id.length < 4 || id.length > 15) {
+    iderror.innerText = 'ID는 4자리 이상 15자리 이하이어야 합니다.';
+    // event.preventDefault();
+  } else if (!isValid) {
+    iderror.innerText = 'ID는 영문 대소문자와 숫자로만 작성이 가능합니다.';
+    // event.preventDefault();
+  } else if (/\s/.test(id)) {
+    iderror.innerText = 'ID에는 공백이 포함될 수 없습니다.';
+    // event.preventDefault();
+  } else {
+    iderror.innerText = '';
+  }
+});
+
+pwField.addEventListener('keyup', function(event) {
+  const pw = event.target.value;
+  const regex = /(?=.*[a-zA-Z])(?=.*\d)(?=.*[&!@#$%^*+=_()-])/;
+  const isValid = regex.test(pw);
+
+  if (pw.length < 8 || pw.length > 15) {
+    pwerror.innerText = 'password는 영문, 숫자, 특수문자가 포함된 8자리 이상 15자리 이하이어야 합니다.';
+    event.preventDefault();
+  }
+  else if(!isValid) {
+    pwerror.innerText = 'password는 영문, 숫자, 특수문자가 포함된 8자리 이상 15자리 이하이어야 합니다.';
+    event.preventDefault();
+  }
+  else{
+    pwerror.innerText = '사용가능한 비밀번호입니다';
+  }
+});
+
+emailField.addEventListener('keyup', function(event) {
+  const email = event.target.value;
+  const regex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+  if(email.metch(regex)){
+    emailerror.innerText = '이메일 형식을 사용해주세요';
+  }
+
+});
+
+function validatePassword() {
+  if (pwField.value !== pwChk.value) {
+    pwChkText.innerText = '비밀번호가 일치하지 않습니다.';
+    event.preventDefault();
+  } else {
+    pwChkText.innerText = '';
+  }
+}
+pwChk.addEventListener('keyup', validatePassword);
+
+
+
+
+
+
+
+  
+</script>
+

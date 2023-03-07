@@ -1,4 +1,4 @@
-.con-li {
+.con-search {
   width: 100%;
   margin-bottom: 20px;
   justify-content: space-between;
@@ -9,27 +9,27 @@
   border-radius: 5px;
 }
 
-.con-li__info {
+.con-search__info {
   /* border: solid 1px teal; */
   width: 50%;
 }
 
-.con-li__info > h3 > a {
+.con-search__info > h3 > a {
   font-size: 2rem;
   color: #141414;
 }
 
-.con-li__util {
+.con-search__util {
   /* border: solid 1px teal; */
   width: 50%;
 }
 
-.con-li__util > h4 {
+.con-search__util > h4 {
   margin-left: 28%;
   margin-bottom: 7px;
 }
 
-.con-li__util > .con-li__btn:nth-child(2) {
+.con-search__util > .con-li__btn:nth-child(2) {
   margin-left: 59%;
 }
 
@@ -37,7 +37,7 @@
       margin-left: 85%;
     } */
 
-.con-li__btn {
+.con-search__btn {
   width: 65px;
   height: 30px;
   border-radius: 5px;
