@@ -51,13 +51,7 @@ const adminWriteP = async function (req, res) {
     res.redirect('/admin/list');
 };
 
-//관리자 게시판 리스트
-// const adminList = async (req, res) => {
-//     const result = await db.collection('post').find({ 삭제: 'N' }).toArray();
-//     res.render('admin_list.ejs', { posts: result });
-// };
-
-// 관리자 게시판 페이징
+// 관리자 게시판 리스트
 const adminList = async function (req, res) {
 
     const PAGE_SIZE = 6;
@@ -148,9 +142,7 @@ const adminDetail = async (req, res) => {
 
 //관리자 게시판 삭제(fake)
 const adminDelete = (req, res) => {
-
     db.collection('post').findOne({ _id: parseInt(req.body._id) }, function (err, result) {
-
         console.log(result.삭제);
         if (result.삭제 == 'N') {
             db.collection('post').updateOne({ _id: parseInt(req.body._id) },
@@ -181,7 +173,6 @@ const adminDelete = (req, res) => {
         }
     });
 }
-
 
 //관리자 게시판 수정 겟
 const adminPutG = async (req, res) => {
@@ -216,23 +207,21 @@ const adminSearchList = async (req, res) =>  {
     const MAX_PAGE = 5;
     const pageNumber = req.params.page;
     const currentPage = parseInt(pageNumber);
-
+    const value = req.query.value;
     const startPage = Math.floor((currentPage - 1) / MAX_PAGE) * MAX_PAGE + 1;
     const endPage = startPage + MAX_PAGE - 1;
 
     const collection = db.collection('post');
     const total = await collection.countDocuments({
-        제목:
-        {
-            $regex: new RegExp(`${req.query.value}`, "i")
-        }
-    });
+        $and:[
+        {제목: {$regex: new RegExp(`${value}`, "i")}},
+        {삭제: 'N'}
+        ]});
     const result = await collection.find({
-        제목:
-        {
-            $regex: new RegExp(`${req.query.value}`, "i")
-        }
-    })
+        $and:[
+            {제목: {$regex: new RegExp(`${value}`, "i")}},
+            {삭제: 'N'}
+            ]})
         .sort({ "_id": -1 })
         .skip((pageNumber - 1) * PAGE_SIZE)
         .limit(PAGE_SIZE)
@@ -245,50 +234,75 @@ const adminSearchList = async (req, res) =>  {
         currentPage: currentPage,
         startPage: startPage,
         endPage: endPage,
+        value: value
+    })
+};
+
+//삭제 영상 검색
+const adminSearchListD = async (req, res) =>  {
+    const PAGE_SIZE = 6;
+    const MAX_PAGE = 5;
+    const pageNumber = req.params.page;
+    const currentPage = parseInt(pageNumber);
+    const value = req.query.value;
+    const startPage = Math.floor((currentPage - 1) / MAX_PAGE) * MAX_PAGE + 1;
+    const endPage = startPage + MAX_PAGE - 1;
+
+    const collection = db.collection('post');
+    const total = await collection.countDocuments({
+        $and:[
+        {제목: {$regex: new RegExp(`${value}`, "i")}},
+        {삭제: 'Y'}
+        ]});
+    const result = await collection.find({
+        $and:[
+            {제목: {$regex: new RegExp(`${value}`, "i")}},
+            {삭제: 'Y'}
+            ]})
+        .sort({ "_id": -1 })
+        .skip((pageNumber - 1) * PAGE_SIZE)
+        .limit(PAGE_SIZE)
+        .toArray();
+    const totalPages = Math.ceil(total / PAGE_SIZE);
+    return res.render('admin_search_list.ejs', {
+        posts: result,
+        total: totalPages,
+        max: MAX_PAGE,
+        currentPage: currentPage,
+        startPage: startPage,
+        endPage: endPage,
+        value: value
+    })
+};
+
+// 회원관리 게시판 리스트 
+const adminUserList = async function (req, res) {
+    const PAGE_SIZE = 6;
+    const MAX_PAGE = 5;
+
+    const pageNumber = req.params.page;
+    const currentPage = parseInt(pageNumber);
+
+    const startPage = Math.floor((currentPage - 1) / MAX_PAGE) * MAX_PAGE + 1;
+    const endPage = startPage + MAX_PAGE - 1;
+
+    const collection = db.collection('users');
+    const total = await collection.countDocuments();
+    const result = await collection.find()
+        .sort({ "_id": -1 })
+        .skip((pageNumber - 1) * PAGE_SIZE)
+        .limit(PAGE_SIZE)
+        .toArray();
+    const totalPages = Math.ceil(total / PAGE_SIZE);
+    return res.render('admin_user_list.ejs', {
+        users: result,
+        total: totalPages,
+        max: MAX_PAGE,
+        currentPage: currentPage,
+        startPage: startPage,
+        endPage: endPage
     })
 
-
-
-
-    // db.collection('post').find({
-    //     제목:
-    //     {
-    //         $regex: new RegExp(`${req.query.value}`, "i")
-    //     }
-    // }).toArray((err, result) => {
-    //     console.log(result);
-    //     res.render('admin_search_list.ejs', { posts: result })
-    // })
-};
-
-// 회원관리 게시판 리스트
-const adminUserList = async (req, res) => {
-    const result = await db.collection('users').find().toArray();
-    res.render('admin_user_list.ejs', { users: result });
-};
-
-// 회원관리 게시판 리스트 페이징
-const adminUserListG = async function (req, res) {
-    const PAGE_SIZE = 2;
-    const pageNumber = parseInt(req.params.page) || 1;
-    const collection = db.collection('users');
-    try {
-        const total = await collection.countDocuments();
-        const totalPages = Math.ceil(total / PAGE_SIZE);
-        const result = await collection.find()
-            .sort({ "_id": -1 })
-            .skip((pageNumber - 1) * PAGE_SIZE)
-            .limit(PAGE_SIZE)
-            .toArray();
-        const data = {
-            users: result,
-            total: totalPages
-        }
-        res.json(data);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
-    }
 }
 
 // 회원관리 게시판 상세보기
@@ -338,50 +352,50 @@ const adminUserQuit = (req, res) => {
         })
 }
 // 관리자 유저 게시판 검색
-const adminUserSearchList = (req, res) => {
-    // var condition = [
+const adminUserSearchList = async (req, res) => {
+    // db.collection('users').find({
+    //     id:
     //     {
-    //         $match: {
-    //           $text: {
-    //             $search: req.query.value,
-    //             $language: 'ko',
-    //             $caseSensitive: false,
-    //             $diacriticSensitive: false,
-    //           }
-    //         }
-    //       }
-    // ]
-    // var condition2 = [{
-    //     $search: {
-    //         index: '제목_text',
-    //         text: {
-    //             query: { $regex: req.query.value },
-    //             path: '제목'
-    //         }
+    //         $regex: new RegExp(`${req.query.value}`, "i")
     //     }
-    // }]
-    // db.collection('post').aggregate(condition)
-    db.collection('users').find({
-        id:
-        {
-            $regex: new RegExp(`${req.query.value}`, "i")
-        }
-    }).toArray((err, result) => {
-        console.log(result);
-        res.render('admin_user_search_list.ejs', { users: result })
+    // }).toArray((err, result) => {
+    //     console.log(result);
+    //     res.render('admin_user_search_list.ejs', { users: result })
+    // })
+    const PAGE_SIZE = 6;
+    const MAX_PAGE = 5;
+    const pageNumber = req.params.page;
+    const currentPage = parseInt(pageNumber);
+    const value = req.query.value;
+    console.log(value);
+    const startPage = Math.floor((currentPage - 1) / MAX_PAGE) * MAX_PAGE + 1;
+    const endPage = startPage + MAX_PAGE - 1;
+
+    const collection = db.collection('users');
+    const total = await collection.countDocuments({id: {$regex: new RegExp(`${value}`, "i")}});
+    console.log(total);
+    const result = await collection.find({id: {$regex: new RegExp(`${value}`, "i")}})
+        .sort({ "_id": -1 })
+        .skip((pageNumber - 1) * PAGE_SIZE)
+        .limit(PAGE_SIZE)
+        .toArray();
+    const totalPages = Math.ceil(total / PAGE_SIZE);
+    return res.render('admin_user_search_list.ejs', {
+        users: result,
+        total: totalPages,
+        max: MAX_PAGE,
+        currentPage: currentPage,
+        startPage: startPage,
+        endPage: endPage,
+        value: value
     })
 };
-
-
-
-
-
 
 module.exports = {
     adminHome, adminWriteG, adminWriteP,
     adminList, adminDetail, adminDelete,
     adminPutG, adminPutP, adminSearchList,
-    adminUserList, adminUserDetail, adminUserListG,
+    adminUserList, adminUserDetail, 
     adminUserPutG, adminUserPutP, adminUserQuit,
-    adminListDeleted, adminUserSearchList
+    adminListDeleted, adminUserSearchList, adminSearchListD
 }
