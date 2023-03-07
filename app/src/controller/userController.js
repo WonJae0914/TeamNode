@@ -77,6 +77,19 @@ const renderLogin = (req, res) => {
   res.render("user_login");
 };
 
+
+const checkDuplicateId = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findOne({ id });
+  res.json(Boolean(user));
+}
+
+const checkDuplicateEmail = async (req, res) => {
+  const { email } = req.params;
+  const user = await User.findOne({ email });
+  res.json(Boolean(user));
+}
+
 // 로그인 확인 함수
 function isLoggedIn(req, res, next) {
   // 로그인했는지 안했는지 확인하는 함수
@@ -187,17 +200,8 @@ const logout = (req, res) => {
   }
 };
 
-module.exports = {
-  renderSignup,
-  privacypolicy,
-  signup,
-  renderLogin,
-  isLoggedIn,
-  login,
-  logout,
-  userdetail,
-  updateuser,
-  removeuser,
-  localLoggedIn,
-  adminisLoggedIn,
-};
+module.exports = { 
+  renderSignup, privacypolicy, signup , 
+  renderLogin, isLoggedIn, login , logout, 
+  userdetail, updateuser, removeuser,localLoggedIn, adminisLoggedIn,checkDuplicateId, checkDuplicateEmail};
+
