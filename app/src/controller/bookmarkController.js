@@ -21,10 +21,8 @@ MongoClient.connect(
 const addbookmark = async (req, res, next) =>{
   // 요청 받은 컨텐츠 타이틀 데이터
   const {title} = req.query;
-
   // 접속한 유저 정보 가져오기
   const arrayBookmark = await User.findOne({id : req.user.id });
-
   // 접속한 유저에 요청 받은 컨텐츠 타이틀 저장
   try{
     if(arrayBookmark.bookmark.includes(title)==false){ // 유저 DB에 요청받은 타이틀 DB가 있는지 확인
@@ -43,6 +41,7 @@ const addbookmark = async (req, res, next) =>{
       };
        
   };
+  
 // 북마크 제거 함수
 const delBookmark = async (req, res) =>{
   // 요청 받은 컨텐츠 타이틀 데이터

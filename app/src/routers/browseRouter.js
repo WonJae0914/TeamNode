@@ -10,7 +10,7 @@ const watch = require("../controller/watchController");
 const video = require("../controller/videoController");
 const {addbookmark,delBookmark} = require("../controller/bookmarkController");
 const starScore = require("../controller/scoreController")
-const review = require("../controller/reviewController")
+const {review} = require("../controller/reviewController")
 const { isLoggedIn} = require("../controller/userController");
 
 

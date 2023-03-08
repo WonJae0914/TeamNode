@@ -26,5 +26,5 @@ const review = async(req,res) => {
 }
 
 module.exports = {
-    review,
+    review
 };
