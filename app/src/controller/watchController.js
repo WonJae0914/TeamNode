@@ -14,7 +14,6 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
     function (err, client) {
         if (err) { return console.log('DB연결 실패'); }
         db = client.db('test');
-        console.log("몽고디비 연결 성공");
     });
 
 const watch = async (req, res) =>{ 
@@ -26,9 +25,7 @@ const watch = async (req, res) =>{
     id : user.id,
   })
   // 클릭한 컨텐츠 DB 정보 가져오기
-  const result = await db.collection("post").findOne({
-    _id : id
-  })
+  const result = await db.collection("post").findOne({_id : id})
   // 해당 컨텐츠의 컨텐츠스코어 DB정보 가져오기
   const result2 = await db.collection("contentScore").find({
     title : result.제목

@@ -11,14 +11,15 @@ MongoClient.connect(
       return console.log("DB연결 실패");
     }
     db = client.db("test");
-    console.log("몽고디비 연결 성공");
   }
 );
 
 // 화면 띄우기 get
 const browse = function (req, res) {
   db.collection("post")
-    .find()
+    .find({
+        삭제 : 'N'
+    })
     .sort({ _id: -1 })
     .toArray(function (err, result) {
       res.render("browse", {
