@@ -40,20 +40,15 @@ const list = async (req, res) => {
 // board uplaod get 요청 함수
 const uploadQuestions = (req, res) => {
   const loggedIn = req.user;
-  console.log("loggedIn info");
-  console.log(loggedIn);
   return res.render("board_upload", {
     pageTitle: "Question Upload",
   });
 };
+
 // board uplaod post 요청 함수
 const postUpload = async (req, res) => {
-  // const { originalname, path } = req.file;
   const { title, detail } = req.body;
-  console.log(req.body);
-  console.log(req.file);
   await Question.create({
-    // path,
     title,
     detail,
   });
@@ -62,7 +57,14 @@ const postUpload = async (req, res) => {
 
 // board detail get 요청 함수
 const detailQuestion = async (req, res) => {
-  const questions = await Question.find({ _id: req.params.id }).exec();
+  const id = req.params.id;
+  const questions = await Question.find({ _id: id }).exec();
+  let numOfViews = questions[0].views + 1;
+  await Question.findByIdAndUpdate(
+    { _id: id },
+    { $set: { views: numOfViews } },
+    { returnOriginal: false }
+  ).exec();
   return res.render("board_detail", {
     title: questions[0].title,
     detail: questions[0].detail,
@@ -113,9 +115,9 @@ const postUpdate = async (req, res) => {
       { _id: req.params.id },
       { $set: updateBoard },
       { returnOriginal: false }
-      );      
-      return res.redirect(`/board/list/1`);
-  } catch(err) {
+    );
+    return res.redirect(`/board/list/1`);
+  } catch (err) {
     console.log(err);
     return res.status(404).send("에러 발생, 문의 게시판에 문의주쇼");
   }
@@ -130,40 +132,42 @@ const deleteQuestions = async (req, res) => {
       { returnOriginal: false }
     );
     return res.redirect("back"); // 함수를 요청한 페이지로 redirect
-  } catch(err) {
+  } catch (err) {
     console.log(err);
     return res.redirect("back");
   }
 };
 
 // board search get 요청 함수
-const searchQuestion = async (req, res) => { // 상수는 최상단에 선언
+const searchQuestion = async (req, res) => {
+  // 상수는 최상단에 선언
   const { kw } = req.query; // url에서 query값을 사용하여 검색값을 받아옴
   const pageNumber = req.params.page;
   const currentPage = parseInt(pageNumber);
 
   const startPage = Math.floor((currentPage - 1) / MAX_PAGE) * MAX_PAGE + 1; // paging 기준점
-  const endPage = startPage + MAX_PAGE - 1; 
-  
-  const totQuestions = await Question.find({ // 검색된 전체 게시물
+  const endPage = startPage + MAX_PAGE - 1;
+
+  const totQuestions = await Question.find({
+    // 검색된 전체 게시물
     title: {
       $regex: new RegExp(`${kw}`, "i"), // 정규 표현식, 대소문자 구분 무시
     },
     delete: false, // 삭제된 함수는 검색하지 않음
-  })
+  });
   const totalPages = Math.ceil(totQuestions.length / PAGE_SIZE); // 전체 페이지 수
   let questions = [];
   if (kw) {
     questions = await Question.find({
-        title: {
-            $regex: new RegExp(`${kw}`, "i"),
-          },
-          delete: false,
-        })
-        .sort({ createdDate: -1 }) // 최신순으로 정렬
-        .skip((pageNumber - 1) * PAGE_SIZE) // 해당 페이지 이전 게시물 스킵
-        .limit(PAGE_SIZE); // 페이지 당 게시물 개수 제한
-      }
+      title: {
+        $regex: new RegExp(`${kw}`, "i"),
+      },
+      delete: false,
+    })
+      .sort({ createdDate: -1 }) // 최신순으로 정렬
+      .skip((pageNumber - 1) * PAGE_SIZE) // 해당 페이지 이전 게시물 스킵
+      .limit(PAGE_SIZE); // 페이지 당 게시물 개수 제한
+  }
   return res.render("board_search", {
     questions,
     loggedIn: true,
