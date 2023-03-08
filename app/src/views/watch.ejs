@@ -55,6 +55,7 @@
               <% } else { %>
               <h2>평점 : </h2>
               <%}%>
+                <div id="dataId" data-id="<%=posts._id%>"></div>
                 <div id="movie" data-title="<%=posts.제목%>"></div>              
                 <div id="data1" data-bookmark="<%=title.includes(posts.제목)%>"></div>
                 <div class="rating-bookmark">
@@ -63,6 +64,7 @@
                   <% } else { %>
                     <button class="fa-solid fa-bookmark"></button>
                   <% } %>
+                  
                 </div>
             </div>
             <div class="user-rating">
@@ -98,7 +100,6 @@
         <textarea style="color:black;" id="comment" name="review" required></textarea>
         <button id="reviewbtn" type="submit">작성</button>
       </div>
-      
     </form>
 
     <!-- 댓글 목록 -->

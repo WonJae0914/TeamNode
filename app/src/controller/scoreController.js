@@ -19,16 +19,20 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
 
 // 별점 생성
 const addScore = async function(req,res){
-    const { userScore } = req.body
-    const { userTitle } = req.body
     try {
-        await db.collection("contentScore").insertOne(
-            { userId : req.user.id,
-              title : userTitle,
-              score : parseInt(userScore) })
-        res.status(200).json({message : "평점 추가!"})
+    const id = req.user.id;
+    console.log(id);
+    const { userScore } = req.body;
+    const { userTitle } = req.body;   
+    const { _id } = await db.collection("post").findOne({제목:userTitle});
+    await db.collection("contentScore").insertOne(
+        { userId : req.user.id,
+            title : userTitle,
+            score : parseInt(userScore) })
+    console.log(_id);
+    return res.json({msg : "success"})
     } catch (error) {
-        res.status(400).json({message : "평점 실패!"})
+        res.status(400).json({message : "false"})
     }
 }
 
