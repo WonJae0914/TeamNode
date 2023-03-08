@@ -15,7 +15,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title></title>
+    <title><%=pageTitle%></title>
   </head>
 </html>
 <nav>
@@ -28,18 +28,6 @@
       <li>
         <a href="/browse">홈</a>
       </li>
-      <li>
-        <a href="#">시리즈</a>
-      </li>
-      <li>
-        <a href="#">영화</a>
-      </li>
-      <li>
-        <a href="#">NEW! 요즘 대세 콘텐츠</a>
-      </li>
-      <li>
-        <a href="#">내가 찜한 콘텐츠</a>
-      </li>
     </ul>
   </div>
   <div class="right">
@@ -47,7 +35,7 @@
       <div class="search-bar">
         <form action="/board/search/1" method="get">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" name="seachwd" placeholder="검색" />
+          <input type="text" name="kw" placeholder="검색" />
           <button class="search--btn" type="submit">검색</button>
         </form>
       </div>
