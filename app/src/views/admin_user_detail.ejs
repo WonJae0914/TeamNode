@@ -14,7 +14,10 @@
                     <span class="fw-bold me-2">Email:</span> <%=data.email%>
                 </div>
                 <div class="mb-3">
-                    <span class="fw-bold me-2">나이:</span><%=data.age%>
+                    <span class="fw-bold me-2">생년월일:</span>
+                    <%=data.birthday.year%>년
+                    <%=data.birthday.month%>월
+                    <%=data.birthday.day%>일
                 </div>
                 <div class="mb-3">
                     <span class="fw-bold me-2">성별:</span><%=data.gender%>
@@ -26,13 +29,18 @@
                     <span class="fw-bold me-2">광고동의:</span><%=data.isOptedIn%>
                 </div>
                 <div class="mb-3">
-                    <span class="fw-bold me-2">삭제여부:</span> <%=data.delete%>
+                    <span class="fw-bold me-2">탈퇴여부:</span>
+                    <%if(data.delete===true){%>
+                        탈퇴
+                        <%}else{%>
+                        가입
+                        <%}%>
                 </div>
                 <div class="mb-3">
-                    <span class="fw-bold me-2">생성날짜:</span><%=data.createdAt%>
+                    <span class="fw-bold me-2">생성날짜:</span><%=data.created_at%>
                 </div>
                 <div class="mb-3">
-                    <span class="fw-bold me-2">수정날짜:</span> <%=data.updatedAt%>
+                    <span class="fw-bold me-2">수정날짜:</span> <%=data.updated_at%>
                 </div>
                 <div class="text-center">
                     <button class="btn btn-primary me-3" onclick="location.href='/admin/user/edit/<%= data._id %>'">Edit</button>

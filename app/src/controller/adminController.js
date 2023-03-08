@@ -10,7 +10,7 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
     function (err, client) {
         if (err) { return console.log('DB연결 실패'); }
         db = client.db('test');
-        console.log("몽고디비 연결 성공");
+        console.log("Admin DB연결 성공");
     });
 
 //관리자 홈
@@ -29,7 +29,7 @@ const adminWriteP = async function (req, res) {
     const total = result.totalpost;
     const put = {
         _id: total + 1,
-        // 작성자: req.user._id,
+        작성자: req.user._id,
         제목: req.body.title.trim(),
         감독: req.body.director.trim(),
         주연: req.body.actor.trim(),
@@ -48,7 +48,7 @@ const adminWriteP = async function (req, res) {
         { name: '게시물 개수' },
         { $inc: { totalpost: 1 } }
     );
-    res.redirect('/admin/list');
+    res.redirect('/admin/list/1');
 };
 
 // 관리자 게시판 리스트
@@ -56,13 +56,10 @@ const adminList = async function (req, res) {
 
     const PAGE_SIZE = 6;
     const MAX_PAGE = 5;
-
     const pageNumber = req.params.page;
     const currentPage = parseInt(pageNumber);
-
     const startPage = Math.floor((currentPage - 1) / MAX_PAGE) * MAX_PAGE + 1;
     const endPage = startPage + MAX_PAGE - 1;
-
     const collection = db.collection('post');
     const total = await collection.countDocuments({ 삭제: { $eq: 'N' } });
     const result = await collection.find({ 삭제: { $eq: 'N' } })
@@ -79,7 +76,6 @@ const adminList = async function (req, res) {
         startPage: startPage,
         endPage: endPage
     })
-
 }
 // 콘텐츠 삭제목록 페이징
 const adminListDeleted = async function (req, res) {
@@ -202,7 +198,7 @@ const adminPutP = async (req, res) => {
 }
 
 // 관리자 게시판 검색
-const adminSearchList = async (req, res) =>  {
+const adminSearchList = async (req, res) => {
     const PAGE_SIZE = 6;
     const MAX_PAGE = 5;
     const pageNumber = req.params.page;
@@ -213,15 +209,17 @@ const adminSearchList = async (req, res) =>  {
 
     const collection = db.collection('post');
     const total = await collection.countDocuments({
-        $and:[
-        {제목: {$regex: new RegExp(`${value}`, "i")}},
-        {삭제: 'N'}
-        ]});
+        $and: [
+            { 제목: { $regex: new RegExp(`${value}`, "i") } },
+            { 삭제: 'N' }
+        ]
+    });
     const result = await collection.find({
-        $and:[
-            {제목: {$regex: new RegExp(`${value}`, "i")}},
-            {삭제: 'N'}
-            ]})
+        $and: [
+            { 제목: { $regex: new RegExp(`${value}`, "i") } },
+            { 삭제: 'N' }
+        ]
+    })
         .sort({ "_id": -1 })
         .skip((pageNumber - 1) * PAGE_SIZE)
         .limit(PAGE_SIZE)
@@ -239,7 +237,7 @@ const adminSearchList = async (req, res) =>  {
 };
 
 //삭제 영상 검색
-const adminSearchListD = async (req, res) =>  {
+const adminSearchListD = async (req, res) => {
     const PAGE_SIZE = 6;
     const MAX_PAGE = 5;
     const pageNumber = req.params.page;
@@ -250,15 +248,17 @@ const adminSearchListD = async (req, res) =>  {
 
     const collection = db.collection('post');
     const total = await collection.countDocuments({
-        $and:[
-        {제목: {$regex: new RegExp(`${value}`, "i")}},
-        {삭제: 'Y'}
-        ]});
+        $and: [
+            { 제목: { $regex: new RegExp(`${value}`, "i") } },
+            { 삭제: 'Y' }
+        ]
+    });
     const result = await collection.find({
-        $and:[
-            {제목: {$regex: new RegExp(`${value}`, "i")}},
-            {삭제: 'Y'}
-            ]})
+        $and: [
+            { 제목: { $regex: new RegExp(`${value}`, "i") } },
+            { 삭제: 'Y' }
+        ]
+    })
         .sort({ "_id": -1 })
         .skip((pageNumber - 1) * PAGE_SIZE)
         .limit(PAGE_SIZE)
@@ -279,13 +279,10 @@ const adminSearchListD = async (req, res) =>  {
 const adminUserList = async function (req, res) {
     const PAGE_SIZE = 6;
     const MAX_PAGE = 5;
-
     const pageNumber = req.params.page;
     const currentPage = parseInt(pageNumber);
-
     const startPage = Math.floor((currentPage - 1) / MAX_PAGE) * MAX_PAGE + 1;
     const endPage = startPage + MAX_PAGE - 1;
-
     const collection = db.collection('users');
     const total = await collection.countDocuments();
     const result = await collection.find()
@@ -301,9 +298,7 @@ const adminUserList = async function (req, res) {
         currentPage: currentPage,
         startPage: startPage,
         endPage: endPage
-    })
-
-}
+    })}
 
 // 회원관리 게시판 상세보기
 const adminUserDetail = async (req, res) => {
@@ -323,13 +318,16 @@ const adminUserPutG = async (req, res) => {
 const adminUserPutP = async (req, res) => {
     var id = req.body.id;
     var o_id = new ObjectId(id);
-    console.log(parseInt(req.body.age));
+    var upyear = parseInt(req.body.year);
+    var upmonth = parseInt(req.body.month);
+    var upday = parseInt(req.body.day);
+    const birthday = { year: upyear, month: upmonth, day: upday };
     const result = await db.collection('users').updateOne({ _id: o_id },
         {
             $set:
             {
                 email: req.body.email.trim(),
-                age: parseInt(req.body.age),
+                birthday: birthday,
                 gender: req.body.gender.trim(),
                 country: req.body.country,
                 isOptedIn: req.body.opt
@@ -337,7 +335,7 @@ const adminUserPutP = async (req, res) => {
         });
     const message = function () {
         console.log("회원정보 수정완료");
-        res.redirect("/admin/user/list")
+        res.redirect("/admin/user/list/1")
     }
     return message();
 }
@@ -370,11 +368,10 @@ const adminUserSearchList = async (req, res) => {
     console.log(value);
     const startPage = Math.floor((currentPage - 1) / MAX_PAGE) * MAX_PAGE + 1;
     const endPage = startPage + MAX_PAGE - 1;
-
     const collection = db.collection('users');
-    const total = await collection.countDocuments({id: {$regex: new RegExp(`${value}`, "i")}});
+    const total = await collection.countDocuments({ id: { $regex: new RegExp(`${value}`, "i") } });
     console.log(total);
-    const result = await collection.find({id: {$regex: new RegExp(`${value}`, "i")}})
+    const result = await collection.find({ id: { $regex: new RegExp(`${value}`, "i") } })
         .sort({ "_id": -1 })
         .skip((pageNumber - 1) * PAGE_SIZE)
         .limit(PAGE_SIZE)
@@ -395,7 +392,7 @@ module.exports = {
     adminHome, adminWriteG, adminWriteP,
     adminList, adminDetail, adminDelete,
     adminPutG, adminPutP, adminSearchList,
-    adminUserList, adminUserDetail, 
+    adminUserList, adminUserDetail,
     adminUserPutG, adminUserPutP, adminUserQuit,
     adminListDeleted, adminUserSearchList, adminSearchListD
 }
