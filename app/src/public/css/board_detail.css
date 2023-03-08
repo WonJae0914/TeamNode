@@ -1,7 +1,9 @@
 .detail-box {
   width: 80%;
   margin: auto;
-  height: 70vh;
+  border: 1px solid white;
+  border-radius: 10px;
+  /* height: 70vh; */
 }
 .detail-box h3 {
   width: 100%;
@@ -21,14 +23,19 @@
   margin: auto;
   height: auto;
 }
-.comment-box textarea {
+.comment-box-form__flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.comment-box-form__flex > textarea {
   width: 85%;
-  height: 70%;
+  height: 5rem;
   color: black;
 }
-.comment-box button {
+.comment-box-form__flex > button {
   width: 10%;
-  height: 40px;
+  height: 4rem;
   background-color: #ad0000;
   border-radius: 5px;
 }

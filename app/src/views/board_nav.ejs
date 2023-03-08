@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
-    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/board_nav.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -21,7 +21,7 @@
 <nav>
   <div class="left">
     <div class="logo">
-      <a href="#"><img src="img/logo.png" alt="" /></a>
+      <a href="/browse"><img src="img/logo.png" alt="" /></a>
     </div>
     <div class="mobile-menu">메뉴</div>
     <ul class="menu-list">
@@ -52,7 +52,7 @@
            </a>
            <ul>
              <a href="/board/list/1">Board List</a>
-             <a href="/board/upload">Board Uplaod</a>
+             <a href="/board/upload">Board Upload</a>
              <% if(!isLoggedIn){ %>
              <a href="/login">Login</a>
              <% } else { %>

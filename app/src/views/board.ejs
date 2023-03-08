@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
-    <link rel="stylesheet" href="/css/board.css" />
+    <link rel="stylesheet" href="/css/board_list.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -24,9 +24,9 @@
       <section class="con">
         <%if(questions.length == 0) {%>
           <h3>There are no registered questions</h3>
-          <div class="con-li">
           <%} else {%> 
             <%for(var question of questions) {%>
+          <div class="con-li">
           <div class="con-li__info">
             <h3><a class="title" href="/board/<%=question._id%>/detail">Title : <%=question.title%></a></h3>
             <!-- <h3>Detail : <%=question.detail%></h3> -->
@@ -38,8 +38,8 @@
             <button class="con-li__btn" type="submit"><a href="/board/<%=question._id%>/delete">delete</a></button>
           </div>
           <br/>
-          <%}%>
         </div>
+          <%}%>
          <%}%> 
       </section>
       <div class="page">
