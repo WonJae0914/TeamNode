@@ -29,7 +29,7 @@ const adminWriteP = async function (req, res) {
     const total = result.totalpost;
     const put = {
         _id: total + 1,
-        작성자: req.user._id,
+        작성자: req.user.id,
         제목: req.body.title.trim(),
         감독: req.body.director.trim(),
         주연: req.body.actor.trim(),
@@ -387,6 +387,10 @@ const adminUserSearchList = async (req, res) => {
         value: value
     })
 };
+const adminAnalyze = async (req, res) => {
+    res.render('admin_analyze.ejs');
+}
+
 
 module.exports = {
     adminHome, adminWriteG, adminWriteP,
@@ -394,5 +398,6 @@ module.exports = {
     adminPutG, adminPutP, adminSearchList,
     adminUserList, adminUserDetail,
     adminUserPutG, adminUserPutP, adminUserQuit,
-    adminListDeleted, adminUserSearchList, adminSearchListD
+    adminListDeleted, adminUserSearchList, adminSearchListD,
+    adminAnalyze
 }
