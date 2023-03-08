@@ -11,16 +11,17 @@ const video = require("../controller/videoController");
 const {addbookmark,delBookmark} = require("../controller/bookmarkController");
 const starScore = require("../controller/scoreController")
 // const bookmark = require("../controller/bookmarkController");
+const { isLoggedIn} = require("../controller/userController");
 
 //get
-browseRouter.get("/browse" , browse); // 메인 페이지
-browseRouter.get("/watch/:id", watch); // 비디오 디테일 
-browseRouter.get("/video/:id", video); // 북마크 
-browseRouter.get("/search", search) // 검색 
+browseRouter.get("/browse" ,isLoggedIn, browse); // 메인 페이지
+browseRouter.get("/watch/:id", isLoggedIn,watch); // 비디오 디테일 
+browseRouter.get("/video/:id",isLoggedIn ,video); // 북마크 
+browseRouter.get("/search",isLoggedIn ,search) // 검색 
 
 //post
-browseRouter.post("/bookmark", addbookmark, delBookmark); // 북마크 
-browseRouter.post("/score", starScore); // 별점 
+browseRouter.post("/bookmark",isLoggedIn ,addbookmark, delBookmark); // 북마크 
+browseRouter.post("/score",isLoggedIn ,starScore); // 별점 
 
 // 라우터 내보내기
 module.exports = browseRouter;

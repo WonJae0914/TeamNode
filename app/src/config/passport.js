@@ -28,6 +28,11 @@ passport.use(
       if (!isMatch) {
         return done(null, false, { message: '비밀번호를 잘못입력하였습니다.' });
       }
+      if (user.admin === true) { // 관리자 권한 체크
+        user.role = 'admin'; // 사용자 객체에 역할(role) 필드 추가
+      } else {
+        user.role = 'user';
+      }
       return done(null, user);
     } catch (err) {
       return done(err);

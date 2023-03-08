@@ -1,10 +1,9 @@
 const express = require("express");
 const admin = require("../controller/adminController");
-const {adminisLoggedIn} = require("../controller/userController");
 const adminRouter = express.Router();
 const upload = require("../utils/adminUtil");
 
-adminRouter.get('/home', adminisLoggedIn,admin.adminHome);
+adminRouter.get('/home',admin.adminHome);
 adminRouter.get('/write', admin.adminWriteG);
 adminRouter.post('/write/add', upload, admin.adminWriteP);
 adminRouter.get('/list/:page', admin.adminList);

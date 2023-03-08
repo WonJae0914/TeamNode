@@ -11,7 +11,7 @@ const methodOverride = require("method-override");
  
 
 const morgan = require("morgan");
-const { isLoggedIn, localLoggedIn } = require("./src/controller/userController");
+const { isLoggedIn, localLoggedIn,adminisLoggedIn } = require("./src/controller/userController");
 const logger = morgan("dev");
 
 // 뷰 엔진 및 셋팅 
@@ -51,9 +51,7 @@ app.use(session({
 app.use(localLoggedIn);
 app.use("/", browse);
 app.use("/board", isLoggedIn,boardRouter);
-app.use("/admin", admin);
+app.use("/admin", adminisLoggedIn,admin);
 app.use("/", user);
-app.get("/home",(req, res)=>{
-  res.render('home');
-});
+
 module.exports = app;

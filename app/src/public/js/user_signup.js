@@ -2,7 +2,7 @@ const signupForm = document.querySelector("#signupform");
 const idField = document.querySelector("#id");
 const iderror = document.querySelector("#iderror");
 const pwField = document.querySelector("#pw");
-const pwerror = document.querySelector("#pwerror")
+const pwerror = document.querySelector(".pwerror")
 const emailField = document.querySelector("#email");
 const emailerror = document.querySelector("#emailerror");
 const pwChk = document.querySelector("#pwChk");
@@ -11,6 +11,7 @@ const yearSelect = document.querySelector('#year');
 const monthSelect = document.querySelector('#month');
 const daySelect = document.querySelector('#day');
 const isAgreedInput = document.querySelector('#gridCheck1');
+const pwToggle = document.querySelector('.pw_btn');
 
 
 idField.addEventListener('keyup', async function(event) {
@@ -59,7 +60,22 @@ pwField.addEventListener('keyup', function(event) {
   }
 });
 
-function validatePassword() {
+pwToggle.addEventListener('click', function() {
+  if (pwField.type === 'password') {
+    pwField.type = 'text';
+    pwToggle.innerHTML = '<i class="fa fa-eye-slash"></i>';
+  } else {
+    pwField.type = 'password';
+    pwToggle.innerHTML = '<i class="fa fa-eye"></i>';
+  }
+});
+
+pwToggle.addEventListener('mouseleave', function() {
+  pwField.type = 'password';
+  pwToggle.innerHTML = '<i class="fa fa-eye"></i>';
+});
+
+function validatePassword(event) {
   if (pwField.value !== pwChk.value) {
     pwChkText.innerText = '비밀번호가 일치하지 않습니다.';
     pwChkText.style.color = 'red';
@@ -70,6 +86,8 @@ function validatePassword() {
   }
 }
 pwChk.addEventListener('keyup', validatePassword);
+
+
 
 emailField.addEventListener('keyup', async function(event) {
     event.preventDefault();
@@ -93,7 +111,7 @@ emailField.addEventListener('keyup', async function(event) {
     }
     });
 
-function validateDate() {
+function validateDate(event) {
   const year = yearSelect.value;
   const month = monthSelect.value;
   const day = daySelect.value;
