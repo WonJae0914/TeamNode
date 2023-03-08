@@ -29,18 +29,21 @@
                 <th scope="row">
                   <%=content[i]._id%>
                 </th>
-                <td><a href="/admin/detail/<%=content[i]._id%>">
+                <td><a href="/admin/detail/<%=content[i]._id%>" style="text-decoration: none;">
                     <%=content[i].제목%>
                   </a> </td>
-                <td>
+                <td >
                   <%=content[i].작성날짜%>
                 </td>
-                <td> + '군침이' + </td>
+                <td><%=content[i].작성자%></td>
               </tr>
               <%}%>
           </tbody>
         </table>
         <div class="text-end ms-auto">
+          <button type="button" class="btn btn-secondary mb-3" onclick="location.href='/admin/write'">
+            업로드
+          </button>
           <button type="button" class="btn btn-secondary mb-3" id="deleted" style="margin-right: 10% !important;">
             <% if(content[0].삭제==="N" ){ %>
               삭제된 컨텐츠

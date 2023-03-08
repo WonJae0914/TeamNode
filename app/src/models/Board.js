@@ -6,7 +6,7 @@ const questionSchema = new mongoose.Schema({
   // questionSchema에 mongoose 스키마 선언
   // Schema 객체 생성
   title: { type: String, required: true, maxLength: 80 },
-  detail: [{ type: String, required: true, minlength: 2 }],
+  detail: [{ type: String, required: true, minlength: 2, trim: true }],
   createdDate: {
     type: Date,
     required: true,
