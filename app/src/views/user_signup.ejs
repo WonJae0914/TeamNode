@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/js/user_signup.js" defer></script>
     <link rel="stylesheet" href="/css/user_signup.css">
-    <title>Document</title>
+    <title>user_signup</title>
 </head>
 <body>
   <%- include('nav.ejs') %>
@@ -17,21 +17,27 @@
             <div class="form-floating mb-3">
               <label for="floatingInput" id="idlabel">ID</label>
               <input type="text" id="id" class="form-control" name="id" placeholder="id" required>
+              <p id="iderror"></p>
             </div>
-            <p id="iderror">id를 입력바랍니다.</p>
-            <div class="form-floating mb-3">
-              <label for="floatingInput">비밀번호</label>
-              <input type="password" id="pw" class="form-control" name="pw" placeholder="비밀번호" required>
+            <div class="form-floating mb-3 password-group">
+              <label for="floatingInput">패스워드</label>
+              <input type="password" id="pw" class="form-control" name="pw" placeholder="password" required>
+              <button class="pw_btn toggle-password" type="button">
+                <i class="fa fa-eye"></i>
+              </button>
             </div>
-            <p id="pwerror">비밀번호는 필수 기재사항입니다.</p>
+            <p class="pwerror">비밀번호는 필수사항입니다</p>
             <div class="form-floating mb-3">
               <label for="floatingInput">이메일</label>
               <input type="text" id="email" class="form-control" name="email" placeholder="이메일" required>
             </div>
             <p id="emailerror"></p>
-            <div class="form-floating mb-3">
+            <div class="form-floating mb-3 password-group">
               <label for="floatingInput">비밀번호 확인</label>
               <input type="password" id="pwChk" class="form-control" name="pwChk" placeholder="비밀번호 확인" required>
+              <button class="pw_btn toggle-password" type="button">
+                <i class="fa fa-eye"></i>
+              </button>
             </div>
             <p id="pwchktext">비밀번호 확인은 필수사항입니다.</p>
             <div class="form-floating mb-3">
@@ -55,7 +61,7 @@
                   <% } %>
               </select>
           </div>
-          <p id="dateerror">생년월일을 선택해주세요</p>
+          <p id="dateerror"></p>
             <div class="col-md-12">
               <label for="inputState" class="form-label">성별</label>
               <select id="inputState1" class="form-select" id="genderSelect" name="gender" >

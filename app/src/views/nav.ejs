@@ -63,14 +63,15 @@
             <i class="fa-solid fa-caret-down"></i>
            </a>
            <ul>
-             <a href="/board/list/1">Board List</a>
-             <a href="/board/upload">Board Uplaod</a>
-             <% if(!isLoggedIn){ %>
-             <a href="/login">Login</a>
-             <% } else { %>
-             <a href="/logout">logout</a>
-             <% } %>
-            </ul>
+            <a href="/board/list/1">Board List</a>
+            <a href="/board/upload">Board Upload</a>
+            <% if(!isLoggedIn){ %>
+              <a href="/login">Login</a>
+            <% } else { %>
+              <a href="/userpage">Userpage</a>
+              <a href="/logout">Logout</a>
+            <% } %>
+          </ul>
           </li>
          </ul>
        </div>
