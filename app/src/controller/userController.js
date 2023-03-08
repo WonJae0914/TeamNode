@@ -209,4 +209,3 @@ module.exports = {
   renderSignup, privacypolicy, signup , 
   renderLogin, isLoggedIn, login , logout, 
   userdetail, updateuser, removeuser,localLoggedIn, adminisLoggedIn,checkDuplicateId, checkDuplicateEmail,home};
-
