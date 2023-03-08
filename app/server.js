@@ -8,6 +8,7 @@ const admin = require("./src/routers/adminRouter");
 const user = require("./src/routers/userRouter");
 const app = express();
 const methodOverride = require("method-override");
+const errorHandler = require("./src/utils/errorHandler");
  
 
 const morgan = require("morgan");
@@ -48,6 +49,7 @@ app.use(session({
   //app.use(session()) 코드 아래에 위치해야 한다는 말이다. 또, Cookie 나 Cookie-parser 미들웨어 다음에 작성해야 한다. 
 
 //라우팅 미들웨어 (제일 하단 고정)
+app.use(errorHandler);
 app.use(localLoggedIn);
 app.use("/", browse);
 app.use("/board", isLoggedIn,boardRouter);

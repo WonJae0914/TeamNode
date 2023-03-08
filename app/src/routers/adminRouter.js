@@ -22,4 +22,5 @@ adminRouter.get('/user/edit/:id', admin.adminUserPutG);
 adminRouter.put('/user/edit', admin.adminUserPutP);
 adminRouter.put('/user/quit', admin.adminUserQuit);
 adminRouter.get('/user/search/:page', admin.adminUserSearchList);
+adminRouter.get('/analyze', admin.adminAnalyze);
 module.exports = adminRouter;
