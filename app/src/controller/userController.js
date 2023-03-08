@@ -6,11 +6,6 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const passport = require("../config/passport"); // passport 모듈 불러오기
 
-// const renderhome = (req, res) =>{
-//  if(req.user){
-//   return res.render('/home');
-//  }
-// }
 
 // 회원 가입 페이지 렌더링
 const renderSignup = (req, res) => {
@@ -60,7 +55,7 @@ const signup = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(500).send("Error creating user");
+    res.status(500).send("Error creating user: " + err.message);
   }
 };
 
@@ -100,10 +95,11 @@ function isLoggedIn(req, res, next) {
 }
 
 function adminisLoggedIn(req, res, next) {
-  if (req.user.admin == true) {
+  if (req.isAuthenticated() && req.user.admin===true) {
     return next();
+  } else {
+    res.redirect('/home');
   }
-  res.redirect("/admin/home");
 }
 
 function localLoggedIn(req, res, next) {
@@ -125,7 +121,11 @@ const login = (req, res, next) => {
       if (err) {
         return next(err);
       }
+      else if(user.admin === true) {
+        return res.redirect("/admin/home");
+      }else{
       return res.redirect("/browse");
+    }
     });
   })(req, res, next);
 };
@@ -181,6 +181,7 @@ const removeuser = async (req, res) => {
         .send(
           `<script>alert("이용해주셔서 감사합니다."); window.location.href="/login";</script>`
         );
+      req.session.destroy();
     } catch (err) {
       console.log(err);
       res.status(500).send(`<script>alert("삭제시 에러 발생");</script>`);
@@ -196,12 +197,16 @@ const logout = (req, res) => {
     return res.redirect("/login");
   } catch (err) {
     console.error(err);
-    return res.status(500).send("An error occurred while logging out");
+    return res.status(500).send(`<script>alert("로그아웃 에러 발생");</script>`);
   }
 };
+
+const home = (req, res)=>{
+  res.render('home');
+}
 
 module.exports = { 
   renderSignup, privacypolicy, signup , 
   renderLogin, isLoggedIn, login , logout, 
-  userdetail, updateuser, removeuser,localLoggedIn, adminisLoggedIn,checkDuplicateId, checkDuplicateEmail};
+  userdetail, updateuser, removeuser,localLoggedIn, adminisLoggedIn,checkDuplicateId, checkDuplicateEmail,home};
 

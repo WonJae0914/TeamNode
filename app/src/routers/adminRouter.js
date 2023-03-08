@@ -1,10 +1,9 @@
 const express = require("express");
 const admin = require("../controller/adminController");
-const {adminisLoggedIn} = require("../controller/userController");
 const adminRouter = express.Router();
 const upload = require("../utils/adminUtil");
 
-adminRouter.get('/home', adminisLoggedIn,admin.adminHome);
+adminRouter.get('/home',admin.adminHome);
 adminRouter.get('/write', admin.adminWriteG);
 adminRouter.post('/write/add', upload, admin.adminWriteP);
 adminRouter.get('/list/:page', admin.adminList);
@@ -22,4 +21,5 @@ adminRouter.get('/user/edit/:id', admin.adminUserPutG);
 adminRouter.put('/user/edit', admin.adminUserPutP);
 adminRouter.put('/user/quit', admin.adminUserQuit);
 adminRouter.get('/user/search/:page', admin.adminUserSearchList);
+adminRouter.get('/analyze', admin.adminAnalyze);
 module.exports = adminRouter;

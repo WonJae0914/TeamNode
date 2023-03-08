@@ -14,10 +14,12 @@ const {
   updateuser,
   removeuser,
   checkDuplicateId,
-  checkDuplicateEmail
+  checkDuplicateEmail,
+  home
 } = require('../controller/userController');
 
 
+userRouter.get("/home",home);
 userRouter.get('/signup',renderSignup);
 userRouter.get('/checkDuplicateId/:id',checkDuplicateId); // 중복체크
 userRouter.get('/checkDuplicateId/:email',checkDuplicateEmail);

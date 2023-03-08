@@ -58,6 +58,40 @@ color: #343a40;
 box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
+.signupfiled input:focus + .pw_btn .fa {
+  color: #343a40;
+}
+
+
+.password-group {
+  position: relative;
+}
+
+.password-group .pw_btn {
+  position: absolute;
+  top: 1rem;
+  right: 0.75rem;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #343a40;
+  cursor: pointer;
+}
+
+.password-group .pw_btn:hover {
+  color: #343a40;
+}
+
+.password-group .fa {
+  font-size: 1.25rem;
+}
+
+.pwerror {
+  color: red;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+}
+
 /* select 스타일 */
 .signupfiled select {
 height: 40px;
