@@ -10,8 +10,7 @@ const watch = require("../controller/watchController");
 const video = require("../controller/videoController");
 const {addbookmark,delBookmark} = require("../controller/bookmarkController");
 const starScore = require("../controller/scoreController")
-const review = require("../controller/reviewController")
-// const bookmark = require("../controller/bookmarkController");
+const {review,} = require("../controller/reviewController")
 
 //get
 browseRouter.get("/browse" , browse); // 메인 페이지
@@ -22,7 +21,7 @@ browseRouter.get("/search", search) // 검색
 //post
 browseRouter.post("/bookmark", addbookmark, delBookmark); // 북마크 
 browseRouter.post("/score", starScore); // 별점 
-browseRouter.post("/watch/:id", review);
+browseRouter.post("/watch/:id", review); // 리뷰
 
 // 라우터 내보내기
 module.exports = browseRouter;

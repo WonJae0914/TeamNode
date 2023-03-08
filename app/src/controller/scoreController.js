@@ -18,7 +18,7 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
         console.log("몽고디비 연결 성공");
     });
 
-// 평점 추가
+// 별점 생성
 const addScore = async function(req,res){
     const { userScore } = req.body
     const { userTitle } = req.body

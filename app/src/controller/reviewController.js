@@ -19,10 +19,12 @@ const review = async(req,res) => {
         await db.collection('post').updateOne(
             {_id : id}, 
             { $addToSet : {review : review}})
-        return res.status(400).send("성공")
+        return res.redirect(`/watch/${id}`)
     } catch (error) {
         console.error(error);
     }
 }
 
-module.exports = review;
+module.exports = {
+    review,
+};
