@@ -18,20 +18,16 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
         console.log("몽고디비 연결 성공");
     });
 
-// 라우터로 접속할 컨트롤러 함수 
+// fs 모듈 사용하여 video 파일 
 const video = function (req, res) {
-
 // 요청 헤더에서 range 가져오기
 const range = req.headers.range; 
-
 // 요청 받은 range 없으면 상태코드400 보내기
 if (!range) {
     res.status(400).send("Requires Range header");
 };
-
 // 파라미터로 전달된 ID 값 파싱
 const id = parseInt(req.params.id);
-
 // MongoDB에서 ID 값에 해당하는 동영상 데이터 조회
 const collection = db.collection('post');
 collection.findOne({
@@ -52,7 +48,7 @@ collection.findOne({
     const stat = fs.statSync(videoPath)
     // 파일 크기 
     const videoSize = stat.size;
-
+    // 전송 할 데이터 제한
     const CHUNK_SIZE = 10 ** 6; // 1MB
     // start값 숫자로 변환
     const start = Number(range.replace(/\D/g, ""));
@@ -78,40 +74,6 @@ collection.findOne({
     videoStream.pipe(res);
     }
 );
-
 }
-// const video = (req, res) =>{ 
-//     // Ensure there is a range given for the video
-//     const range = req.headers.range;
-//     if (!range) {
-//         res.status(400).send("Requires Range header");
-//     }
-
-//     let path = "./src/public/movies/test_video.mp4";
-//     const videoPath = path;
-//     const videoSize = fs.statSync(path).size;
-
-//     const CHUNK_SIZE = 10 ** 6; // 1MB
-//     const start = Number(range.replace(/\D/g, ""));
-//     const end = Math.min(start + CHUNK_SIZE, videoSize - 1);
-
-//     // Create headers
-//     const contentLength = end - start + 1;
-//     const headers = {
-//         "Content-Range": `bytes ${start}-${end}/${videoSize}`,
-//         "Accept-Ranges": "bytes",
-//         "Content-Length": contentLength,
-//         "Content-Type": "video/mp4",
-//     };
-
-//     // HTTP Status 206 for Partial Content
-//     res.writeHead(206, headers);
-
-//     // create video read stream for this particular chunk
-//     const videoStream = fs.createReadStream(videoPath, { start, end });
-
-//     // Stream the video chunk to the client
-//     videoStream.pipe(res);
-// }
 
 module.exports = video;

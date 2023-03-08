@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const User = require("../models/User")
 const passport = require("../config/passport")
-
+const reviewCnt = require("../controller/reviewController")
 
 const MongoClient = require('mongodb-legacy').MongoClient;
 
@@ -33,7 +33,6 @@ const watch = async (req, res) =>{
   const result2 = await db.collection("contentScore").find({
     title : result.제목
   }).toArray();
-  console.log(result2);
 
   // 해당 컨텐츠에 유저가 평가한 점수 가져오기
   function userScore(){
@@ -43,6 +42,7 @@ const watch = async (req, res) =>{
       }
     }
   }
+
   // 컨텐츠 조회수 
   const post = await db.collection("post").findOne({_id : id});
   let views = post.view;
@@ -55,18 +55,16 @@ const watch = async (req, res) =>{
     { $set : {view : parseInt(views)}}
   )
   
-  
 
-  // 유저의 컨텐츠스코어 DB 개수
+  // 유저의 컨텐츠점수 카운트
   const contentCnt = await db.collection("contentScore")
                   .countDocuments({title: result.제목, score: {"$exists": true}})
+
   // 별점 평균 내기
-
-  let avg = 0;
-
   const scoreAvg = function() {
     let sumScore = 0;
     let notNum = 0;
+    let avg = 0;
     for(let i=0; i<contentCnt; i++){
       sumScore += result2[i].score;
     }
@@ -74,15 +72,21 @@ const watch = async (req, res) =>{
     return isNaN(avg) ? notNum : avg
   }
 
+  // 리뷰 개수 조회
+  const cnt = result.review ? result.review.length : 0;
+  
+  // 리뷰 생성
+  const review = result.review ? result.review : "";
+  console.log("리뷰 : " + review)
+
   res.render("watch", { 
     posts : result,
     title : userInfo.bookmark,
     score : userScore(),
-    avg : scoreAvg()
+    avg : scoreAvg(),
+    cnt : cnt,
+    review : review
   })
-
 }
-
-
 
 module.exports = watch; 

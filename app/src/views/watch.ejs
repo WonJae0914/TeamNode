@@ -92,7 +92,7 @@
   <section class="comments">
 
     <!-- 댓글 작성 폼 -->
-    <h2>리뷰 0 </h2>
+    <h2>리뷰 <%=cnt%>건</h2>
     <form class="comment-form" method="post">
       <div class="form-row">
         <textarea style="color:black;" id="comment" name="review" required></textarea>
@@ -104,6 +104,9 @@
     <!-- 댓글 목록 -->
     <div class="comment-list">
       <p style="color:black;">댓글 목록</p>
+      <%for(let i=0; i<review.length; i++) {%>
+      <h2 style="color: black;"><%=review[i]%></h2>
+      <%}%>
     </div>
   </section>
   
