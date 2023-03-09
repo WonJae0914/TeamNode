@@ -1,11 +1,11 @@
 const stars = document.querySelectorAll(".star");
 const subStarbtn = document.querySelector(".subStar");
 const userTitle = document.querySelector("#movie").dataset.title;
-
 let rating=-1;
 
 document.addEventListener('DOMContentLoaded', function(){
   const userScore = document.querySelector("#userScore").dataset.userscore;
+   
     stars.forEach(function (star) { // star = class명 star인 모든 span
       // 클릭한 별 이하의 모든 별에 대해
      if (star.getAttribute("data-rating") <= userScore) {
@@ -42,17 +42,19 @@ stars.forEach(function (star) {
     });
   }
   subStarbtn.addEventListener("click", function(){
-    alert("이 점수 맞아?")
+    alert("평가하시겠습니까?")
     $.ajax({
       method : "post",
       url : "/score?score=" + rating,
       data : { userScore : rating,
                userTitle : userTitle },
-      success : function(msg){
-        console.log(msg);     
-      }
+      success : function(){
+        subStarbtn.style.display="none"
+        stars.addEventListener("click",(e)=>{
+          e.preventDefault();
+        })
+      } 
     })
-    alert("적용됐습니다")
   })
 }
 

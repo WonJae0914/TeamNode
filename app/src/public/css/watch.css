@@ -16,7 +16,10 @@
     user-select: none;
     font-family: Arial, sans-serif;
 }
-
+body{
+  font-size: 15px;
+  
+}
 header{
     padding: 1.5rem 5%;
 }
@@ -79,7 +82,7 @@ header{
 }
 /* 컨텐츠 디테일 정보 스타일 */
 .content-info{
-    border : 1px solid beige;
+    /* border : 1px solid beige; */
     width: 70%;
     height: 500px;
     display: flex;
@@ -88,19 +91,19 @@ header{
 }
 /* 컨텐츠 헤더 정보 스타일 */
 .content-header {
-    border : 1px solid beige;
+    /* border : 1px solid beige; */
     height: 100px;
     width: 70%;
 }
 /* 컨텐츠 내용 정보 스타일 */
 .content-discription{
-    border : 1px solid beige;
+    /* border : 1px solid beige; */
     height: 150px;
     width: 100%;
 }
 /* 컨텐츠 크리에잇터 정보 스타일 */
 .content-creater{
-    border : 1px solid beige;
+    /* border : 1px solid beige; */
     height: 80px;
     width: 70%;
     display: flex;
@@ -108,18 +111,18 @@ header{
 }
 /* 컨텐츠 감독 정보 스타일 */
 .director{
-    border : 1px solid beige;
+    /* border : 1px solid beige; */
     height: 80px;
     width: 50%;
 }
 /* 컨텐츠 주연배우 정보 스타일 */
 .actor{
-    border : 1px solid beige;
+    /* border : 1px solid beige; */
     height: 80px;
     width: 50%;
 }
 .rating{
-    border : 1px solid beige;
+    /* border : 1px solid beige; */
     height: 50px;
     width: 100%;
     display: flex;
@@ -129,7 +132,7 @@ header{
 .rating-bookmark{
     width: 50px;
     height: 50px;
-    border : 1px solid beige;
+    /* border : 1px solid beige; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -190,7 +193,7 @@ header{
   
   /* 댓글 작성 폼 스타일 */
   .comment-form {
-    background-color: #fff;
+    background-color: var(--bg);
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 30px;
@@ -233,8 +236,8 @@ header{
   }
   
   button[id="reviewbtn"] {
-    background-color: #141414;
-    color: #fff;
+    background-color: #fff;
+    color: var(--bg);
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -244,15 +247,24 @@ header{
   
   /* 댓글 목록 스타일 */
   .comment-list {
-    background-color: #fff;
+    background-color: var(--bg);
     border-radius: 5px;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
   
-  .comment {
+  #comment {
     margin-bottom: 20px;
+    color: #000;
   }
-  
+  .review-text{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
   .comment-header {
     display: flex;
     justify-content: space-between;
@@ -275,5 +287,7 @@ header{
     margin: 0;
     line-height: 1.5;
   }
-
+  .comment-text h2 {
+    color: crimson;
+  }
 /* 리뷰 댓글 끝 */

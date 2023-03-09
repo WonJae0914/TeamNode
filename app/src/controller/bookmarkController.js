@@ -13,7 +13,6 @@ MongoClient.connect(
       return console.log("DB연결 실패");
     }
     db = client.db("test");
-    console.log("몽고디비 연결 성공");
   }
 );
 

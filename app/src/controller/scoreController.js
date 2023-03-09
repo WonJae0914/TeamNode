@@ -15,21 +15,23 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
     function (err, client) {
         if (err) { return console.log('DB연결 실패'); }
         db = client.db('test');
-        console.log("몽고디비 연결 성공");
     });
 
 // 별점 생성
 const addScore = async function(req,res){
-    const { userScore } = req.body
-    const { userTitle } = req.body
     try {
-        await db.collection("contentScore").insertOne(
-            { userId : req.user.id,
-              title : userTitle,
-              score : parseInt(userScore) })
-        res.status(200).json({message : "평점 추가!"})
+    const id = req.user.id;
+    console.log(id);
+    const { userScore } = req.body;
+    const { userTitle } = req.body;   
+    await db.collection("contentScore").insertOne(
+        { userId : req.user.id,
+            title : userTitle,
+            score : parseInt(userScore) })
+    console.log(_id);
+    return res.json({msg : "success"})
     } catch (error) {
-        res.status(400).json({message : "평점 실패!"})
+        res.status(400).json({message : "false"})
     }
 }
 

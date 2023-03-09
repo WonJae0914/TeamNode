@@ -15,7 +15,6 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
     function (err, client) {
         if (err) { return console.log('DB연결 실패'); }
         db = client.db('test');
-        console.log("몽고디비 연결 성공");
     });
 
 // fs 모듈 사용하여 video 파일 
