@@ -22,6 +22,7 @@ const video = function (req, res) {
 // 요청 헤더에서 range 가져오기
 const { id } = parseInt(req.params);
 const {range} = req.headers; 
+
 // 요청 받은 range 없으면 상태코드400 보내기
 if (!range) {
     res.status(400).send("Requires Range header");
@@ -29,7 +30,7 @@ if (!range) {
 // 파라미터로 전달된 ID 값 파싱
 
 // MongoDB에서 ID 값에 해당하는 동영상 데이터 조회
-const collection = db.collection('post');
+const collection = db.collection('post')
 collection.findOne({
     _id : id
     }, function(err, result){
@@ -43,7 +44,7 @@ collection.findOne({
         return res.status(404).send('Not Found');
     }
     // 조회된 결과가 있을 경우 요청된 동영상 파일의 경로 생성
-    const videoPath = "public/movices/test_video.mp4";
+    
     // 파일의 상태를 동기적으로 가져오기
     const stat = fs.statSync(videoPath)
     // 파일 크기 
