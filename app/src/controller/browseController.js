@@ -16,7 +16,8 @@ MongoClient.connect(
 
 // 화면 띄우기 get
 const browse = function (req, res) {
-  db.collection("post")
+  try {
+    db.collection("post")
     .find({
         삭제 : 'N'
     })
@@ -25,13 +26,16 @@ const browse = function (req, res) {
       res.render("browse", {
         posts: result });
     });
+  } catch (error) {
+    res.status(400).json({msg : error})
+  }
+  
 };
 
 // 검색 get
 const search = async (req, res) => {
- 
-  const { seachwd } = req.query;
-  console.log(seachwd);
+  try {
+    const { seachwd } = req.query;
   const result = await db.collection("post")
     .find({
       $or : [
@@ -42,9 +46,11 @@ const search = async (req, res) => {
       ]})
     .sort({ _id: -1 })
     .toArray()
-  console.log(result);
-  res.render("browse_search", {
+    res.render("browse_search", {
       searchdb: result })
+  } catch (error) {
+    res.status(400).json({msg : error})
+  }
 };
 
 module.exports = {

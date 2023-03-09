@@ -24,36 +24,27 @@ const watch = async (req, res) =>{
   const userInfo = await User.findOne({
     id : userId,
   })
-  console.log(userInfo);
+
   // 클릭한 컨텐츠 DB 정보 가져오기
-
   const result = await db.collection("post").findOne({_id : id})
-  // 해당 컨텐츠의 컨텐츠스코어 DB정보 가져오기
 
+  // 해당 컨텐츠의 컨텐츠스코어 DB정보 가져오기
   const result2 = await db.collection("contentScore").find({
     userId : userId
   }).toArray();
-  console.log("result2 : " + result2);
 
   const result3 = await db.collection("contentScore").find({
     title : result.제목
   }).toArray();
-  
-  console.log("평점찍은 컨텐츠 정보 : " + JSON.stringify(result3))
 
   // 해당 컨텐츠에 유저가 평가한 점수 가져오기
   function userScore(){
     for(const us of result2){
-      console.log(us);
       if(us.title==result.제목){
-        console.log(req.user.id);
-        console.log("test1 : " +us.score);
         return us.score
       }
     }
    }
-   
-  
 
   // 컨텐츠 조회수 
   const post = await db.collection("post").findOne({_id : id});
@@ -77,14 +68,10 @@ const watch = async (req, res) =>{
     let sumScore = 0;
     let notNum = 0;
     let avg = 0;
-    console.log("콘텐츠갯수 : " + contentCnt);
     for(let i=0; i<contentCnt; i++){
-      console.log("콘텐츠 점수 : " + result3[i].score);
       sumScore += result3[i].score;
     }
-    console.log("컨텐츠점수합 : " + sumScore)
     avg = Math.ceil(sumScore/contentCnt);
-    console.log("컨텐츠 평균 : " + avg)
     return isNaN(avg) ? notNum : avg
   }
 

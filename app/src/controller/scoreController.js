@@ -21,14 +21,12 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
 const addScore = async function(req,res){
     try {
     const id = req.user.id;
-    console.log(id);
     const { userScore } = req.body;
     const { userTitle } = req.body;   
     await db.collection("contentScore").insertOne(
         { userId : req.user.id,
             title : userTitle,
             score : parseInt(userScore) })
-    console.log(_id);
     return res.json({msg : "success"})
     } catch (error) {
         res.status(400).json({message : "false"})
