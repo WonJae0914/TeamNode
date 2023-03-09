@@ -1,7 +1,16 @@
-.con-top {
+main {
+  width: 100%;
+  display: flex;
+  padding: 1.5rem 5%;
+  background-color: #141414;
+  flex-direction: column;
+  align-items: center;
+}
+
+section {
   width: 100%;
   background-color: black;
-  height: 20vh;
+  height: 60vh;
   border: solid 1px white;
   border-radius: 10px;
   padding: 1.5rem 5%;
@@ -9,13 +18,14 @@
 .con {
   width: 100%;
   background-color: black;
-  height: 80vh;
+  height: 100%;
   border: solid 1px white;
   border-radius: 10px;
   padding: 1.5rem 5%;
 }
 .con-li {
   width: 100%;
+  height: 6rem;
   margin-bottom: 20px;
   justify-content: space-between;
   display: flex;
@@ -32,7 +42,7 @@
 
 .con-li__info > h3 > a {
   font-size: 2rem;
-  color: white;
+  color: #141414;
 }
 
 .con-li__util {
@@ -43,6 +53,7 @@
 .con-li__util > h4 {
   margin-left: 28%;
   margin-bottom: 7px;
+  color: #141414;
 }
 
 .con-li__util > .con-li__btn:nth-child(2) {
@@ -58,7 +69,7 @@
   height: 30px;
   border-radius: 5px;
   margin-left: 1%;
-  background-color: var(--ptcolor);
+  background-color: #ad0000;
   display: inline;
 }
 

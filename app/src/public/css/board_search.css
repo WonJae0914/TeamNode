@@ -1,5 +1,23 @@
+main {
+  width: 100%;
+  display: flex;
+  padding: 1.5rem 5%;
+  background-color: #141414;
+  flex-direction: column;
+  align-items: center;
+}
+
+section {
+  width: 100%;
+  background-color: black;
+  height: 100%;
+  border: solid 1px white;
+  border-radius: 10px;
+  padding: 1.5rem 5%;
+}
 .con-search {
   width: 100%;
+  height: 6rem;
   margin-bottom: 20px;
   justify-content: space-between;
   display: flex;
@@ -27,6 +45,7 @@
 .con-search__util > h4 {
   margin-left: 28%;
   margin-bottom: 7px;
+  color: #141414;
 }
 
 .con-search__util > .con-li__btn:nth-child(2) {
@@ -44,4 +63,23 @@
   margin-left: 1%;
   background-color: #ad0000;
   display: inline;
+}
+.page {
+  margin-top: 20px;
+  background-color: #141414;
+  width: 30%;
+}
+
+.page ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.page ul li {
+  list-style: none;
+}
+
+.page ul li a {
+  font-size: 1.8rem;
 }
