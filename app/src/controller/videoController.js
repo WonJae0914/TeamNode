@@ -20,13 +20,14 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
 // fs 모듈 사용하여 video 파일 
 const video = function (req, res) {
 // 요청 헤더에서 range 가져오기
-const range = req.headers.range; 
+const { id } = parseInt(req.params);
+const {range} = req.headers; 
 // 요청 받은 range 없으면 상태코드400 보내기
 if (!range) {
     res.status(400).send("Requires Range header");
 };
 // 파라미터로 전달된 ID 값 파싱
-const id = parseInt(req.params.id);
+
 // MongoDB에서 ID 값에 해당하는 동영상 데이터 조회
 const collection = db.collection('post');
 collection.findOne({
