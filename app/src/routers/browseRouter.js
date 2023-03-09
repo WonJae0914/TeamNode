@@ -12,13 +12,14 @@ const {addbookmark,delBookmark} = require("../controller/bookmarkController");
 const starScore = require("../controller/scoreController")
 const {review} = require("../controller/reviewController")
 const { isLoggedIn} = require("../controller/userController");
-
+const videos = require("../controller/videoController")
 
 //get
 browseRouter.get("/browse" ,isLoggedIn, browse); // 메인 페이지
-browseRouter.get("/watch/:id", isLoggedIn,watch); // 비디오 디테일 
-browseRouter.get("/video/:id",isLoggedIn ,video); // 북마크 
+browseRouter.get("/watch/:id", isLoggedIn, watch); // 비디오 디테일 
+browseRouter.get("/bookmark/:id",isLoggedIn ,video); // 북마크 
 browseRouter.get("/search",isLoggedIn ,search) // 검색 
+browseRouter.get("/video", videos);
 
 //post
 

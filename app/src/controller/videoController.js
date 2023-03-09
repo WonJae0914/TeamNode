@@ -18,13 +18,16 @@ MongoClient.connect("mongodb+srv://kdKim:6r7r6e5!KD@cluster0.mo9rckf.mongodb.net
     });
 
 // fs 모듈 사용하여 video 파일 
-const video = function (req, res) {
+const videos = async function (req, res) {
+console.log("들어옴")
 // 요청 헤더에서 range 가져오기
-const { id } = parseInt(req.params);
+const { id } = parseInt(req.params.id);
+console.log(id);
+await db.collection("post").findOne({id_:id});
 const {range} = req.headers; 
 
 // 요청 받은 range 없으면 상태코드400 보내기
-if (!range) {
+if (range) {
     res.status(400).send("Requires Range header");
 };
 // 파라미터로 전달된 ID 값 파싱
@@ -52,7 +55,7 @@ collection.findOne({
     // 전송 할 데이터 제한
     const CHUNK_SIZE = 10 ** 6; // 1MB
     // start값 숫자로 변환
-    const start = Number(range.replace(/\D/g, ""));
+    const start = Number(range.replace(/\D/g, "")); // 숫자가 아닌 것 지우는 정규식
     // end값 숫자로 변환 and end값 없을 경우 "파일크기-1" 값 할당
     const end = Math.min(start + CHUNK_SIZE, videoSize - 1);
 
@@ -77,4 +80,4 @@ collection.findOne({
 );
 }
 
-module.exports = video;
+module.exports = videos;
