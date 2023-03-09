@@ -29,4 +29,12 @@
     </div>
     <%- include('footer.ejs') %>
   </body>
+  <script>
+    const queryParams = new URLSearchParams(window.location.search);
+    const loginStatus = queryParams.get('login');
+    if (loginStatus === 'failed') {
+      alert('등록된 사용자가 없습니다.');
+    }
+  </script>
 </html>
+

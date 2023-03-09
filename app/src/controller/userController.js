@@ -109,6 +109,17 @@ function localLoggedIn(req, res, next) {
 
 // 로그인 처리
 const login = (req, res, next) => {
+  const { id, pw } = req.body;
+  
+  // check if the user ID exists in the database
+  User.findOne({ id: id }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      res.redirect('/login?login=failed');
+      return;
+    }
   passport.authenticate("local", (err, user, info) => {
     // 로컬에 정보 가져오기
     if (err) {
@@ -128,6 +139,7 @@ const login = (req, res, next) => {
     }
     });
   })(req, res, next);
+});
 };
 // 유저 상세 정보 페이지 렌더링
 const userdetail = (req, res) => {
