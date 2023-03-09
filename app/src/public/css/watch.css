@@ -1,6 +1,6 @@
 @import "./reset.css";
 :root{
-    --black : 13131a;
+    --black : #13131a;
     --bg : #141414;
 }
 *{
