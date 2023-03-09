@@ -24,7 +24,6 @@ const addScore = async function(req,res){
     console.log(id);
     const { userScore } = req.body;
     const { userTitle } = req.body;   
-    const { _id } = await db.collection("post").findOne({제목:userTitle});
     await db.collection("contentScore").insertOne(
         { userId : req.user.id,
             title : userTitle,

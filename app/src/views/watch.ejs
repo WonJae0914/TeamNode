@@ -31,8 +31,16 @@
           </div>
           <div class="content-info">
             <div class="content-header">
-              <h2><%=posts.제목%><span class="content-year">(<%=posts.출시년도%>년)</span></h2>
+              <h2 class="mb-5"><%=posts.제목%><span class="content-year">(<%=posts.출시년도%>년)</span></h2>
               <p class="content-genre"><span>장르: </span><%=posts.장르%></p>
+              <div class="rating-bookmark">
+                <% if (title.includes(posts.제목) !== true) { %>
+                  <button class="fa-regular fa-bookmark" style="color: crimson;"></button>
+                <% } else { %>
+                  <button class="fa-solid fa-bookmark" style="color: crimson;"></button>
+                <% } %>
+                
+              </div>
             </div>
             <div class="content-discription">
               <h1>개요</h1>
@@ -58,14 +66,6 @@
                 <div id="dataId" data-id="<%=posts._id%>"></div>
                 <div id="movie" data-title="<%=posts.제목%>"></div>              
                 <div id="data1" data-bookmark="<%=title.includes(posts.제목)%>"></div>
-                <div class="rating-bookmark">
-                  <% if (title.includes(posts.제목) !== true) { %>
-                    <button class="fa-regular fa-bookmark"></button>
-                  <% } else { %>
-                    <button class="fa-solid fa-bookmark"></button>
-                  <% } %>
-                  
-                </div>
             </div>
             <div class="user-rating">
               <h2>평가하기 : </h2>
@@ -78,7 +78,7 @@
                 <span class="star" data-rating="4"></span>
                 <span class="star" data-rating="5"></span>
               </div> 
-              <% if(score == null) { %>
+              <% if(!score) { %>
                 <button type="button" class="subStar">평점</button>
               <% } %>
               
@@ -92,21 +92,23 @@
 
   <!-- 댓글 영역 -->
   <section class="comments">
-
     <!-- 댓글 작성 폼 -->
-    <h2>리뷰 <%=cnt%>건</h2>
+    <div class="review-text">
+      <h2>리뷰 <%=cnt%>건</h2>
+    </div>
     <form class="comment-form" method="post">
       <div class="form-row">
-        <textarea style="color:black;" id="comment" name="review" required></textarea>
+        <textarea id="comment" name="review" required></textarea>
         <button id="reviewbtn" type="submit">작성</button>
       </div>
     </form>
 
     <!-- 댓글 목록 -->
     <div class="comment-list">
-      <p style="color:black;">댓글 목록</p>
-      <%for(let i=0; i<review.length; i++) {%>
-      <h2 style="color: black;"><%=review[i]%></h2>
+        <%for(let i=review.length; i>=0; i--) {%>
+      <div class="comment-text">
+        <h2><%=review[i]%></h2>
+      </div>
       <%}%>
     </div>
   </section>
@@ -114,6 +116,6 @@
   <!-- 리뷰 댓글 끝 -->
   <%- include('footer.ejs') %>
   <script src="/js/watch.js" defer></script>
-    
+  
 </body>
 </html>
