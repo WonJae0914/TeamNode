@@ -4,9 +4,9 @@
 <h3>개발기간 : 2023.01.27 ~ 2023.03.07 </h3>
 <h3>스택</h3>
 <h4>
-  DataBase : MongoDB</br>
-  Web : HTML5, CSS3, jQuery, JavaScript, Node.js, npm</br>
-  Library : EJS(Templet Engine), Express, BootStrap</br>
-  Tool : Visual Code Studio, MongoDB Compass</br>
-  Etc : git, github
+  ⚙ DataBase : MongoDB</br>
+  📗 Web : HTML5, CSS3, jQuery, JavaScript, Node.js, npm</br>
+  📗 Library : EJS(Templet Engine), Express, BootStrap</br>
+  🔨 Tool : Visual Code Studio, MongoDB Compass</br>
+  📁 Etc : git, github
 </h4>
