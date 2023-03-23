@@ -3,9 +3,9 @@
 ### 인원 : 김규동(조장) 길영준 신진영 조원재
 ### 개발기간 : 2023.01.27 ~ 2023.03.07 
 ### 스택
-#### ⚙ DataBase
+#### 🧮 DataBase
 MongoDB
-#### 📗 Web
+#### 🖥 Web
 HTML5, CSS3, jQuery, JavaScript, Node.js, npm</br>
 #### 📗 Library 
 EJS(Templet Engine), Express, BootStrap</br>
